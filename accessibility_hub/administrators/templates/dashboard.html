@@ -1,57 +1,61 @@
 {% extends "base.html" %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}Medewerker Portal{% endblock title %}
 
 {% block content %}
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action active">Dashboard</a>
-                <a href="#" class="list-group-item list-group-item-action">Gebruikers</a>
-                <a href="#" class="list-group-item list-group-item-action">Onderzoeken</a>
+        <div class="col-md-2">
+            <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="list-portal-list" data-bs-toggle="tab"
+                   href="#list-portal" role="tab" aria-controls="list-portal">Medewerker Portal</a>
+                <a class="list-group-item list-group-item-action" id="list-users-list" data-bs-toggle="tab"
+                   href="#list-users" role="tab" aria-controls="list-users">Gebruikers</a>
+                <a class="list-group-item list-group-item-action" id="list-researches-list" data-bs-toggle="tab"
+                   href="#list-researches" role="tab" aria-controls="list-researches">Onderzoeken</a>
             </div>
         </div>
         <div class="col-md-9">
             <h2>Welkom {Naam}</h2>
+            <hr>
 
             <div class="row">
-                <div class="col-6"><canvas id="myChart" width="400" height="200"></canvas></div>
-                <div class="col-6">test</div>
+                <div class="col-9">
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="list-portal" role="tabpanel"
+                             aria-labelledby="list-portal-list">
+                        </div>
+                        <div class="tab-pane fade" id="list-users" role="tabpanel"
+                             aria-labelledby="list-users-list">
+                        </div>
+                        <div class="tab-pane fade" id="list-researches" role="tabpanel"
+                             aria-labelledby="list-researches-list">
+                            <h3>Recent ingediende onderzoeken</h3>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Titel</th>
+                                    <th scope="col">Organisatie</th>
+                                    <th scope="col">Datum</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for onderzoek in recente_onderzoeken %}
+                                <tr>
+                                    <td>{{ onderzoek.titel }}</td>
+                                    <td>{{ onderzoek.organisatie_id }}</td>
+                                    <td>{{ onderzoek.datum_vanaf }}</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-
-    var data = {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
-        datasets: [{
-            label: 'Aantal onderzoeken',
-            data: [10, 25, 18, 32, 20],
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1
-        }]
-    };
-
-    var options = {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    };
-
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: data,
-        options: options
-    });
-</script>
-
 
 {% endblock content %}
