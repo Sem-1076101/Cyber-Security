@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.hashers import make_password
 
 
 class Onderzoeken(models.Model):
@@ -21,3 +22,26 @@ class Onderzoeken(models.Model):
 
     class Meta:
         db_table = 'onderzoeken'
+
+
+class Medewerkers(models.Model):
+    medewerker_id = models.AutoField(primary_key=True)
+    voornaam = models.CharField(max_length=255)
+    achternaam = models.CharField(max_length=100)
+    postcode = models.CharField(max_length=6)
+    huisnummer = models.IntegerField()
+    geslacht = models.CharField(max_length=10)
+    emailadres = models.CharField(max_length=255)
+    telefoonnummer = models.CharField(max_length=15)
+    geboortedatum = models.DateField()
+    admin = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    gebruikersnaam = models.CharField(max_length=255, default='')
+    wachtwoord = models.CharField(max_length=255, default='')
+
+    def save(self, *args, **kwargs):
+        self.wachtwoord = make_password(self.wachtwoord)
+        super().save(*args, **kwargs)
+
+    class Meta:
+        db_table = 'medewerkers'
