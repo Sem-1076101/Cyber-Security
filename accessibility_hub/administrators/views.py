@@ -1,13 +1,20 @@
 from django.shortcuts import render
-from .models import Onderzoeken, Medewerkers
+from .models import Onderzoek, Medewerker, Organisatie, Ervaringsdeskundige, Beperking
+
 
 def login(request):
     return render(request, 'login.html', {})
 
+
 def signup(request):
     return render(request, 'signup.html', {})
 
+
 def dashboard(request):
-    recente_onderzoeken = Onderzoeken.objects.all()[:5]
-    medewerkers = Medewerkers.objects.all()
-    return render(request, 'dashboard.html', {'recente_onderzoeken': recente_onderzoeken, 'medewerkers': medewerkers})
+    onderzoeken = Onderzoek.objects.all()[:5]
+    medewerkers = Medewerker.objects.all()
+    organisaties = Organisatie.objects.all()
+    ervaringsdeskundigen = Ervaringsdeskundige.objects.all()
+    beperkingen = Beperking.objects.all()
+    return render(request, 'dashboard.html', {'onderzoeken': onderzoeken, 'medewerkers': medewerkers,
+                                              'organisaties': organisaties, 'ervaringsdeskundigen': ervaringsdeskundigen, 'beperkingen': beperkingen})
