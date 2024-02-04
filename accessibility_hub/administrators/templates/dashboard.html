@@ -9,9 +9,9 @@
         <div class="col-md-2">
             <div class="list-group" id="list-tab" role="tablist">
                 <a class="list-group-item list-group-item-action active" id="list-portal-list" data-bs-toggle="tab"
-                   href="#list-portal" role="tab" aria-controls="list-portal">Medewerker Portal</a>
+                   href="#list-portal" role="tab" aria-controls="list-portal">Medewerkers Portal</a>
                 <a class="list-group-item list-group-item-action" id="list-users-list" data-bs-toggle="tab"
-                   href="#list-users" role="tab" aria-controls="list-users">Gebruikers</a>
+                   href="#list-users" role="tab" aria-controls="list-users">Medewerkers</a>
                 <a class="list-group-item list-group-item-action" id="list-researches-list" data-bs-toggle="tab"
                    href="#list-researches" role="tab" aria-controls="list-researches">Onderzoeken</a>
             </div>
@@ -28,6 +28,27 @@
                         </div>
                         <div class="tab-pane fade" id="list-users" role="tabpanel"
                              aria-labelledby="list-users-list">
+                            <h3>Accessibility Hub Medewerkers</h3>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Medewerker ID</th>
+                                    <th scope="col">Naam</th>
+                                    <th scope="col">E-mailadres</th>
+                                    <th scope="col">Gebruikersnaam</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for medewerker in medewerkers %}
+                                <tr>
+                                    <td>{{ medewerker.medewerker_id }}</td>
+                                    <td>{{ medewerker.voornaam }} {{ medewerker.achternaam }}</td>
+                                    <td>{{ medewerker.emailadres }}</td>
+                                    <td>{{ medewerker.gebruikersnaam }}</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                         <div class="tab-pane fade" id="list-researches" role="tabpanel"
                              aria-labelledby="list-researches-list">
