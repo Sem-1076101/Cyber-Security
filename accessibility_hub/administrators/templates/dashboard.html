@@ -4,79 +4,113 @@
 
 {% block content %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-2">
-            <div class="list-group" id="list-tab" role="tablist">
-                <a class="list-group-item list-group-item-action active" id="list-portal-list" data-bs-toggle="tab"
-                   href="#list-portal" role="tab" aria-controls="list-portal">Medewerkers Portal</a>
-                <a class="list-group-item list-group-item-action" id="list-users-list" data-bs-toggle="tab"
-                   href="#list-users" role="tab" aria-controls="list-users">Medewerkers</a>
-                <a class="list-group-item list-group-item-action" id="list-researches-list" data-bs-toggle="tab"
-                   href="#list-researches" role="tab" aria-controls="list-researches">Onderzoeken</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="list-group" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action active" id="list-portal-list" data-bs-toggle="tab"
+                       href="#list-portal" role="tab" aria-controls="list-portal">Medewerkers Portal</a>
+                    <a class="list-group-item list-group-item-action" id="list-users-list" data-bs-toggle="tab"
+                       href="#list-users" role="tab" aria-controls="list-users">Medewerkers</a>
+                    <a class="list-group-item list-group-item-action" id="list-researches-list" data-bs-toggle="tab"
+                       href="#list-researches" role="tab" aria-controls="list-researches">Onderzoeken</a>
+                    <a class="list-group-item list-group-item-action" id="list-expert-list" data-bs-toggle="tab"
+                       href="#list-expert" role="tab" aria-controls="list-expert">Ervaringsdeskundige</a>
+                </div>
             </div>
-        </div>
-        <div class="col-md-9">
-            <h2>Welkom {Naam}</h2>
-            <hr>
+            <div class="col-md-9">
+                <h2>Welkom {Naam}</h2>
+                <hr>
 
-            <div class="row">
-                <div class="col-9">
-                    <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="list-portal" role="tabpanel"
-                             aria-labelledby="list-portal-list">
-                        </div>
-                        <div class="tab-pane fade" id="list-users" role="tabpanel"
-                             aria-labelledby="list-users-list">
-                            <h3>Accessibility Hub Medewerkers</h3>
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Medewerker ID</th>
-                                    <th scope="col">Naam</th>
-                                    <th scope="col">E-mailadres</th>
-                                    <th scope="col">Gebruikersnaam</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for medewerker in medewerkers %}
-                                <tr>
-                                    <td>{{ medewerker.medewerker_id }}</td>
-                                    <td>{{ medewerker.voornaam }} {{ medewerker.achternaam }}</td>
-                                    <td>{{ medewerker.emailadres }}</td>
-                                    <td>{{ medewerker.gebruikersnaam }}</td>
-                                </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="tab-pane fade" id="list-researches" role="tabpanel"
-                             aria-labelledby="list-researches-list">
-                            <h3>Recent ingediende onderzoeken</h3>
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Titel</th>
-                                    <th scope="col">Organisatie</th>
-                                    <th scope="col">Datum</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {% for onderzoek in recente_onderzoeken %}
-                                <tr>
-                                    <td>{{ onderzoek.titel }}</td>
-                                    <td>{{ onderzoek.organisatie_id }}</td>
-                                    <td>{{ onderzoek.datum_vanaf }}</td>
-                                </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
+                <div class="row">
+                    <div class="col-9">
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="list-portal" role="tabpanel"
+                                 aria-labelledby="list-portal-list">
+                            </div>
+                            <div class="tab-pane fade" id="list-users" role="tabpanel"
+                                 aria-labelledby="list-users-list">
+                                <h3>Accessibility Hub Medewerkers</h3>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Medewerker ID</th>
+                                        <th scope="col">Naam</th>
+                                        <th scope="col">E-mailadres</th>
+                                        <th scope="col">Gebruikersnaam</th>
+                                        <th scope="col">Aangemaakt op</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for medewerker in medewerkers %}
+                                        <tr>
+                                            <td>{{ medewerker.medewerker_id }}</td>
+                                            <td>{{ medewerker.voornaam }} {{ medewerker.achternaam }}</td>
+                                            <td>{{ medewerker.emailadres }}</td>
+                                            <td>{{ medewerker.gebruikersnaam }}</td>
+                                            <td>{{ medewerker.created_at|date:"d-m-Y H:i" }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="list-researches" role="tabpanel"
+                                 aria-labelledby="list-researches-list">
+                                <h3>Recent ingediende onderzoeken</h3>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Titel</th>
+                                        <th scope="col">Organisatie</th>
+                                        <th scope="col">Datum vanaf</th>
+                                        <th scope="col">Datum tot</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for onderzoek in onderzoeken %}
+                                        <tr>
+                                            <td>{{ onderzoek.titel }}</td>
+                                            <td>{{ onderzoek.organisatie.naam }}</td>
+                                            <td>{{ onderzoek.datum_vanaf|date:"d-m-Y" }}</td>
+                                            <td>{{ onderzoek.datum_tot|date:"d-m-Y" }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="tab-pane fade" id="list-expert" role="tabpanel"
+                                 aria-labelledby="list-researches-list">
+                                <h3>Recent aangemelden ervaringsdeskundige</h3>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Naam</th>
+                                        <th scope="col">Geboortedatum</th>
+                                        <th scope="col">E-mailadres</th>
+                                        <th scope="col">Telefoonnummer</th>
+                                        <th scope="col">Beperking</th>
+                                        <th scope="col">Aangemaakt op</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for ervaringsdeskundige in ervaringsdeskundigen %}
+                                        <tr>
+                                            <td>{{ ervaringsdeskundige.naam }}</td>
+                                            <td>{{ ervaringsdeskundige.geboortedatum }}</td>
+                                            <td>{{ ervaringsdeskundige.email }}</td>
+                                            <td>{{ ervaringsdeskundige.telefoonnummer }}</td>
+                                            <td>{{ ervaringsdeskundige.soort_beperking }}</td>
+                                            <td>{{ ervaringsdeskundige.created_at }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 {% endblock content %}
