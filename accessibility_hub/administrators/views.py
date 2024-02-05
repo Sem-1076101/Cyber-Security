@@ -10,11 +10,11 @@ def signup(request):
     return render(request, 'signup.html', {})
 
 
-def dashboard(request):
+def portal(request):
     onderzoeken = Onderzoek.objects.all()[:5]
     medewerkers = Medewerker.objects.all()
     organisaties = Organisatie.objects.all()
     ervaringsdeskundigen = Ervaringsdeskundige.objects.all()
     beperkingen = Beperking.objects.all()
-    return render(request, 'dashboard.html', {'onderzoeken': onderzoeken, 'medewerkers': medewerkers,
+    return render(request, 'portal.html', {'onderzoeken': onderzoeken, 'medewerkers': medewerkers,
                                               'organisaties': organisaties, 'ervaringsdeskundigen': ervaringsdeskundigen, 'beperkingen': beperkingen})
