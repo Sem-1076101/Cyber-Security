@@ -41,9 +41,9 @@
                                         <th scope="col">Aangemaakt op</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="employee_table">
                                     {% for medewerker in medewerkers %}
-                                        <tr>
+                                        <tr class='clickable-row' data-href="/medewerkers/medewerker/{{ medewerker.medewerker_id }}">
                                             <td>{{ medewerker.medewerker_id }}</td>
                                             <td>{{ medewerker.voornaam }} {{ medewerker.achternaam }}</td>
                                             <td>{{ medewerker.emailadres }}</td>
