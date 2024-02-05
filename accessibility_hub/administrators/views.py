@@ -19,5 +19,6 @@ def portal(request):
     return render(request, 'portal.html', {'onderzoeken': onderzoeken, 'medewerkers': medewerkers,
                                               'organisaties': organisaties, 'ervaringsdeskundigen': ervaringsdeskundigen, 'beperkingen': beperkingen})
 
-def medewerker(request):
-    return render(request, 'employee.html', {})
+def medewerker(request, medewerker_id):
+    medewerker = Medewerker.objects.get(medewerker_id=medewerker_id)
+    return render(request, 'employee.html', {'medewerker': medewerker})
