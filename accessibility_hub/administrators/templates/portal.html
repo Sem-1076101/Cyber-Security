@@ -6,7 +6,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-2">
                 <div class="list-group" id="list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action active" id="list-portal-list" data-bs-toggle="tab"
                        href="#list-portal" role="tab" aria-controls="list-portal">Medewerkers Portal</a>
@@ -18,19 +18,27 @@
                        href="#list-expert" role="tab" aria-controls="list-expert">Ervaringsdeskundige</a>
                 </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-10">
                 <h2>Welkom {Naam}</h2>
                 <hr>
 
                 <div class="row">
-                    <div class="col-9">
+                    <div class="col-10">
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="list-portal" role="tabpanel"
                                  aria-labelledby="list-portal-list">
                             </div>
                             <div class="tab-pane fade" id="list-users" role="tabpanel"
                                  aria-labelledby="list-users-list">
-                                <h3>Accessibility Hub Medewerkers</h3>
+                                <div class="row">
+                                    <div class="col-8 ">
+                                        <h3>Accessibility Hub Medewerkers</h3>
+                                    </div>
+                                    <div class="col-4 d-flex justify-content-end align-items-center">
+                                        <a href="/medewerkers/medewerker/toevoegen" class="btn btn-primary">Medewerker
+                                            toevoegen</a>
+                                    </div>
+                                </div>
                                 <table class="table table-hover">
                                     <thead>
                                     <tr>
@@ -43,7 +51,8 @@
                                     </thead>
                                     <tbody id="employee_table">
                                     {% for medewerker in medewerkers %}
-                                        <tr class='clickable-row' data-href="/medewerkers/medewerker/{{ medewerker.medewerker_id }}">
+                                        <tr class='clickable-row'
+                                            data-href="/medewerkers/medewerker/{{ medewerker.medewerker_id }}">
                                             <td>{{ medewerker.medewerker_id }}</td>
                                             <td>{{ medewerker.voornaam }} {{ medewerker.achternaam }}</td>
                                             <td>{{ medewerker.emailadres }}</td>
@@ -78,7 +87,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                        <div class="tab-pane fade" id="list-expert" role="tabpanel"
+                            <div class="tab-pane fade" id="list-expert" role="tabpanel"
                                  aria-labelledby="list-researches-list">
                                 <h3>Recent aangemelden ervaringsdeskundige</h3>
                                 <table class="table table-hover">
