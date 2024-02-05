@@ -18,3 +18,6 @@ def portal(request):
     beperkingen = Beperking.objects.all()
     return render(request, 'portal.html', {'onderzoeken': onderzoeken, 'medewerkers': medewerkers,
                                               'organisaties': organisaties, 'ervaringsdeskundigen': ervaringsdeskundigen, 'beperkingen': beperkingen})
+
+def medewerker(request):
+    return render(request, 'employee.html', {})
