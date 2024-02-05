@@ -1,22 +1,35 @@
 {% extends "base.html" %}
 
-{% block title %}Medewerker{% endblock title %}
+{% block title %}Medewerker {{ medewerker.voornaam }} {{ medewerker.achternaam }}{% endblock title %}
 
 {% block content %}
 
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>{{ medewerker.voornaam }} {{ medewerker.achternaam }}</h1>
+                <a class="btn btn-primary mb-2" href="/medewerkers/portal/" role="button">Terug naar portaal</a>
+                <h1>Gegevens van {{ medewerker.voornaam }} {{ medewerker.achternaam }}</h1>
                 <div class="card">
                     <div class="card-body">
-                        <p><b>Medewerker ID:</b> {{ medewerker.medewerker_id }}</p>
-                        <p><b>Geslacht:</b> {{ medewerker.geslacht }}</p>
-                        <p><b>Geslacht:</b> {{ medewerker.geslacht }}</p>
-                        <p><b>Geslacht:</b> {{ medewerker.geslacht }}</p>
-                        <p><b>Geslacht:</b> {{ medewerker.geslacht }}</p>
-                        <p><b>Geslacht:</b> {{ medewerker.geslacht }}</p>
-                        <p><b>Geslacht:</b> {{ medewerker.geslacht }}</p>
+                        <div class="row">
+                            <div class="col-6">
+                                <p><b>Medewerker ID:</b> {{ medewerker.medewerker_id }}</p>
+                                <p><b>Admin:</b> {% if medewerker.admin == 1 %}Ja{% else %}Nee{% endif %}</p>
+                                <p><b>Voornaam:</b> {{ medewerker.voornaam }}</p>
+                                <p><b>Achternaam:</b> {{ medewerker.achternaam }}</p>
+                                <p><b>Geboortedatum:</b> {{ medewerker.geboortedatum|date:"d-m-Y" }}</p>
+                                <p><b>E-mailadres:</b> {{ medewerker.emailadres }}</p>
+                                <p><b>Telefoonnummer:</b> {{ medewerker.telefoonnummer }}</p>
+                                <p><b>Gebruikersnaam:</b> {{ medewerker.gebruikersnaam }}</p>
+                                <p><b>Wachtwoord:</b> {{ medewerker.wachtwoord }}</p>
+                            </div>
+                            <div class="col-6">
+                                <p><b>Postcode:</b> {{ medewerker.postcode }}</p>
+                                <p><b>Huisnummer:</b> {{ medewerker.huisnummer }}</p>
+                                <p><b>Geslacht:</b> {{ medewerker.geslacht }}</p>
+                                <p><b>Aangemaakt op:</b> {{ medewerker.created_at|date:"d-m-Y H:i" }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
