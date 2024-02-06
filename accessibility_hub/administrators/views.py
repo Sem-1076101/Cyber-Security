@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
+from django.urls import reverse
 from .models import Onderzoek, Medewerker, Organisatie, Ervaringsdeskundige, Beperking
 
 
@@ -22,3 +25,8 @@ def portal(request):
 def medewerker(request, medewerker_id):
     medewerker = Medewerker.objects.get(medewerker_id=medewerker_id)
     return render(request, 'employee.html', {'medewerker': medewerker})
+
+def verwijder_medewerker(request, medewerker_id):
+    medewerker = get_object_or_404(Medewerker, medewerker_id=medewerker_id)
+    medewerker.delete()
+    return redirect('administrators:medewerkersportal')
