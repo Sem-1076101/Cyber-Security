@@ -11,6 +11,69 @@
         <div class="col-12">
             <h1>Voeg een nieuwe gebruiker toe</h1>
         </div>
+        <div class="col-12">
+            <form action="" method="post">
+                <label for="firstName">Voornaam:</label>
+                <input type="text" name="firstName">
+
+                <label for="lastName">Achternaam:</label>
+                <input type="text" name="lastName">
+
+                <label for="password">Wachtwoord:</label>
+                <input type="password" name="password">
+
+                <label for="email">E-mailadres:</label>
+                <input type="text" name="email">
+
+                <label for="gender">Geslacht:</label>
+                <input type="text" name="gender">
+
+                <label for="birthday">Geboortedatum:</label>
+                <input type="date" name="birthday">
+
+                <label for="zipCode">Postcode:</label>
+                <input type="text" name="zipCode">
+
+                <label for="disability">Type beperking:</label>
+                <select name="disability">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="fiat">Fiat</option>
+                    <option value="audi">Audi</option>
+                </select>
+
+                <label for="tools">Gebruiktet hulpmiddelen:</label>
+                <textarea name="tools" cols="30" rows="10"></textarea>
+
+                <label for="particulars">Bijzonderheden:</label>
+                <textarea name="particulars" cols="30" rows="10"></textarea>
+
+                <label for="supervisor">toezichthouder/voogd?:</label>
+                <select name="supervisor">
+                    <option value="nee">Nee</option>
+                    <option value="ja">Ja</option>
+                </select>
+
+                <div id="superviso_div">
+                    <label for="name_supervisor">Naam toezichthouder/voogd:</label>
+                    <input type="text" name="name_supervisor">
+
+                    <label for="email_supervisor">E-mailadres toezichthouder:</label>
+                    <input type="text" name="email_supervisor">
+
+                    <label for="phonenumber_supervisor">Telefoonnummer toezichthouder/voogd:</label>
+                    <input type="number" name="phonenumber_supervisor">
+                </div>
+
+                <label for="">Benadering keuze:</label>
+                <select name="">
+                    <option value="phone"></option>
+                </select>
+
+
+                <button type="submit">Goedkeuring aanvragen</button>
+            </form>
+        </div>
     </div>
 </div>
 
