@@ -1,22 +1,22 @@
 from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django import forms
 from .models import Onderzoek, Medewerker, Organisatie, Ervaringsdeskundige, Beperking
-
+# from forms import CreateEmployeeForm
 
 def login(request):
-
-    form = CreateEmployeeForm()
-
-    if request.method == 'POST':
-        form = CreateEmployeeForm
-
     return render(request, 'login.html', {})
 
 
 def signup(request):
+    # form = CreateEmployeeForm()
+    # if request.method == 'POST':
+    #     form = CreateEmployeeForm(request.POST)
+    #     if form.is_valid():
+    #         form.save()
+    #         return redirect('login')
+    # context = {'registerform':form}
     return render(request, 'signup.html', {})
-
-def signup_employee(request):
-    return render(request, 'signup_employees.html', {})
 
 def portal(request):
     onderzoeken = Onderzoek.objects.all()[:5]

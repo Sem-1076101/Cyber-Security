@@ -7,82 +7,59 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12">
-            <h1>Aanmelden</h1>
+            <h1 class="text-center mb-4">Voeg een nieuwe medewerker toe</h1>
         </div>
         <div class="col-8">
-            <form action="" method="post">
+            <form action="" method="post" class="form-horizontal">
+                {% csrf_token %}
+                {{registerform}}
+                <!-- .as_p -->
                 <div class="form-group p-1">
                     <label for="firstName">Voornaam:</label>
-                    <input type="text" name="firstName">
+                    <input type="text" name="firstName" class="form-control" placeholder="Voornaam">
                 </div>
                 <div class="form-group p-1">
                     <label for="lastName">Achternaam:</label>
-                    <input type="text" name="lastName">
+                    <input type="text" name="lastName" class="form-control" placeholder="Tussenvoegsel en achternaam">
                 </div>
                 <div class="form-group p-1">
                     <label for="password">Wachtwoord:</label>
-                    <input type="password" name="password">
+                    <input type="password1" name="password" class="form-control" placeholder="Wachtwoord">
                 </div>
                 <div class="form-group p-1">
                     <label for="email">E-mailadres:</label>
-                    <input type="text" name="email">
+                    <input type="text" name="email" class="form-control" placeholder="E-emailadres">
                 </div>
                 <div class="form-group p-1">
                     <label for="gender">Geslacht:</label>
-                    <input type="text" name="gender">
+                    <input type="text" name="gender" class="form-control" placeholder="Geslacht">
                 </div>
                 <div class="form-group p-1">
                     <label for="birthday">Geboortedatum:</label>
-                    <input type="date" name="birthday">
+                    <input type="date" name="birthday" class="form-control" placeholder="Geboortedatum">
+                </div>
+                <div class="form-group p-1">
+                    <label for="phone_number">Telefoonnummer</label>
+                    <input type="number" name="phone_number" class="form-control" placeholder="Telefoonnummer">
                 </div>
                 <div class="form-group p-1">
                     <label for="zipCode">Postcode:</label>
-                    <input type="text" name="zipCode">
+                    <input type="text" name="zipCode" class="form-control" placeholder="Postcode">
                 </div>
                 <div class="form-group p-1">
-                    <label for="disability">Type beperking:</label>
-                    <select name="disability">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="fiat">Fiat</option>
-                        <option value="audi">Audi</option>
+                    <label for="home_number">Huisnummer:</label>
+                    <input type="number" name="house_number" class="form-control" placeholder="Huisnummer">
+                </div>
+                <div class="form-group p-1">
+                    <label for="admin">Beheerder?</label>
+                    <select name="admin" class="form-control">
+                        <option value="no">Nee</option>
+                        <option value="yes">Ja</option>
                     </select>
                 </div>
                 <div class="form-group p-1">
-                    <label for="tools">Gebruikte hulpmiddelen:</label>
-                    <textarea name="tools" cols="30" rows="10"></textarea>
+                    <button type="submit" class="btn btn-primary mb-5 mt-2">Goedkeuring aanvragen</button>
                 </div>
-                <div class="form-group p-1">
-                    <label for="particulars">Bijzonderheden:</label>
-                    <textarea name="particulars" cols="30" rows="10"></textarea>
-                </div>
-                <div class="form-group p-1">
-                    <label for="supervisor">toezichthouder/voogd?:</label>
-                    <select name="supervisor">
-                </div>
-                <option value="nee">Nee</option>
-                <option value="ja">Ja</option>
-                </select>
-
-                <div id="superviser_div">
-                    <label for="name_supervisor">Naam toezichthouder/voogd:</label>
-                    <input type="text" name="name_supervisor">
-
-                    <label for="email_supervisor">E-mailadres toezichthouder:</label>
-                    <input type="text" name="email_supervisor">
-
-                    <label for="phonenumber_supervisor">Telefoonnummer toezichthouder/voogd:</label>
-                    <input type="number" name="phonenumber_supervisor">
-                </div>
-
-                <label for="approach">Benadering keuze:</label>
-                <select name="approach_choice">
-                    <option value="phone">Telefonisch</option>
-                    <option value="email">Email</option>
-                </select>
-
-
-                <button type="submit">Goedkeuring aanvragen</button>
             </form>
         </div>
     </div>
