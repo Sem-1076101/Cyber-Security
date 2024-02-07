@@ -3,12 +3,20 @@ from .models import Onderzoek, Medewerker, Organisatie, Ervaringsdeskundige, Bep
 
 
 def login(request):
+
+    form = CreateEmployeeForm()
+
+    if request.method == 'POST':
+        form = CreateEmployeeForm
+
     return render(request, 'login.html', {})
 
 
 def signup(request):
     return render(request, 'signup.html', {})
 
+def signup_employee(request):
+    return render(request, 'signup_employees.html', {})
 
 def portal(request):
     onderzoeken = Onderzoek.objects.all()[:5]

@@ -6,6 +6,8 @@ app_name = 'administrators'
 urlpatterns = [
     path('login/', views.login, name='login'),
     path('signup/', views.signup, name='signup'),
+    path('signup_employee/', views.signup_employee, name='signup_employee'),
     path('portal/', views.portal, name='medewerkers portal'),
     path('medewerker/', views.medewerker, name='medewerker'),
 ]
+ 

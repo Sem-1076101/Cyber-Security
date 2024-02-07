@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <h1 class="text-center mb-4">Voeg een nieuwe medewerker toe</h1>
+        </div>
+        <div class="col-8">
+            <form action="" method="post" class="form-horizontal">
+                <div class="form-group p-1">
+                    <label for="firstName">Voornaam:</label>
+                    <input type="text" name="firstName" class="form-control" placeholder="Voornaam">
+                </div>
+                <div class="form-group p-1">
+                    <label for="lastName">Achternaam:</label>
+                    <input type="text" name="lastName" class="form-control" placeholder="Tussenvoegsel en achternaam">
+                </div>
+                <div class="form-group p-1">
+                    <label for="password">Wachtwoord:</label>
+                    <input type="password" name="password" class="form-control" placeholder="Wachtwoord">
+                </div>
+                <div class="form-group p-1">
+                    <label for="email">E-mailadres:</label>
+                    <input type="text" name="email" class="form-control" placeholder="E-emailadres">
+                </div>
+                <div class="form-group p-1">
+                    <label for="gender">Geslacht:</label>
+                    <input type="text" name="gender" class="form-control" placeholder="Geslacht">
+                </div>
+                <div class="form-group p-1">
+                    <label for="birthday">Geboortedatum:</label>
+                    <input type="date" name="birthday" class="form-control" placeholder="Geboortedatum">
+                </div>
+                <div class="form-group p-1">
+                    <label for="phone_number">Telefoonnummer</label>
+                    <input type="number" name="phone_number" class="form-control" placeholder="Telefoonnummer">
+                </div>
+                <div class="form-group p-1">
+                    <label for="zipCode">Postcode:</label>
+                    <input type="text" name="zipCode" class="form-control" placeholder="Postcode">
+                </div>
+                <div class="form-group p-1">
+                    <label for="home_number">Huisnummer:</label>
+                    <input type="number" name="house_number" class="form-control" placeholder="Huisnummer">
+                </div>
+                <div class="form-group p-1">
+                    <label for="admin">Beheerder?</label>
+                    <select name="admin" class="form-control">
+                        <option value="no">Nee</option>
+                        <option value="yes">Ja</option>
+                    </select>
+                </div>
+                <div class="form-group p-1">
+                    <button type="submit" class="btn btn-primary mb-5 mt-2">Goedkeuring aanvragen</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
