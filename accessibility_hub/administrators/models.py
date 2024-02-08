@@ -30,16 +30,16 @@ class Medewerker(models.Model):
     medewerker_id = models.AutoField(primary_key=True)
     voornaam = models.CharField(max_length=255)
     achternaam = models.CharField(max_length=100)
+    gebruikersnaam = models.CharField(max_length=255, default='')
+    wachtwoord = models.CharField(max_length=255)
+    emailadres = models.CharField(max_length=255)
     postcode = models.CharField(max_length=6)
     huisnummer = models.IntegerField()
-    geslacht = models.CharField(max_length=10)
-    emailadres = models.CharField(max_length=255)
+    geslacht = models.CharField(max_length=10) 
     telefoonnummer = models.CharField(max_length=15)
     geboortedatum = models.DateField()
     admin = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
-    gebruikersnaam = models.CharField(max_length=255, default='')
-    wachtwoord = models.CharField(max_length=255)
 
     def save(self, *args, **kwargs):
         if self._state.adding:
