@@ -10,10 +10,10 @@ def signup(request):
         form = CreateEmployeeForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
-        else:
-            form = CreateEmployeeForm()
-        return render(request, 'signup.html', {})
+            return redirect('medewerkers/login')
+    else:
+        form = CreateEmployeeForm()
+    return render(request, 'signup.html', {'form': form})
 
 
 def portal(request):
