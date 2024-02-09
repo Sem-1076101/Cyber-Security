@@ -4,7 +4,7 @@ from django import forms
 from .models import Medewerker
 
 class CreateEmployeeForm(forms.ModelForm):
-
+    wachtwoord = forms.CharField(label='wachtwoord', widget = forms.PasswordInput)
     class Meta:
 
         model = Medewerker
