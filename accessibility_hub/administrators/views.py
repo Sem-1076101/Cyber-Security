@@ -3,11 +3,16 @@ from .models import Onderzoek, Medewerker, Organisatie, Ervaringsdeskundige, Bep
 from .forms import CreateEmployeeForm
 
 def login(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+
     return render(request, 'login.html', {})
 
 def signup(request):
     if request.method == 'POST':
         form = CreateEmployeeForm(request.POST)
+        
         if form.is_valid():
             form.save()
             return redirect('../login')

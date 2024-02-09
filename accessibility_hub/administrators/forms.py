@@ -9,3 +9,10 @@ class CreateEmployeeForm(forms.ModelForm):
 
         model = Medewerker
         fields = '__all__'
+
+    def check_email(self):
+        email = self.cleaned_data.get('email')
+
+        if Medewerker.objects.filter(emailadres__iexact=email).exists():
+            raise forms.ValidationError("Email is al in gebruik.")
+        return email
