@@ -9,19 +9,21 @@ from django.contrib.auth import authenticate, login, logout
 def login(request):
     form = LoginForm()
     if request.method == 'POST':
-        form = LoginForm(request, data=request.POST)
+        form = LoginForm(request.POST)
         if form.is_valid():
             username = request.POST.get('username')
             password = request.POST.get('password')
 
-            userCheck = authenticate(request, gebruikersnaam = username, wachtwoord = password)
+            userCheck = authenticate(request, username = username, password = password)
             if userCheck is not None:
                 auth.login(request, userCheck)
                 return redirect('portal')
-            else: 
-                print('Gaat fout bij usercheck')
-    else: 
-        print('Komt form niet in')
+            else:
+                print('Inloggen mislukt. Ongeldige gebruikersnaam of wachtwoord.')
+        else:
+            print('Formulier is niet geldig. Fouten: ', form.errors)
+    else:
+        print('Geen POST-verzoek ontvangen.')
             
 
     context = {'loginform': form}
