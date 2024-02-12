@@ -10,7 +10,7 @@
             <h1 class="text-center mb-4">Inloggen</h1>
         </div>
         <div class="col-2 justify-content-center">
-            <form method="post" class="form-horizontal">
+            <form action="" method="post" class="form-horizontal">
                 {% csrf_token %}
                 {{loginform.as_p}}
                 <p class="form-group p-1">

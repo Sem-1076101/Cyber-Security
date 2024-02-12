@@ -14,10 +14,10 @@ def login(request):
             username = request.POST.get('username')
             password = request.POST.get('password')
 
-            userCheck = authenticate(request, username = username, password = password)
+            userCheck = authenticate(request, username= username, password= password)
             if userCheck is not None:
                 auth.login(request, userCheck)
-                return redirect('portal')
+                return redirect('../portal')
             else:
                 print('Inloggen mislukt. Ongeldige gebruikersnaam of wachtwoord.')
         else:
