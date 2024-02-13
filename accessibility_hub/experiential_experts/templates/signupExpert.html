@@ -58,13 +58,14 @@
                 </div>
                 <div class="form-group p-1">
                     <label for="supervisor">toezichthouder/voogd?:</label>
-                    <select name="supervisor">
+                    <select name="supervisor" id="supervisor">
+                        <option value="nee">Nee</option>
+                        <option value="ja">Ja</option>
+                    </select>
                 </div>
-                <option value="nee">Nee</option>
-                <option value="ja">Ja</option>
-                </select>
 
-                <div id="superviser_div">
+
+                <div id="supervisor_div">
                     <label for="name_supervisor">Naam toezichthouder/voogd:</label>
                     <input type="text" name="name_supervisor">
 
@@ -88,6 +89,6 @@
     </div>
 </div>
 
-<script src="signup.js"></script> 
+<script src="../../static/signup.js"></script>
 
 {% endblock content %}
