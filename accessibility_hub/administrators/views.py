@@ -9,12 +9,12 @@ from django.contrib.auth import authenticate, login, logout
 def login(request):
     form = LoginForm()
     if request.method == 'POST':
-        form = LoginForm(request.POST)
+        form = LoginForm(request, data=request.POST)
         if form.is_valid():
-            username = request.POST.get('username')
-            password = request.POST.get('password')
+            username = request.cleaned_data.get('username')
+            password = request.cleaned_data.get('password')
 
-            userCheck = authenticate(request, username= username, password= password)
+            userCheck = authenticate(request, gebruikersnaam= username, wachtwoord= password)
             if userCheck is not None:
                 auth.login(request, userCheck)
                 return redirect('../portal')
