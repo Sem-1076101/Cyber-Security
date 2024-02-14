@@ -1,10 +1,16 @@
 from django.shortcuts import render, redirect
 from .models import Onderzoek, Medewerker, Organisatie, Ervaringsdeskundige, Beperking
 from .forms import CreateEmployeeForm, LoginForm
+from django.utils.translation import gettext as _
+from django.core.exceptions import ValidationError
 
 # Authenticatie imports voor de login
+from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout 
+
+
+               
 
 def login(request):
     form = LoginForm()
@@ -13,17 +19,21 @@ def login(request):
         if form.is_valid():
             username = request.POST.get('gebruikersnaam')
             password = request.POST.get('wachtwoord')
-
-            userCheck = authenticate(request, username= username, password= password)
+            # hashed_pw_from_usermodel = Medewerker.objects.all().first().wachtwoord
+            print(username)
+            print(password)
+            userCheck = authenticate(request, gebruikersnaam=username, wachtwoord = password)
             if userCheck is not None:
-                auth.login(request, userCheck)
                 return redirect('../portal')
+                # auth.login(request, userCheck)
             else:
-                print('Inloggen mislukt. Ongeldige gebruikersnaam of wachtwoord.')
+                print('Inloggen mislukt. Ongeldige gebruikersnaam of wachtwoord. komt niet voorbij usercheck')
         else:
             print('Formulier is niet geldig')
     else:
         print('Geen POST-verzoek ontvangen.')
+
+            
             
 
     context = {'loginform': form}

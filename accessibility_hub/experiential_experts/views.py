@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 
 def login(request):
+    # active_users_list = Users.objects.filter(status="active")
     return render(request, 'login.html', {})
 
 def signup(request):
