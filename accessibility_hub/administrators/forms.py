@@ -18,6 +18,8 @@ class CreateEmployeeForm(forms.ModelForm):
             raise forms.ValidationError("Email is al in gebruik.")
         return email 
     
-class LoginForm(AuthenticationForm):
-    username = forms.CharField(widget=TextInput())
-    password = forms.CharField(widget=PasswordInput())
+class LoginForm(forms.ModelForm):
+    wachtwoord = forms.CharField(label='wachtwoord', widget = forms.PasswordInput)
+    class Meta: 
+        model = Medewerker
+        fields = ('gebruikersnaam', 'wachtwoord')
