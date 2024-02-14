@@ -51,6 +51,33 @@ class Medewerker(models.Model):
         db_table = 'medewerkers'
 
 
+class goedkeuring_ervaringsdeskundige(models.Model):
+    goedkeurings_id = models.AutoField(primary_key=True)
+    status = models.IntegerField(default=0)
+    datum_van_goed_keuring = models.DateField()
+    deskundige = models.ForeignKey(
+        'Ervaringsdeskundige', on_delete=models.SET_NULL, blank=True, null=True
+    )
+    medewerker = models.ForeignKey(
+        'Medewerker', on_delete=models.SET_NULL, blank=True, null=True
+    )
+
+    class Meta:
+        db_table = 'goedkeuring_ervaringsdeskundige'
+
+class goedkeuring_onderzoek(models.Model):
+    goedkeurings_id = models.AutoField(primary_key=True)
+    status = models.IntegerField(default=0)
+    datum_van_goedkeuring = models.DateField()
+    onderzoek = models.ForeignKey(
+        'Onderzoek', on_delete=models.SET_NULL, blank=True, null=True
+    )
+    organisatie = models.ForeignKey(
+        'Organisatie', on_delete=models.SET_NULL, blank=True, null=True
+    )
+    medewerker = models.ForeignKey(
+        'Medewerker', on_delete=models.SET_NULL, blank=True, null=True
+    )
 class Organisatie(models.Model):
     organisatie_id = models.AutoField(primary_key=True)
     naam = models.CharField(max_length=255)
