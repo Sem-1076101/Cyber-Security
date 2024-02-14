@@ -9,5 +9,4 @@ urlpatterns = [
     path('portal/', views.portal, name='medewerkersportal'),
     path('medewerker/<int:medewerker_id>/', views.medewerker, name='medewerker'),
     path('verwijder_medewerker/<int:medewerker_id>/', views.verwijder_medewerker, name='verwijder_medewerker'),
-
 ]
