@@ -13,9 +13,15 @@
                     <a class="list-group-item list-group-item-action" id="list-users-list" data-bs-toggle="tab"
                        href="#list-users" role="tab" aria-controls="list-users">Medewerkers</a>
                     <a class="list-group-item list-group-item-action" id="list-researches-list" data-bs-toggle="tab"
-                       href="#list-researches" role="tab" aria-controls="list-researches">Onderzoeken</a>
+                       href="#list-recent-researches" role="tab" aria-controls="list-recent-researches">Recent
+                        ingediende onderzoeken</a>
                     <a class="list-group-item list-group-item-action" id="list-expert-list" data-bs-toggle="tab"
-                       href="#list-expert" role="tab" aria-controls="list-expert">Ervaringsdeskundigen</a>
+                       href="#list-recent-expert" role="tab" aria-controls="list-recent-expert">Recent ingediende
+                        ervaringsdeskundigen</a>
+                    <a class="list-group-item list-group-item-action" id="list-researches-list" data-bs-toggle="tab"
+                       href="#list-researches" role="tab" aria-controls="list-researches">Alle onderzoeken</a>
+                    <a class="list-group-item list-group-item-action" id="list-expert-list" data-bs-toggle="tab"
+                       href="#list-expert" role="tab" aria-controls="list-expert">Alle ervaringsdeskundigen</a>
                 </div>
             </div>
             <div class="col-10">
@@ -34,19 +40,24 @@
                                             alle beschikbare onderzoeken en ervaringsdeskundigen.</p>
                                         <b>Medewerkers</b>
                                         <p>Hier vindt u een overzicht van al onze medewerkers, inclusief hun
-                                        contactgegevens en functies binnen de organisatie. U kunt door de lijst bladeren
-                                            om meer te weten te komen over het team dat onze organisatie draaiende houdt.</p>
+                                            contactgegevens en functies binnen de organisatie. U kunt door de lijst
+                                            bladeren
+                                            om meer te weten te komen over het team dat onze organisatie draaiende
+                                            houdt.</p>
                                         <b>Onderzoeken</b>
-                                        <p>Ontdek alle lopende en voltooide onderzoeksprojecten die worden uitgevoerd door
-                                        onze organisatie. Leer meer over de doelstellingen, resultaten en betrokkenen
+                                        <p>Ontdek alle lopende en voltooide onderzoeksprojecten die worden uitgevoerd
+                                            door
+                                            onze organisatie. Leer meer over de doelstellingen, resultaten en
+                                            betrokkenen
                                             bij elk onderzoek en hoe ze bijdragen aan onze missie.</p>
                                         <b>Ervaringsdeskundigen</b>
                                         <p>Ontmoet onze ervaringsdeskundigen, die waardevolle inzichten en perspectieven
-                                        bieden vanuit hun eigen ervaringen. Leer meer over hun achtergronden,
-                                        expertisegebieden en hoe ze een waardevolle bijdrage leveren aan onze
+                                            bieden vanuit hun eigen ervaringen. Leer meer over hun achtergronden,
+                                            expertisegebieden en hoe ze een waardevolle bijdrage leveren aan onze
                                             gemeenschap.</p>
                                         <p>Dank u voor uw interesse en betrokkenheid bij onze organisatie. We hopen dat
-                                        deze portal u zal helpen om meer te weten te komen over wie we zijn en wat we
+                                            deze portal u zal helpen om meer te weten te komen over wie we zijn en wat
+                                            we
                                             doen.</p>
                                     </div>
                                 </div>
@@ -86,7 +97,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="tab-pane fade" id="list-researches" role="tabpanel"
+                            <div class="tab-pane fade" id="list-recent-researches" role="tabpanel"
                                  aria-labelledby="list-researches-list">
                                 <h3>Recent ingediende onderzoeken</h3>
                                 <table class="table table-hover">
@@ -110,9 +121,61 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="tab-pane fade" id="list-expert" role="tabpanel"
+                            <div class="tab-pane fade" id="list-recent-expert" role="tabpanel"
+                                 aria-labelledby="list-expert-list">
+                                <h3>Recent ingediende ervaringsdeskundige</h3>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Naam</th>
+                                        <th scope="col">Geboortedatum</th>
+                                        <th scope="col">E-mailadres</th>
+                                        <th scope="col">Telefoonnummer</th>
+                                        <th scope="col">Beperking</th>
+                                        <th scope="col">Aangemaakt op</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for ervaringsdeskundige in ervaringsdeskundigen %}
+                                        <tr>
+                                            <td>{{ ervaringsdeskundige.naam }}</td>
+                                            <td>{{ ervaringsdeskundige.geboortedatum }}</td>
+                                            <td>{{ ervaringsdeskundige.email }}</td>
+                                            <td>{{ ervaringsdeskundige.telefoonnummer }}</td>
+                                            <td>{{ ervaringsdeskundige.soort_beperking }}</td>
+                                            <td>{{ ervaringsdeskundige.created_at }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="list-researches" role="tabpanel"
                                  aria-labelledby="list-researches-list">
-                                <h3>Recent aangemelden ervaringsdeskundige</h3>
+                                <h3>Onderzoeken</h3>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Titel</th>
+                                        <th scope="col">Organisatie</th>
+                                        <th scope="col">Datum vanaf</th>
+                                        <th scope="col">Datum tot</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for onderzoek in onderzoeken %}
+                                        <tr>
+                                            <td>{{ onderzoek.titel }}</td>
+                                            <td>{{ onderzoek.organisatie.naam }}</td>
+                                            <td>{{ onderzoek.datum_vanaf|date:"d-m-Y" }}</td>
+                                            <td>{{ onderzoek.datum_tot|date:"d-m-Y" }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="list-expert" role="tabpanel"
+                                 aria-labelledby="list-expert-list">
+                                <h3>Ervaringsdeskundige</h3>
                                 <table class="table table-hover">
                                     <thead>
                                     <tr>
