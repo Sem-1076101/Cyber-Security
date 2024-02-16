@@ -5,6 +5,7 @@ from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
 
 # Authenticatie imports voor de login
+from django.contrib import messages
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout 
@@ -22,12 +23,15 @@ def login(request):
             # hashed_pw_from_usermodel = Medewerker.objects.all().first().wachtwoord
             print(username)
             print(password)
-            userCheck = authenticate(request, gebruikersnaam=username, wachtwoord = password)
-            if userCheck is not None:
+            user = authenticate(request, gebruikersnaam=username, wachtwoord = password)
+            if user is not None:
+                login(request, user)
                 return redirect('../portal')
                 # auth.login(request, userCheck)
             else:
+                messages.success(request, ('Inloggen mislukt. Ongeldige gebruikersnaam of wachtwoord.'))
                 print('Inloggen mislukt. Ongeldige gebruikersnaam of wachtwoord. komt niet voorbij usercheck')
+                # return redirect('../login')
         else:
             print('Formulier is niet geldig')
     else:
