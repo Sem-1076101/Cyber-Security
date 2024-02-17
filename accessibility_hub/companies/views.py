@@ -1,5 +1,9 @@
 from .models import Onderzoek
+from .models import Vraag
+from .models import Onderzoekvraag
 from .serializers import OnderzoekSerializer
+from .serializers import VraagSerializer
+from .serializers import OnderzoekvraagSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -43,3 +47,18 @@ def onderzoek_detail(request, onderzoek_id, format=None):
     if request.method == 'DELETE':
         onderzoek.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET'])
+def vragen_lijst(request, format=None):
+    if request.method == 'GET':
+        vraag = Vraag.objects.all()
+        serializer = VraagSerializer(vraag, many=True)
+        return Response({'vragen': serializer.data})
+
+@api_view(['GET'])
+def onderzoek_vragen_lijst(request, format=None):
+    if request.method == 'GET':
+        onderzoekvraag = Onderzoekvraag.objects.all()
+        serializer = OnderzoekvraagSerializer(onderzoekvraag, many=True)
+        return Response({'onderzoekvragen': serializer.data})
