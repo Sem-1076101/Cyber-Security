@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'companies',
     'experiential_experts',
     'default',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
