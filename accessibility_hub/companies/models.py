@@ -18,7 +18,6 @@ class Onderzoek(models.Model):
     doelgroep_leeftijd_van = models.IntegerField()
     doelgroep_leeftijd_tot = models.IntegerField()
     doelgroep_beperking = models.CharField(max_length=100)
-    onderzoek_vragen_id = models.IntegerField()
     organisatie = models.ForeignKey(
         'Organisatie', on_delete=models.SET_NULL, null=True
     )
@@ -46,3 +45,33 @@ class Organisatie(models.Model):
 
     def __str__(self):
         return self.naam
+
+
+class Vraag(models.Model):
+    vraag_id = models.AutoField(primary_key=True)
+    titel = models.CharField(max_length=255)
+    beschrijving = models.CharField(max_length=255)
+    opties = models.CharField(max_length=255)
+    categorie = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'organisatie_vragen'
+
+    def __str__(self):
+        return self.titel
+
+
+class Onderzoekvraag(models.Model):
+    onderzoekvraag_id = models.AutoField(primary_key=True)
+    vraag = models.ForeignKey(
+        'Vraag', on_delete=models.SET_NULL, null=True
+    )
+    onderzoek = models.ForeignKey(
+        'Onderzoek', on_delete=models.SET_NULL, null=True
+    )
+
+    class Meta:
+        db_table = 'organisatie_onderzoekvragen'
+
+    def __str__(self):
+        return self.onderzoekvraag_id
