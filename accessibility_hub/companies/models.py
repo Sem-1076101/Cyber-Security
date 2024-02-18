@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -30,14 +30,13 @@ class Onderzoek(models.Model):
         return self.titel
 
 
-class Organisatie(models.Model):
+class Organisatie(AbstractUser):
     organisatie_id = models.AutoField(primary_key=True)
     naam = models.CharField(max_length=255)
     type = models.CharField(max_length=255)
-    website = models.URLField(max_length=200)
+    website = models.CharField(max_length=200)
     beschrijving = models.TextField()
     contactpersoon = models.CharField(max_length=255)
-    emailadres = models.EmailField(max_length=255)
     telefoonnummer = models.CharField(max_length=15)
     overige_details = models.TextField()
 
