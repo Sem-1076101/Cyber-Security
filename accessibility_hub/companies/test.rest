@@ -1,0 +1,18 @@
+POST http://127.0.0.1:8000/bedrijven/login/
+content-type: application/json
+
+{ "username": "admin", "password": "admin" }
+
+###
+
+POST http://127.0.0.1:8000/bedrijven/signup/
+content-type: application/json
+
+{ "username": "bryan", "password": "bryan", "email": "bryan@gmail.com" }
+
+###
+
+GET http://127.0.0.1:8000/bedrijven/test_token/
+content-type: application/json
+
+{}
