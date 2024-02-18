@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'experiential_experts',
     'default',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
