@@ -2,7 +2,8 @@ from rest_framework import serializers
 from .models import Onderzoek
 from .models import Vraag
 from .models import Onderzoekvraag
-from django.contrib.auth.models import User
+from .models import Organisatie
+
 
 class OnderzoekSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,14 +25,15 @@ class OnderzoekvraagSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['id', 'username', 'password', 'email']
+        model = Organisatie
+        fields = ['organisatie_id', 'email', 'username', 'password', 'website']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        user = User.objects.create_user(
+        user = Organisatie.objects.create_user(
             username=validated_data['username'],
-            email=validated_data['email']
+            email=validated_data['email'],
+            website=validated_data.get('website', '')
         )
         user.set_password(validated_data['password'])
         user.save()
