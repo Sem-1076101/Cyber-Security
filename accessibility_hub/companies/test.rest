@@ -8,7 +8,7 @@ content-type: application/json
 POST http://127.0.0.1:8000/bedrijven/signup/
 content-type: application/json
 
-{ "username": "bryan", "password": "bryan", "email": "bryan@gmail.com" }
+{ "username": "bryan4", "password": "bryan", "email": "bryandk@gmail.com", "website": "https://www.tweakers.net" }
 
 ###
 
