@@ -12,8 +12,6 @@ class CreateEmployeeForm(forms.ModelForm):
         model = Medewerker
         fields = '__all__' 
     
-class LoginForm(forms.ModelForm):
+class LoginForm(forms.Form):
+    gebruikersnaam = forms.CharField(label='Gebruikersnaam', max_length=100)
     wachtwoord = forms.CharField(label='wachtwoord', widget = forms.PasswordInput)
-    class Meta: 
-        model = Medewerker
-        fields = ('gebruikersnaam', 'wachtwoord')

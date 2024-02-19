@@ -18,11 +18,11 @@ def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            username = request.cleaned_data['gebruikersnaam']
-            password = request.cleaned_data['wachtwoord']
-            print(username)
-            print(password)
-            user = authenticate(request, gebruikersnaam=username, wachtwoord=password)
+            gebruikersnaam = request.POST.get('gebruikersnaam')
+            wachtwoord = request.POST.get('wachtwoord')
+            print(gebruikersnaam)
+            print(wachtwoord)
+            user = authenticate(request, username=gebruikersnaam, password=wachtwoord)
             if user is not None:
                 login(request, user)
                 return redirect('../portal')
@@ -39,6 +39,10 @@ def login(request):
     context = {'loginform': form}
 
     return render(request, 'login.html', context=context)
+
+def logout_view(request):
+    logout(request)
+    return redirect('login') 
 
 def signup(request):
     if request.method == 'POST':
