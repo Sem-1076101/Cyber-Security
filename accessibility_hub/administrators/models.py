@@ -1,4 +1,5 @@
 from django.db import models
+from companies.models import Organisatie
 from django.contrib.auth.hashers import make_password
 
 
