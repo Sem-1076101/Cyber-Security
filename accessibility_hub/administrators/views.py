@@ -18,12 +18,11 @@ def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            username = request.POST.get('gebruikersnaam')
-            password = request.POST.get('wachtwoord')
-            # hashed_pw_from_usermodel = Medewerker.objects.all().first().wachtwoord
+            username = request.cleaned_data['gebruikersnaam']
+            password = request.cleaned_data['wachtwoord']
             print(username)
             print(password)
-            user = authenticate(request, gebruikersnaam=username, wachtwoord = password)
+            user = authenticate(request, gebruikersnaam=username, wachtwoord=password)
             if user is not None:
                 login(request, user)
                 return redirect('../portal')
@@ -36,9 +35,6 @@ def login(request):
             print('Formulier is niet geldig')
     else:
         print('Geen POST-verzoek ontvangen.')
-
-            
-            
 
     context = {'loginform': form}
 

@@ -27,8 +27,7 @@ class Onderzoek(models.Model):
         db_table = 'onderzoeken'
 
 
-class Medewerker(models.Model):
-    
+class Medewerker(models.Model):  
     medewerker_id = models.AutoField(primary_key=True)
     voornaam = models.CharField(max_length=255)
     achternaam = models.CharField(max_length=100)

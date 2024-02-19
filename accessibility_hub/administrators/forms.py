@@ -10,7 +10,7 @@ class CreateEmployeeForm(forms.ModelForm):
     class Meta:
 
         model = Medewerker
-        fields = '__all__'
+        fields = '__all__' 
     
 class LoginForm(forms.ModelForm):
     wachtwoord = forms.CharField(label='wachtwoord', widget = forms.PasswordInput)
