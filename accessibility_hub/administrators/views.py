@@ -57,10 +57,6 @@ def accepteer_organisatie(request, id):
     return redirect('administrators:medewerkersportal')
 
 
-from django.shortcuts import render
-from django.core.mail import send_mail
-from django.conf import settings
-
 def mail(request):
     if request.method == 'POST':
         message = request.POST.get('message', '')
@@ -69,17 +65,17 @@ def mail(request):
 
         if message and email and name:
             send_mail(
-                'Contactformulier',  # title
-                'Test',  # message
-                settings.EMAIL_HOST_USER,  # from email
-                [email, 'bdeknikker04@gmail.com'],  # to email
+                'Contactformulier',  # titel
+                'Test',  # bericht
+                settings.EMAIL_HOST_USER,  # van e-mail
+                [email, 'bdeknikker04@gmail.com'],  # naar e-mail
                 fail_silently=False,
             )
-            return render(request, 'signup.html')
+            return redirect('administrators:signup')
         else:
-            # Als gegevens ontbreken, keer dan terug naar de oorspronkelijke pagina.
-            return render(request, 'portal.html')
+            # Als gegevens ontbreken, keer dan terug naar het contactformulier.
+            print("Dat ging mis")
+            return render(request, 'mail.html')
 
-    # Als het geen POST-verzoek is, keer dan terug naar de oorspronkelijke pagina.
-    return render(request, 'portal.html')
-
+    # Als het geen POST-verzoek is, render dan het contactformulier.
+    return render(request, 'mail.html')
