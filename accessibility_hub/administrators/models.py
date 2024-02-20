@@ -41,6 +41,8 @@ class Medewerker(models.Model):
     admin = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+    
+
     def save(self, *args, **kwargs):
         if self._state.adding:
             self.wachtwoord = make_password(self.wachtwoord)

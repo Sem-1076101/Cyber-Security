@@ -105,6 +105,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# login laten werken via andere manier.
+# AUTH_USER_MODEL = 'administrators.Medewerker'
+# LOGIN_URL = '/medewerkers/login/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
