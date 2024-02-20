@@ -3,7 +3,8 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.core.mail import send_mail
 from django.conf import settings
-# from .models import Onderzoek, Medewerker, Organisatie, Ervaringsdeskundige, Beperking
+from django.http import JsonResponse
+# from .models import Onderzoek, Medewerker, organisatie, Ervaringsdeskundige, Beperking
 from .models import Medewerker, Ervaringsdeskundige, Beperking
 from companies.models import Organisatie
 
@@ -46,7 +47,23 @@ def organisatie(request, id):
 
 def verwijder_organisatie(request, id):
     organisatie = get_object_or_404(Organisatie, id=id)
-    organisatie.delete()
+    organisatie.status = 'Afgekeurd'
+    organisatie.save()
+
+    message = (
+        f'Beste {organisatie.first_name} {organisatie.last_name},\n\n'
+        f'Uw aanvraag is afgekeurd. Helaas kunnen wij u geen toegang geven tot de applicatie.\n\n'
+        f'Met vriendelijke groet,\n'
+        'Het team van de Accessibility Hub'
+    )
+
+    send_mail(
+        'Afkeuring van uw aanvraag',
+        message,
+        settings.EMAIL_HOST_USER,
+        [organisatie.email],
+        fail_silently=False,
+    )
     return redirect('administrators:medewerkersportal')
 
 
@@ -54,6 +71,22 @@ def accepteer_organisatie(request, id):
     organisatie = get_object_or_404(Organisatie, id=id)
     organisatie.status = 'Geaccepteerd'
     organisatie.save()
+
+    message = (
+        f'Beste {organisatie.first_name} {organisatie.last_name},\n\n'
+        f'Uw aanvraag is geaccepteerd. U kunt nu inloggen op de website.\n'
+        f'Hier is uw persoonlijke API-sleutel: {organisatie.token}\n\n'
+        f'Met vriendelijke groet,\n'
+        'Het team van de Accessibility Hub'
+    )
+
+    send_mail(
+        'Goedkeuring van uw aanvraag',
+        message,
+        settings.EMAIL_HOST_USER,
+        [organisatie.email],
+        fail_silently=False,
+    )
     return redirect('administrators:medewerkersportal')
 
 
@@ -65,17 +98,27 @@ def mail(request):
 
         if message and email and subject:
             send_mail(
-                subject,  # titel
-                message,  # bericht
-                settings.EMAIL_HOST_USER,  # van e-mail
-                [email],  # naar e-mail
+                subject,
+                message,
+                settings.EMAIL_HOST_USER,
+                [email],
                 fail_silently=False,
             )
             return redirect('administrators:signup')
         else:
-            # Als gegevens ontbreken, keer dan terug naar het contactformulier.
             print("Dat ging mis")
             return render(request, 'mail.html')
 
-    # Als het geen POST-verzoek is, render dan het contactformulier.
     return render(request, 'mail.html')
+
+
+def check_updates(request):
+    recent_organisaties = Organisatie.objects.filter(status='Nieuw').order_by('date_joined')[:10]
+
+    data = [{'id': organisatie.id, 'bedrijfsnaam': organisatie.bedrijfsnaam, 'email': organisatie.email,
+             'first_name': organisatie.first_name,
+             'last_name': organisatie.last_name, 'status': organisatie.status, 'date_joined': organisatie.date_joined}
+            for organisatie in
+            recent_organisaties]
+
+    return JsonResponse(data, safe=False)
