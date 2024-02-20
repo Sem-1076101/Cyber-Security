@@ -61,14 +61,14 @@ def mail(request):
     if request.method == 'POST':
         message = request.POST.get('message', '')
         email = request.POST.get('email', '')
-        name = request.POST.get('name', '')
+        subject = request.POST.get('subject', '')
 
-        if message and email and name:
+        if message and email and subject:
             send_mail(
-                'Contactformulier',  # titel
-                'Test',  # bericht
+                subject,  # titel
+                message,  # bericht
                 settings.EMAIL_HOST_USER,  # van e-mail
-                [email, 'bdeknikker04@gmail.com'],  # naar e-mail
+                [email],  # naar e-mail
                 fail_silently=False,
             )
             return redirect('administrators:signup')
