@@ -11,7 +11,7 @@ function checkForUpdates() {
     fetch('../updates/', {method: 'GET'})
         .then(response => response.json())
         .then(data => {
-            const tbody = document.querySelector('#list-organisation tbody');
+            const tbody = document.querySelector('#list-recent-organisation tbody');
             tbody.innerHTML = '';
 
             data.forEach(organisatie => {
