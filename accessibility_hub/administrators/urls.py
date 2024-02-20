@@ -12,5 +12,6 @@ urlpatterns = [
     path('organisatie/<int:id>/', views.organisatie, name='organisatie'),
     path('verwijder_organisatie/<int:id>/', views.verwijder_organisatie, name='verwijder_organisatie'),
     path('accepteer_organisatie/<int:id>/', views.accepteer_organisatie, name='accepteer_organisatie'),
-    path('mail/', views.mail, name='mail')
+    path('mail/', views.mail, name='mail'),
+    path('updates/', views.check_updates, name='updates'),
 ]
