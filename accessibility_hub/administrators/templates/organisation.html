@@ -27,6 +27,7 @@
                             </div>
                         </div>
                     </div>
+                    {% if organisatie.status == 'Nieuw' %}
                     <div class="row pt-4">
                         <div class="col-6 d-flex justify-content-start align-items-center">
                             <a class="btn btn-danger mb-2"
@@ -37,6 +38,7 @@
                                href="{% url 'administrators:accepteer_organisatie' organisatie.id %}"
                                role="button">Accepteer {{ organisatie.bedrijfsnaam }}</a></div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
