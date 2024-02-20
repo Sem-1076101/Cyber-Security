@@ -6,26 +6,39 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-2">
+            <div class="col-3">
                 <div class="list-group" id="list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action active" id="list-portal-list" data-bs-toggle="tab"
                        href="#list-portal" role="tab" aria-controls="list-portal">Medewerkers Portal</a>
                     <a class="list-group-item list-group-item-action" id="list-users-list" data-bs-toggle="tab"
                        href="#list-users" role="tab" aria-controls="list-users">Medewerkers</a>
-                    <a class="list-group-item list-group-item-action" id="list-researches-list" data-bs-toggle="tab"
-                       href="#list-researches" role="tab" aria-controls="list-researches">Onderzoeken</a>
+                    <a class="list-group-item list-group-item-action" id="list-recent-researches-list"
+                       data-bs-toggle="tab"
+                       href="#list-recent-researches" role="tab" aria-controls="list-recent-researches">Recent
+                        ingediende onderzoeken</a>
+                    <a class="list-group-item list-group-item-action" id="list-researches-list"
+                       data-bs-toggle="tab"
+                       href="#list-researches" role="tab" aria-controls="list-researches">Alle onderzoeken</a>
+                    <a class="list-group-item list-group-item-action" id="list-recent-expert-list" data-bs-toggle="tab"
+                       href="#list-recent-expert" role="tab" aria-controls="list-recent-expert">Recent ingediende
+                        ervaringsdeskundigen</a>
                     <a class="list-group-item list-group-item-action" id="list-expert-list" data-bs-toggle="tab"
-                       href="#list-expert" role="tab" aria-controls="list-expert">Ervaringsdeskundigen</a>
-                    <a class="list-group-item list-group-item-action" id="list-organisation-list" data-bs-toggle="tab"
-                       href="#list-organisation" role="tab" aria-controls="list-organisation">Organisaties</a>
+                       href="#list-expert" role="tab" aria-controls="list-expert">Alle ervaringsdeskundigen</a>
+                    <a class="list-group-item list-group-item-action" id="list-recent-organisation-list"
+                       data-bs-toggle="tab"
+                       href="#list-recent-organisation" role="tab" aria-controls="list-recent-organisation">Recent
+                        ingediende organisaties</a>
+                    <a class="list-group-item list-group-item-action" id="list-organisation-list"
+                       data-bs-toggle="tab"
+                       href="#list-organisation" role="tab" aria-controls="list-organisation">Alle organisaties</a>
                 </div>
             </div>
-            <div class="col-10">
+            <div class="col-9">
                 <h2>Welkom {Naam}</h2>
                 <hr>
 
                 <div class="row">
-                    <div class="col-10">
+                    <div class="col-12">
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="list-portal" role="tabpanel"
                                  aria-labelledby="list-portal-list">
@@ -93,9 +106,25 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="tab-pane fade" id="list-recent-researches" role="tabpanel"
+                                 aria-labelledby="list-recent-researches-list">
+                                <h3>Recent ingediende onderzoeken</h3>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Titel</th>
+                                        <th scope="col">Organisatie</th>
+                                        <th scope="col">Datum vanaf</th>
+                                        <th scope="col">Datum tot</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
                             <div class="tab-pane fade" id="list-researches" role="tabpanel"
                                  aria-labelledby="list-researches-list">
-                                <h3>Recent ingediende onderzoeken</h3>
+                                <h3>Alle onderzoeken</h3>
                                 <table class="table table-hover">
                                     <thead>
                                     <tr>
@@ -117,9 +146,27 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="tab-pane fade" id="list-recent-expert" role="tabpanel"
+                                 aria-labelledby="list-recent-experts-list">
+                                <h3>Recent ingediende ervaringsdeskundigen</h3>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Naam</th>
+                                        <th scope="col">Geboortedatum</th>
+                                        <th scope="col">E-mailadres</th>
+                                        <th scope="col">Telefoonnummer</th>
+                                        <th scope="col">Beperking</th>
+                                        <th scope="col">Aangemaakt op</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
                             <div class="tab-pane fade" id="list-expert" role="tabpanel"
                                  aria-labelledby="list-experts-list">
-                                <h3>Recent aangemelden ervaringsdeskundige</h3>
+                                <h3>Alle ervaringsdeskundigen</h3>
                                 <table class="table table-hover">
                                     <thead>
                                     <tr>
@@ -145,9 +192,27 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="tab-pane fade" id="list-recent-organisation" role="tabpanel"
+                                 aria-labelledby="list-recent-organisation-list">
+                                <h3>Recent ingediende organisaties</h3>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Bedrijfsnaam</th>
+                                        <th scope="col">E-mailadres</th>
+                                        <th scope="col">Voornaam</th>
+                                        <th scope="col">Achternaam</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Aangemaakt op</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
                             <div class="tab-pane fade" id="list-organisation" role="tabpanel"
                                  aria-labelledby="list-organisation-list">
-                                <h3>Recent aangemelde organisaties</h3>
+                                <h3>Alle organisaties</h3>
                                 <table class="table table-hover">
                                     <thead>
                                     <tr>
