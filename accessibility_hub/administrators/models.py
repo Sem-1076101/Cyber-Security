@@ -2,7 +2,6 @@ from django.db import models
 from django import forms
 from django.contrib.auth.hashers import make_password
 
-
 class Onderzoek(models.Model):
     onderzoek_id = models.AutoField(primary_key=True)
     titel = models.CharField(max_length=255)

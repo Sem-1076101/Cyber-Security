@@ -10,7 +10,8 @@ class CreateEmployeeForm(forms.ModelForm):
     class Meta:
 
         model = Medewerker
-        fields = '__all__' 
+        fields = '__all__'
+        # ['voornaam', 'achternaam', 'gebruikersnaam', 'wachtwoord', 'emailadres', 'postcode', 'huisnummer', 'geslacht', 'telefoonnummer', 'geboortedatum', 'admin'] 
     
 class LoginForm(forms.Form):
     gebruikersnaam = forms.CharField(label='Gebruikersnaam', max_length=100)
