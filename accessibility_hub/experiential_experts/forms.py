@@ -17,10 +17,10 @@ class CreateExpertForm(forms.Form):
     tools = forms.CharField(label='Gebruikte hulpmiddelen')
     particulars = forms.CharField(label='Bijzonderheden')
     supervisor = forms.CharField(label='Toezichthouder')
-    supervisorName = forms.CharField(label='Toezichthouder naam', default='NULL')
-    email_supervisor = forms.CharField(label='Toezichthouder email', default='NULL')
-    phonenumber_supervisor = forms.CharField(label='Toezichthouder telefoonnummer', default='NULL')
-    approach_choice = forms.CharField(label='Benadering keuze')
+    supervisorName = forms.CharField(label='Toezichthouder_naam')
+    email_supervisor = forms.CharField(label='Toezichthouder_email')
+    phonenumber_supervisor = forms.CharField(label='Toezichthouder_telefoonnummer')
+    approach_choice = forms.CharField(label='Benadering_keuze')
 
 
     def clean(self):

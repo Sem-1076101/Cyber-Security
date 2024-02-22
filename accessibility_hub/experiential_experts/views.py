@@ -13,7 +13,6 @@ from django.contrib.auth.hashers import check_password
 def signup(request):
     if request.method == 'POST':
         form = CreateExpertForm(request.POST)
-        
         if form.is_valid():
             form.save()
             return redirect('../login')
@@ -31,12 +30,12 @@ def login(request):
             wachtwoord = request.POST.get('wachtwoord')
             print(gebruikersnaam)
             print(wachtwoord)    
-            medewerker = Medewerker.objects.filter(gebruikersnaam=gebruikersnaam).first()
-            if medewerker and check_password(wachtwoord, medewerker.wachtwoord):
+            ervaringsdeskundige = Ervaringsdeskundige.objects.filter(gebruikersnaam=gebruikersnaam).first()
+            if ervaringsdeskundige and check_password(wachtwoord, ervaringsdeskundige.wachtwoord):
             # user = authenticate(request, gebruikersnaam=gebruikersnaam, wachtwoord=wachtwoord)
             # if user is not None:
                 # login(request, medewerker)
-                return redirect('../portal')
+                return redirect('/')
             else:
                 messages.success(request, ('Inloggen mislukt. Ongeldige gebruikersnaam of wachtwoord.'))
         else:

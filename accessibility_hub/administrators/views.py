@@ -23,10 +23,16 @@ from django.contrib.auth.hashers import check_password
 def signup(request):
     if request.method == 'POST':
         form = CreateEmployeeForm(request.POST)
-        
-        if form.is_valid():
-            form.save()
-            return redirect('../login')
+        gebruikersnaam = request.POST.get('gebruikersnaam')
+        emailadres = request.POST.get('emailadres')
+        if Medewerker.objects.filter(gebruikersnaam=gebruikersnaam).exists(): 
+                messages.success(request, ('Gebruikersnaam is al ingebruik!'))
+        elif Medewerker.objects.filter(emailadres=emailadres).exists():
+            messages.success(request, ('Email is al ingebruik!'))
+        else:
+            if form.is_valid():
+                form.save()
+                return redirect('../login')
     else:
         form = CreateEmployeeForm()
     return render(request, 'signup.html', {'form': form})          
