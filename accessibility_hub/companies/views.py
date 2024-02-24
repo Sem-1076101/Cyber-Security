@@ -1,8 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
-from .serializers import OrganisatieSerializer
-from .models import Organisatie
+from .serializers import OrganisatieSerializer, OnderzoekSerializer
+from .models import Organisatie, Onderzoek
 import jwt
 import datetime
 
@@ -60,3 +60,18 @@ class Login(APIView):
         }
 
         return response
+
+
+class Research(APIView):
+    def post(self, request):
+        serializer = OnderzoekSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+
+            # Haal de gegevens van de opgeslagen gebruiker op
+            onderzoek = Onderzoek.objects.get(titel=serializer.data['titel'])
+
+            onderzoek.save()
+
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
