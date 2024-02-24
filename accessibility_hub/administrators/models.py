@@ -3,30 +3,6 @@ from companies.models import Organisatie
 from django.contrib.auth.hashers import make_password
 
 
-# class Onderzoek(models.Model):
-#     onderzoek_id = models.AutoField(primary_key=True)
-#     titel = models.CharField(max_length=255)
-#     status = models.CharField(max_length=100)
-#     beschikbaar = models.CharField(max_length=50)
-#     beschrijving = models.CharField(max_length=255)
-#     datum_vanaf = models.DateField()
-#     datum_tot = models.DateField()
-#     type_onderzoek = models.CharField(max_length=50)
-#     locatie = models.CharField(max_length=255)
-#     met_beloning = models.BooleanField()
-#     beloning = models.TextField(null=True, blank=True)
-#     doelgroep_leeftijd_van = models.IntegerField()
-#     doelgroep_leeftijd_tot = models.IntegerField()
-#     doelgroep_beperking = models.CharField(max_length=100)
-#     onderzoek_vragen_id = models.IntegerField()
-#     organisatie = models.ForeignKey(
-#         'Organisatie', on_delete=models.SET_NULL, null=True
-#     )
-#
-#     class Meta:
-#         db_table = 'onderzoeken'
-
-
 class Medewerker(models.Model):
     medewerker_id = models.AutoField(primary_key=True)
     voornaam = models.CharField(max_length=255)
