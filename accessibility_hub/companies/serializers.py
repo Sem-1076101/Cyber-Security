@@ -24,25 +24,24 @@ class OrganisatieSerializer(serializers.ModelSerializer):
 
 
 class OnderzoekSerializer(serializers.ModelSerializer):
-    token = serializers.CharField(write_only=True)  # Voeg het token-veld toe
+    token = serializers.CharField(write_only=True)
 
     class Meta:
         model = Onderzoek
         fields = ['onderzoek_id', 'titel', 'beschikbaar', 'beschrijving', 'startdatum', 'einddatum', 'type_onderzoek',
                   'locatie', 'met_beloning', 'beloning', 'doelgroep_leeftijd_van', 'doelgroep_leeftijd_tot',
-                  'doelgroep_beperking', 'token']  # Verwijder 'organisatie' uit de lijst met velden
+                  'doelgroep_beperking', 'token']
         extra_kwargs = {
-            'titel': {'validators': []},  # Schakel standaard validatoren uit
+            'titel': {'validators': []},
         }
 
     def validate(self, data):
-        # Controleer of de titel uniek is binnen de context van de huidige organisatie
         token = data.get('token')
         if token is None:
             raise serializers.ValidationError("Geen API-token verstrekt.")
 
         try:
-            organisatie = Organisatie.objects.get(token=token)  # Zoek de organisatie met de opgegeven token
+            organisatie = Organisatie.objects.get(token=token)
         except Organisatie.DoesNotExist:
             raise serializers.ValidationError("Ongeldige API-token.")
 
@@ -54,10 +53,10 @@ class OnderzoekSerializer(serializers.ModelSerializer):
         return data
 
     def create(self, validated_data):
-        token = validated_data.pop('token', None)  # Haal de token uit de gevalideerde gegevens
+        token = validated_data.pop('token', None)
 
         try:
-            organisatie = Organisatie.objects.get(token=token)  # Zoek de organisatie met de opgegeven token
+            organisatie = Organisatie.objects.get(token=token)
         except Organisatie.DoesNotExist:
             raise serializers.ValidationError("Ongeldige API-token.")
 

@@ -68,7 +68,6 @@ class Research(APIView):
         if serializer.is_valid():
             serializer.save()
 
-            # Haal de gegevens van de opgeslagen gebruiker op
             onderzoek = Onderzoek.objects.get(titel=serializer.data['titel'])
 
             onderzoek.save()
