@@ -116,6 +116,7 @@
                                         <th scope="col">Organisatie</th>
                                         <th scope="col">Datum vanaf</th>
                                         <th scope="col">Datum tot</th>
+                                        <th scope="col">Status</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -132,15 +133,18 @@
                                         <th scope="col">Organisatie</th>
                                         <th scope="col">Datum vanaf</th>
                                         <th scope="col">Datum tot</th>
+                                        <th scope="col">Status</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     {% for onderzoek in onderzoeken %}
-                                        <tr>
+                                        <tr class='clickable-row'
+                                            data-href="/medewerkers/onderzoek/{{ onderzoek.onderzoek_id }}">
                                             <td>{{ onderzoek.titel }}</td>
-                                            <td>{{ onderzoek.organisatie.naam }}</td>
-                                            <td>{{ onderzoek.datum_vanaf|date:"d-m-Y" }}</td>
-                                            <td>{{ onderzoek.datum_tot|date:"d-m-Y" }}</td>
+                                            <td>{{ onderzoek.organisatie.bedrijfsnaam }}</td>
+                                            <td>{{ onderzoek.startdatum|date:"d-m-Y" }}</td>
+                                            <td>{{ onderzoek.einddatum|date:"d-m-Y" }}</td>
+                                            <td>{{ onderzoek.status }}</td>
                                         </tr>
                                     {% endfor %}
                                     </tbody>
