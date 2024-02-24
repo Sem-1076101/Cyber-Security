@@ -4,9 +4,8 @@ from django.shortcuts import redirect
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import JsonResponse
-# from .models import Onderzoek, Medewerker, organisatie, Ervaringsdeskundige, Beperking
 from .models import Medewerker, Ervaringsdeskundige, Beperking
-from companies.models import Organisatie
+from companies.models import Organisatie, Onderzoek
 
 
 def login(request):
@@ -18,15 +17,14 @@ def signup(request):
 
 
 def portal(request):
-    # onderzoeken = Onderzoek.objects.all()[:5]
+    onderzoeken = Onderzoek.objects.all()
     medewerkers = Medewerker.objects.all()
     organisaties = Organisatie.objects.all()
     ervaringsdeskundigen = Ervaringsdeskundige.objects.all()
     beperkingen = Beperking.objects.all()
-    # return render(request, 'portal.html', {'onderzoeken': onderzoeken, 'medewerkers': medewerkers,
-    #                                           'organisaties': organisaties, 'ervaringsdeskundigen': ervaringsdeskundigen, 'beperkingen': beperkingen})
-    return render(request, 'portal.html', {'medewerkers': medewerkers, 'organisaties': organisaties,
-                                           'ervaringsdeskundigen': ervaringsdeskundigen, 'beperkingen': beperkingen})
+    return render(request, 'portal.html',
+                  {'onderzoeken': onderzoeken, 'medewerkers': medewerkers, 'organisaties': organisaties,
+                   'ervaringsdeskundigen': ervaringsdeskundigen, 'beperkingen': beperkingen})
 
 
 def medewerker(request, medewerker_id):
@@ -112,7 +110,7 @@ def mail(request):
     return render(request, 'mail.html')
 
 
-def check_updates(request):
+def check_updates_organisaties(request):
     recent_organisaties = Organisatie.objects.filter(status='Nieuw').order_by('date_joined')[:10]
 
     data = [{'id': organisatie.id, 'bedrijfsnaam': organisatie.bedrijfsnaam, 'email': organisatie.email,
@@ -122,3 +120,63 @@ def check_updates(request):
             recent_organisaties]
 
     return JsonResponse(data, safe=False)
+
+
+def onderzoek(request, onderzoek_id):
+    onderzoek = Onderzoek.objects.get(onderzoek_id=onderzoek_id)
+    return render(request, 'research.html', {'onderzoek': onderzoek})
+
+
+def check_updates_onderzoek(request):
+    recent_onderzoeken = Onderzoek.objects.filter(status='Nieuw')[:10]
+
+    data = [{'id': onderzoek.onderzoek_id, 'titel': onderzoek.titel, 'organisatie': onderzoek.organisatie.bedrijfsnaam,
+             'startdatum': onderzoek.startdatum, 'einddatum': onderzoek.einddatum, 'status': onderzoek.status}
+            for onderzoek in
+            recent_onderzoeken]
+
+    return JsonResponse(data, safe=False)
+
+
+def verwijder_onderzoek(request, onderzoek_id):
+    onderzoek = get_object_or_404(Onderzoek, onderzoek_id=onderzoek_id)
+    onderzoek.status = 'Afgekeurd'
+    onderzoek.save()
+
+    message = (
+        f'Beste {onderzoek.organisatie.bedrijfsnaam},\n\n'
+        f'Uw onderzoek is afgewezen.\n\n'
+        f'Met vriendelijke groet,\n'
+        'Het team van de Accessibility Hub'
+    )
+
+    send_mail(
+        'Afkeuring van uw onderzoek',
+        message,
+        settings.EMAIL_HOST_USER,
+        [onderzoek.organisatie.email],
+        fail_silently=False,
+    )
+    return redirect('administrators:medewerkersportal')
+
+
+def accepteer_onderzoek(request, onderzoek_id):
+    onderzoek = get_object_or_404(Onderzoek, onderzoek_id=onderzoek_id)
+    onderzoek.status = 'Geaccepteerd'
+    onderzoek.save()
+
+    message = (
+        f'Beste {onderzoek.organisatie.bedrijfsnaam},\n\n'
+        f'Uw onderzoek is geaccepteerd.\n\n'
+        f'Met vriendelijke groet,\n'
+        'Het team van de Accessibility Hub'
+    )
+
+    send_mail(
+        'Goedkeuring van uw onderzoek',
+        message,
+        settings.EMAIL_HOST_USER,
+        [onderzoek.organisatie.email],
+        fail_silently=False,
+    )
+    return redirect('administrators:medewerkersportal')
