@@ -16,3 +16,24 @@ class Organisatie(AbstractUser):
 
     class Meta:
         db_table = 'organisaties'
+
+
+class Onderzoek(models.Model):
+    onderzoek_id = models.AutoField(primary_key=True)
+    titel = models.CharField(max_length=255, unique=True)
+    status = models.CharField(max_length=255, default='Nieuw')
+    beschikbaar = models.BooleanField(default=True)
+    beschrijving = models.TextField()
+    startdatum = models.DateField()
+    einddatum = models.DateField()
+    type_onderzoek = models.CharField(max_length=255)
+    locatie = models.CharField(max_length=255)
+    met_beloning = models.BooleanField(default=False)
+    beloning = models.CharField(max_length=255, blank=True, null=True)
+    doelgroep_leeftijd_van = models.IntegerField()
+    doelgroep_leeftijd_tot = models.IntegerField()
+    doelgroep_beperking = models.CharField(max_length=255)
+    organisatie = models.ForeignKey(Organisatie, on_delete=models.CASCADE, related_name='onderzoeken')
+
+    class Meta:
+        db_table = 'onderzoeken'
