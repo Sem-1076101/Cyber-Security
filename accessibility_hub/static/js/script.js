@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-function checkForUpdates() {
-    fetch('../updates/', {method: 'GET'})
+function checkForUpdatesOrganisation() {
+    fetch('../updates_organisatie/', {method: 'GET'})
         .then(response => response.json())
         .then(data => {
             const tbody = document.querySelector('#list-recent-organisation tbody');
@@ -46,4 +46,41 @@ function checkForUpdates() {
         });
 }
 
-setInterval(checkForUpdates, 2000);
+setInterval(checkForUpdatesOrganisation, 2000);
+
+function checkForUpdatesResearch() {
+    fetch('../updates_onderzoek/', {method: 'GET'})
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.querySelector('#list-recent-researches tbody');
+            tbody.innerHTML = '';
+
+            data.forEach(onderzoek => {
+                const row = document.createElement('tr');
+                row.classList.add('clickable-row');
+                row.setAttribute('data-href', `/medewerkers/onderzoek/${onderzoek.id}`);
+
+
+                row.innerHTML = `
+                    <td>${onderzoek.titel}</td>
+                    <td>${onderzoek.organisatie}</td>
+                    <td>${onderzoek.startdatum}</td>
+                    <td>${onderzoek.einddatum}</td>
+                    <td>${onderzoek.status}</td>
+                `;
+
+                tbody.appendChild(row);
+            });
+
+            document.querySelectorAll('.clickable-row').forEach(row => {
+                row.addEventListener('click', function() {
+                    window.location.href = row.getAttribute('data-href');
+                });
+            });
+        })
+        .catch(error => {
+            console.error('Fout bij het ophalen van updates:', error);
+        });
+}
+
+setInterval(checkForUpdatesResearch, 2000);
