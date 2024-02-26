@@ -24,15 +24,21 @@ def signup(request):
     if request.method == 'POST':
         form = CreateEmployeeForm(request.POST)
         gebruikersnaam = request.POST.get('gebruikersnaam')
-        emailadres = request.POST.get('emailadres')
+        emailadres = request.POST.get('email')
         if Medewerker.objects.filter(gebruikersnaam=gebruikersnaam).exists(): 
-                messages.success(request, ('Gebruikersnaam is al ingebruik!'))
+            messages.success(request, ('Gebruikersnaam is al ingebruik!'))
         elif Medewerker.objects.filter(emailadres=emailadres).exists():
             messages.success(request, ('Email is al ingebruik!'))
-        else:
-            if form.is_valid():
+        elif form.is_valid():
+                # voornaam = request.POST.get('email')
+                # achternaam = request.POST.get('email')
+                # gebruikersnaam = request.POST.get('gebruikersnaam')
+                # emailadres = request.POST.get('email')
                 form.save()
-                return redirect('../login')
+                return redirect('../login') 
+        else:
+            messages.success(request, ('Er is iets fout gegaan, probeer het opnieuw'))
+
     else:
         form = CreateEmployeeForm()
     return render(request, 'signup.html', {'form': form})          

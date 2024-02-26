@@ -1,6 +1,7 @@
 from django.db import models
 from django import forms
 from django.contrib.auth.hashers import make_password
+# from django.contrib.auth.models import AbstractBaseUser
 
 class Onderzoek(models.Model):
     onderzoek_id = models.AutoField(primary_key=True)
@@ -38,10 +39,11 @@ class Medewerker(models.Model):
     geslacht = models.CharField(max_length=10) 
     telefoonnummer = models.CharField(max_length=15)
     geboortedatum = models.DateField()
-    admin = models.IntegerField()
+    admin = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)
 
-    
+    USERNAME_FIELD = 'gebruikersnaam'
+    REQUIRED_FIELDS = ['']
 
     def save(self, *args, **kwargs):
         if self._state.adding:

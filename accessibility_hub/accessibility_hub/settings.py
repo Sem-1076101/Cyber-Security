@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'companies',
     'experiential_experts',
     'default',
+    'crispy_forms', 
+    'crispy_bootstrap4',
 ]
 
 MIDDLEWARE = [
@@ -111,6 +113,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
+
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LANGUAGES = [
     ('nl', _('Dutch')),

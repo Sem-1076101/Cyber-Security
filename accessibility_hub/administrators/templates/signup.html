@@ -3,6 +3,7 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+{% load crispy_forms_tags %}
 
 <div class="container">
     <div class="row justify-content-center">
@@ -12,7 +13,39 @@
         <div class="col-8">
             <form action="" method="post" class="form-horizontal">
                 {% csrf_token %}
-                {{form.as_p}}
+                {{ form|crispy }}
+                <!-- <div class="mb-3">
+                    <label class="form-label" for="firstName">Voornaam:</label>
+                    <input type="text" class="form-control" name="voornaam" placeholder="Voornaam" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="lastName">Achternaam:</label>
+                    <input type="text" class="form-control" name="achternaam" placeholder="Achternaam" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="password">Wachtwoord:</label>
+                    <input type="password" class="form-control" name="wachtwoord" placeholder="Wachtwoord" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="email">E-mailadres:</label>
+                    <input type="email" class="form-control" name="email" placeholder="E-mailadres" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="gender">Geslacht:</label>
+                    <input type="text" class="form-control" name="geslacht" placeholder="Geslacht" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="birthday">Geboortedatum:</label>
+                    <input type="text" class="form-control" name="verjaardag" placeholder="jaar-maand-dag" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="zipCode">Postcode:</label>
+                    <input type="text" class="form-control" name="postcode" placeholder="Postcode" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="housenumber">Huisnummer:</label>
+                    <input type="text" class="form-control" name="huisnummer" placeholder="Huisnummer" required>
+                </div> -->
                 <div class="form-group p-1">
                     <button type="submit" class="btn btn-primary mb-5 mt-2">Account aanmaken</button>
                 </div>
