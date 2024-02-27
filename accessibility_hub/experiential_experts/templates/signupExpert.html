@@ -10,81 +10,82 @@
             <h1>Aanmelden</h1>
         </div>
         <div class="col-8">
-            <form action="" method="post">
+            <form action="" method="post" class="form-control p-5 mb-2">
                 {% csrf_token %}
-                <div class="form-group p-1">
-                    <label for="firstName">Voornaam:</label>
-                    <input type="text" name="firstName" placeholder="Voornaam" required>
+                <div class="mb-3" for="firstName">Voornaam:</label>
+                    <input type="text" class="form-control" name="firstName" placeholder="Voornaam" required>
                 </div>
-                <div class="form-group p-1">
+                <div class="mb-3">
                     <label for="lastName">Achternaam:</label>
-                    <input type="text" name="lastName" placeholder="Achternaam" required>
+                    <input type="text" class="form-control" name="lastName" placeholder="Achternaam" required>
                 </div>
-                <div class="form-group p-1">
+                <div class="mb-3">
                     <label for="password">Wachtwoord:</label>
-                    <input type="password" name="password" placeholder="Wachtwoord" required>
+                    <input type="password" class="form-control" name="password" placeholder="Wachtwoord" required>
                 </div>
-                <div class="form-group p-1">
+                <div class="mb-3">
                     <label for="email">E-mailadres:</label>
-                    <input type="text" name="email" placeholder="E-mailadres" required>
+                    <input type="text" class="form-control" name="email" placeholder="E-mailadres" required>
                 </div>
-                <div class="form-group p-1">
+                <div class="mb-3">
                     <label for="gender">Geslacht:</label>
-                    <input type="text" name="gender" placeholder="Geslacht" required>
+                    <input type="text" class="form-control" name="gender" placeholder="Geslacht" required>
                 </div>
-                <div class="form-group p-1">
+                <div class="mb-3">
                     <label for="birthday">Geboortedatum:</label>
-                    <input type="date" name="birthday" placeholder="Geboortedatum" required>
+                    <input type="text" class="form-control" name="birthday" placeholder="jj-mm-dd" required>
                 </div>
-                <div class="form-group p-1">
+                <div class="mb-3">
                     <label for="zipCode">Postcode:</label>
-                    <input type="text" name="zipCode" placeholder="Postcode" required>
+                    <input type="text" class="form-control" name="zipCode" placeholder="Postcode" required>
                 </div>
-                <div class="form-group p-1">
+                <div class="mb-3">
                     <label for="disability">Type beperking:</label>
-                    <select name="disability">
+                    <select class="form-select" name="disability">
                         <option value="volvo">Volvo</option>
                         <option value="saab">Saab</option>
                         <option value="fiat">Fiat</option>
                         <option value="audi">Audi</option>
                     </select>
                 </div>
-                <div class="form-group p-1">
-                    <label for="tools">Gebruikte hulpmiddelen:</label>
-                    <textarea name="tools" cols="30" rows="10"></textarea>
+                <div class="mb-3">
+                    <label class="form-label" for="tools">Gebruikte hulpmiddelen:</label>
+                    <textarea name="tools" class="form-control" cols="30" rows="10"></textarea>
                 </div>
-                <div class="form-group p-1">
-                    <label for="particulars">Bijzonderheden:</label>
-                    <textarea name="particulars" cols="30" rows="10"></textarea>
+                <div class="mb-3">
+                    <label class="form-label" for="particulars">Bijzonderheden:</label>
+                    <textarea name="particulars" class="form-control" cols="30" rows="10"></textarea>
                 </div>
-                <div class="form-group p-1">
-                    <label for="supervisor">Toezichthouder/voogd?:</label>
-                    <select name="supervisor" id="supervisor">
+                <div class="mb-3">
+                    <label class="form-label" for="supervisor">Toezichthouder/voogd?:</label>
+                    <select class="form-select" name="supervisor" id="supervisor">
                         <option value="nee">Nee</option>
                         <option value="ja">Ja</option>
                     </select>
                 </div>
 
 
-                <div id="supervisor_div">
-                    <label for="name_supervisor">Naam toezichthouder/voogd:</label>
-                    <input type="text" name="supervisorName" placeholder="Volledige naam">
+                <div class="mb-3" id="supervisor_div">
+                    <label class="form-label" for="name_supervisor">Naam toezichthouder/voogd:</label>
+                    <input type="text" class="form-control" name="supervisorName" placeholder="Volledige naam">
 
-                    <label for="email_supervisor">E-mailadres toezichthouder:</label>
-                    <input type="text" name="email_supervisor" placeholder="E-mailadres">
+                    <label class="form-label" for="email_supervisor">E-mailadres toezichthouder:</label>
+                    <input type="text" class="form-control" name="email_supervisor" placeholder="E-mailadres">
 
-                    <label for="phonenumber_supervisor">Telefoonnummer toezichthouder/voogd:</label>
-                    <input type="number" name="phonenumber_supervisor" placeholder="Telefoonnummer">
+                    <label class="form-label" for="phonenumber_supervisor">Telefoonnummer toezichthouder/voogd:</label>
+                    <input type="number" class="form-control" name="phonenumber_supervisor"
+                        placeholder="Telefoonnummer">
                 </div>
-
-                <label for="approach">Benadering keuze:</label>
-                <select name="approach_choice">
-                    <option value="phone">Telefonisch</option>
-                    <option value="email">Email</option>
-                </select>
-
-
-                <button type="submit">Goedkeuring aanvragen</button>
+                <div class="mb-3">
+                    <label class="form-label" for="approach">Benadering keuze:</label>
+                    <select class="form-select" name="approach_choice">
+                        <option value="phone">Telefonisch</option>
+                        <option value="email">Email</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Goedkeuring aanvragen</button>
+                </div>
             </form>
         </div>
     </div>

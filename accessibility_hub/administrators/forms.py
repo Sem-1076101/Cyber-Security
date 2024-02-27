@@ -6,7 +6,7 @@ from django.forms.widgets import PasswordInput, TextInput
 from django.core.exceptions import ValidationError
 
 class CreateEmployeeForm(forms.ModelForm):
-    wachtwoord = forms.CharField(label='wachtwoord', widget = forms.PasswordInput)
+    wachtwoord = forms.CharField(label='Wachtwoord', widget = forms.PasswordInput)
     # firstName = forms.CharField(label='Voornaam', max_length=100)
     # lastName = forms.CharField(label='Achternaam', max_length=100)
     # email = forms.EmailField(label='E-mailadres')
@@ -19,7 +19,7 @@ class CreateEmployeeForm(forms.ModelForm):
     
     class Meta:
         model = Medewerker
-        fields = ('voornaam', 'achternaam', 'gebruikersnaam', 'emailadres', 'postcode', 'huisnummer', 'geslacht', 'geboortedatum', 'admin')
+        fields = ('voornaam', 'achternaam', 'gebruikersnaam', 'wachtwoord', 'emailadres', 'postcode', 'huisnummer', 'geslacht', 'geboortedatum', 'admin')
     
 class LoginForm(forms.Form):
     gebruikersnaam = forms.CharField(label='Gebruikersnaam', max_length=100)

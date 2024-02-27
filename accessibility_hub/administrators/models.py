@@ -1,6 +1,10 @@
+from typing import Any
+from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from django import forms
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.backends import BaseBackend
+from django.http import HttpRequest
 # from django.contrib.auth.models import AbstractBaseUser
 
 class Onderzoek(models.Model):
@@ -44,6 +48,11 @@ class Medewerker(models.Model):
 
     USERNAME_FIELD = 'gebruikersnaam'
     REQUIRED_FIELDS = ['']
+
+    # BaseBackend
+    # def authenticate(self, request, gebruikersnaam=None, wachtwoord=None):
+
+
 
     def save(self, *args, **kwargs):
         if self._state.adding:
