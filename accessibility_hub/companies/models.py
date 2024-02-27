@@ -37,3 +37,14 @@ class Onderzoek(models.Model):
 
     class Meta:
         db_table = 'onderzoeken'
+
+
+class Vragen(models.Model):
+    vraag_id = models.AutoField(primary_key=True)
+    vraag = models.CharField(max_length=255)
+    beschrijving = models.TextField()
+    categorie = models.CharField(max_length=255)
+    onderzoek = models.ForeignKey(Onderzoek, on_delete=models.CASCADE, related_name='vragen')
+
+    class Meta:
+        db_table = 'vragen'
