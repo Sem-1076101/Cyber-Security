@@ -39,9 +39,9 @@ class Onderzoek(models.Model):
         db_table = 'onderzoeken'
 
 
-class Vragen(models.Model):
+class Vraag(models.Model):
     vraag_id = models.AutoField(primary_key=True)
-    vraag = models.CharField(max_length=255)
+    vraagtitel = models.CharField(max_length=255)
     beschrijving = models.TextField()
     categorie = models.CharField(max_length=255)
     onderzoek = models.ForeignKey(Onderzoek, on_delete=models.CASCADE, related_name='vragen')
