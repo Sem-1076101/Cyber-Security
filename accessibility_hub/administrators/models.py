@@ -4,8 +4,9 @@ from django.db import models
 from django import forms
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.backends import BaseBackend
+from django.contrib.auth.base_user import BaseUserManager
 from django.http import HttpRequest
-# from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractUser
 
 class Onderzoek(models.Model):
     onderzoek_id = models.AutoField(primary_key=True)
@@ -31,6 +32,30 @@ class Onderzoek(models.Model):
         db_table = 'onderzoeken'
 
 
+
+# class CustomUserManager(BaseUserManager):
+#     def create_user(self, email, wachtwoord, **extra_fields):
+#         email = self.normalize_email(email)
+#         user=self.model(
+#             email=email, 
+#         )
+#         user.set_password(wachtwoord)
+#         user.save()
+
+#         return user
+
+#     def create_superuser(self, email, wachtwoord, **extra_fields):
+#         extra_fields.setdefault('is_staff', True)
+#         extra_fields.setdefault('is_superuser', True)
+
+#         if extra_fields.get('is_staff') is not True:
+#             raise ValueError('Superuser has to have is_staff True')
+
+#         if extra_fields.get('is_superuser') is not True:
+#             raise ValueError('Superuser has to have is_superuser True')
+ 
+#         return self.create_user(email=email, wachtwoord=wachtwoord, **extra_fields)
+
 class Medewerker(models.Model):  
     medewerker_id = models.AutoField(primary_key=True)
     voornaam = models.CharField(max_length=255)
@@ -46,7 +71,7 @@ class Medewerker(models.Model):
     admin = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)
 
-    USERNAME_FIELD = 'gebruikersnaam'
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['']
 
     # BaseBackend

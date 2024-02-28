@@ -30,10 +30,6 @@ def signup(request):
         elif Medewerker.objects.filter(emailadres=emailadres).exists():
             messages.success(request, ('Email is al ingebruik!'))
         elif form.is_valid():
-                # voornaam = request.POST.get('email')
-                # achternaam = request.POST.get('email')
-                # gebruikersnaam = request.POST.get('gebruikersnaam')
-                # emailadres = request.POST.get('email')
                 form.save()
                 return redirect('../login') 
         else:
@@ -54,10 +50,10 @@ def login(request):
             print(gebruikersnaam)
             print(wachtwoord)    
             medewerker = Medewerker.objects.filter(gebruikersnaam=gebruikersnaam).first()
-            if medewerker and check_password(wachtwoord, medewerker.wachtwoord):
-            # user = authenticate(request, gebruikersnaam=gebruikersnaam, wachtwoord=wachtwoord)
-            # if user is not None:
-                # login(request, medewerker)
+            # if medewerker and check_password(wachtwoord, medewerker.wachtwoord):
+            user = authenticate(request, gebruikersnaam=gebruikersnaam, wachtwoord=wachtwoord)
+            if user is not None:
+                login(request, medewerker)
                 return redirect('../portal')
             else:
                 messages.success(request, ('Inloggen mislukt. Ongeldige gebruikersnaam of wachtwoord.'))
