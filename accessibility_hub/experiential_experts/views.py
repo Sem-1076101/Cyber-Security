@@ -15,21 +15,23 @@ def signup(request):
         form = CreateExpertForm(request.POST)
         if form.is_valid():
             gebruikersnaam = request.POST.get('gebruikersnaam')
-            emailadres = request.POST.get('email')
+            email = request.POST.get('email')
 
             if Ervaringsdeskundige.objects.filter(gebruikersnaam=gebruikersnaam).exists():
                 messages.success(request, 'Gebruikersnaam is al in gebruik!')
-            elif Ervaringsdeskundige.objects.filter(emailadres=emailadres).exists():
+            elif Ervaringsdeskundige.objects.filter(email=email).exists():
                 messages.success(request, 'E-mail is al in gebruik!')
             else:
                 voornaam = request.POST.get('firstName')
                 achternaam = request.POST.get('lastName')
                 wachtwoord = request.POST.get('password')
                 geslacht = request.POST.get('gender')
+                telefoonnummer = request.POST.get('phonenumber')
                 geboortedatum = request.POST.get('birthday')
                 postcode = request.POST.get('zipCode')
-                type_beperking = request.POST.get('disability')
-                gebruikte_hulpmiddelen = request.POST.get('tools')
+                huisnummer = request.POST.get('housenumber')
+                soort_beperking = request.POST.get('disability')
+                hulpmiddelen = request.POST.get('tools')
                 bijzonderheden = request.POST.get('particulars')
 
                 naam_toezichthouder = request.POST.get('supervisorName')
@@ -42,9 +44,10 @@ def signup(request):
                     email_toezichthouder = None
                     telefoonnummer_toezichthouder = None
                 
-                Ervaringsdeskundige.objects.create(
+                aanmaken_ervaringsdeskundige = Ervaringsdeskundige.objects.create(
                     voornaam=voornaam,
                     achternaam=achternaam,
+                    wachtwoord=wachtwoord,
                     geboortedatum=geboortedatum,
                     telefoonnummer=telefoonnummer,
                     email=email,
@@ -54,9 +57,15 @@ def signup(request):
                     soort_beperking=soort_beperking,
                     hulpmiddelen=hulpmiddelen,
                     bijzonderheden=bijzonderheden,
+
+                    naam_toezichthouder=naam_toezichthouder,
+                    email_toezichthouder=email_toezichthouder,
+                    benadering_keuze=benadering_keuze
                 )
-                # form.save()
-                return redirect('../login') 
+                if aanmaken_ervaringsdeskundige:
+                    return redirect('../login') 
+                else:
+                    messages.success(request, ('Er is iets fout gegaan.'))
         else:
             messages.success(request, ('Er is iets fout gegaan, probeer het opnieuw'))
     else:

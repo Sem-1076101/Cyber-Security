@@ -135,7 +135,7 @@ class Ervaringsdeskundige(models.Model):
     voornaam = models.CharField(max_length=255, blank=True, null=True)
     achternaam = models.CharField(max_length=255, blank=True, null=True)
     geboortedatum = models.DateField(blank=True, null=True)
-    telefoonnummer = models.CharField(max_length=15, blank=True, null=True)
+    telefoonnummer = models.IntegerField(blank=True, null=True)
     email = models.EmailField(max_length=255, blank=True, null=True)
     geslacht = models.CharField(max_length=10, blank=True, null=True)
     postcode = models.CharField(max_length=6, blank=True, null=True)
