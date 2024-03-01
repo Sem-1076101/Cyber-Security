@@ -13,22 +13,52 @@ from django.contrib.auth.hashers import check_password
 def signup(request):
     if request.method == 'POST':
         form = CreateExpertForm(request.POST)
-        gebruikersnaam = request.POST.get('gebruikersnaam')
-        emailadres = request.POST.get('email')
-        if Ervaringsdeskundige.objects.filter(gebruikersnaam=gebruikersnaam).exists(): 
-            messages.success(request, ('Gebruikersnaam is al ingebruik!'))
-        elif Ervaringsdeskundige.objects.filter(emailadres=emailadres).exists():
-            messages.success(request, ('Email is al ingebruik!'))
-        elif form.is_valid():
-                # voornaam = request.POST.get('email')
-                # achternaam = request.POST.get('email')
-                # gebruikersnaam = request.POST.get('gebruikersnaam')
-                # emailadres = request.POST.get('email')
-                form.save()
+        if form.is_valid():
+            gebruikersnaam = request.POST.get('gebruikersnaam')
+            emailadres = request.POST.get('email')
+
+            if Ervaringsdeskundige.objects.filter(gebruikersnaam=gebruikersnaam).exists():
+                messages.success(request, 'Gebruikersnaam is al in gebruik!')
+            elif Ervaringsdeskundige.objects.filter(emailadres=emailadres).exists():
+                messages.success(request, 'E-mail is al in gebruik!')
+            else:
+                voornaam = request.POST.get('firstName')
+                achternaam = request.POST.get('lastName')
+                wachtwoord = request.POST.get('password')
+                geslacht = request.POST.get('gender')
+                geboortedatum = request.POST.get('birthday')
+                postcode = request.POST.get('zipCode')
+                type_beperking = request.POST.get('disability')
+                gebruikte_hulpmiddelen = request.POST.get('tools')
+                bijzonderheden = request.POST.get('particulars')
+
+                naam_toezichthouder = request.POST.get('supervisorName')
+                email_toezichthouder = request.POST.get('email_supervisor')
+                telefoonnummer_toezichthouder = request.POST.get('phonenumber_supervisor')
+                benadering_keuze = request.POST.get('approach_choice')
+
+                if not naam_toezichthouder or not email_toezichthouder or not telefoonnummer_toezichthouder:
+                    naam_toezichthouder = None
+                    email_toezichthouder = None
+                    telefoonnummer_toezichthouder = None
+                
+                Ervaringsdeskundige.objects.create(
+                    voornaam=voornaam,
+                    achternaam=achternaam,
+                    geboortedatum=geboortedatum,
+                    telefoonnummer=telefoonnummer,
+                    email=email,
+                    geslacht=geslacht,
+                    postcode=postcode,
+                    huisnummer=huisnummer,
+                    soort_beperking=soort_beperking,
+                    hulpmiddelen=hulpmiddelen,
+                    bijzonderheden=bijzonderheden,
+                )
+                # form.save()
                 return redirect('../login') 
         else:
             messages.success(request, ('Er is iets fout gegaan, probeer het opnieuw'))
-
     else:
         form = CreateExpertForm()
     return render(request, 'signupExpert.html', {})          

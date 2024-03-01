@@ -71,8 +71,8 @@ class Medewerker(models.Model):
     admin = models.BooleanField()
     created_at = models.DateTimeField(auto_now_add=True)
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['']
+    # USERNAME_FIELD = 'email'
+    # REQUIRED_FIELDS = ['']
 
     # BaseBackend
     # def authenticate(self, request, gebruikersnaam=None, wachtwoord=None):
@@ -144,6 +144,10 @@ class Ervaringsdeskundige(models.Model):
     hulpmiddelen = models.TextField(blank=True, null=True)
     bijzonderheden = models.TextField(blank=True, null=True)
     account_status = models.IntegerField(default=0)
+    naam_toezichthouder = models.CharField(max_length=255, blank=True, null=True)
+    email_toezichthouder = models.CharField(max_length=255, blank=True, null=True)
+    telefoonnummer_toezichthouder = models.CharField(max_length=255, blank=True, null=True)
+    benadering_keuze = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     beperking = models.ForeignKey(
         'Beperking', on_delete=models.SET_NULL, blank=True, null=True
