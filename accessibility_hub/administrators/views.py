@@ -50,12 +50,18 @@ def login(request):
             print(gebruikersnaam)
             print(wachtwoord)    
             medewerker = Medewerker.objects.filter(gebruikersnaam=gebruikersnaam).first()
-            # if medewerker and check_password(wachtwoord, medewerker.wachtwoord):
-            user = authenticate(request, gebruikersnaam=gebruikersnaam, wachtwoord=wachtwoord)
-            if user is not None:
-                login(request, medewerker)
+            if medewerker and check_password(wachtwoord, medewerker.wachtwoord):
+                request.session['medewerker_id'] = medewerker.medewerker_id
+                request.session['voornaam'] = medewerker.voornaam
+                request.session['achternaam'] = medewerker.achternaam
+                request.session['gebruikersnaam'] = medewerker.gebruikersnaam
+                request.session['emailadres'] = medewerker.emailadres
                 return redirect('../portal')
+            # user = authenticate(request, gebruikersnaam=gebruikersnaam, wachtwoord=wachtwoord)
+            # if user is not None:
+                # login(request, medewerker)    
             else:
+                print('error')
                 messages.success(request, ('Inloggen mislukt. Ongeldige gebruikersnaam of wachtwoord.'))
         else:
             print('Formulier is niet geldig')
