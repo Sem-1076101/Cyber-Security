@@ -56,10 +56,7 @@ def login(request):
                 request.session['achternaam'] = medewerker.achternaam
                 request.session['gebruikersnaam'] = medewerker.gebruikersnaam
                 request.session['emailadres'] = medewerker.emailadres
-                return redirect('../portal')
-            # user = authenticate(request, gebruikersnaam=gebruikersnaam, wachtwoord=wachtwoord)
-            # if user is not None:
-                # login(request, medewerker)    
+                return redirect('../portal')    
             else:
                 print('error')
                 messages.success(request, ('Inloggen mislukt. Ongeldige gebruikersnaam of wachtwoord.'))

@@ -67,16 +67,7 @@ def signup(request):
     else:
         form = CreateExpertForm()
     return render(request, 'signupExpert.html', {})          
-
-# def signup(request):
-#     if request.method == 'POST':
-#         form = CreateExpertForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('../login')
-#     else:
-#         form = CreateExpertForm()
-#     return render(request, 'signupExpert.html', {})          
+        
 
 
 def login(request):
@@ -89,12 +80,13 @@ def login(request):
             print(email, wachtwoord)
             ervaringsdeskundige = Ervaringsdeskundige.objects.filter(email=email).first()
             if ervaringsdeskundige and check_password(wachtwoord, ervaringsdeskundige.wachtwoord):
-            # user = authenticate(request, gebruikersnaam=gebruikersnaam, wachtwoord=wachtwoord)
-            # if user is not None:
-                # login(request, medewerker)
-                return redirect('../login')
+                request.session['deskundige_id'] = ervaringsdeskundige.deskundige_id
+                request.session['voornaam'] = ervaringsdeskundige.voornaam
+                request.session['achternaam'] = ervaringsdeskundige.achternaam
+                request.session['email'] = ervaringsdeskundige.email
+                return redirect('../home')
             else:
-                messages.success(request, ('Inloggen mislukt. Ongeldige gebruikersnaam of wachtwoord.'))
+                messages.success(request, ('Inloggen mislukt. Ongeldige email of wachtwoord.'))
         else:
             messages.success(request, ('Er is iets fout gegaan, probeer het opnieuw.'))
             print('Formulier is niet geldig')
@@ -104,3 +96,6 @@ def login(request):
     context = {'loginform': form}
 
     return render(request, 'loginExpert.html', context=context)
+
+def home(request):
+    return render(request, 'homepageExperts.html', {})
