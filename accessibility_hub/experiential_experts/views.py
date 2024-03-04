@@ -84,16 +84,15 @@ def login(request):
     if request.method == 'POST':
         form = LoginFormExpert(request.POST)
         if form.is_valid():
-            gebruikersnaam = request.POST.get('gebruikersnaam')
+            email = request.POST.get('email')
             wachtwoord = request.POST.get('wachtwoord')
-            print(gebruikersnaam)
-            print(wachtwoord)    
-            ervaringsdeskundige = Ervaringsdeskundige.objects.filter(gebruikersnaam=gebruikersnaam).first()
+            print(email, wachtwoord)
+            ervaringsdeskundige = Ervaringsdeskundige.objects.filter(email=email).first()
             if ervaringsdeskundige and check_password(wachtwoord, ervaringsdeskundige.wachtwoord):
             # user = authenticate(request, gebruikersnaam=gebruikersnaam, wachtwoord=wachtwoord)
             # if user is not None:
                 # login(request, medewerker)
-                return redirect('/')
+                return redirect('../login')
             else:
                 messages.success(request, ('Inloggen mislukt. Ongeldige gebruikersnaam of wachtwoord.'))
         else:

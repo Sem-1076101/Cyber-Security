@@ -157,6 +157,11 @@ class Ervaringsdeskundige(models.Model):
         'Onderzoek', on_delete=models.SET_NULL, blank=True, null=True
     )
 
+    def save(self, *args, **kwargs):
+        if self._state.adding:
+            self.wachtwoord = make_password(self.wachtwoord)
+        super().save(*args, **kwargs)
+
     class Meta:
         db_table = 'ervaringsdeskundigen'
 
