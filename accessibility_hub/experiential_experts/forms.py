@@ -8,7 +8,7 @@ from django.core.exceptions import ValidationError
 class CreateExpertForm(forms.Form):
     # firstName = forms.CharField(label='Voornaam')
     # lastName = forms.CharField(label='Achternaam')
-    # password = forms.CharField(label='Wachtwoord', widget = forms.PasswordInput)
+    wachtwoord = forms.CharField(label='Wachtwoord', widget = forms.PasswordInput)
     # email = forms.CharField(label='Email')
     # gender = forms.CharField(label='Geslacht')
     # birthday = forms.CharField(label='Geboortedatum')
@@ -21,8 +21,6 @@ class CreateExpertForm(forms.Form):
     # email_supervisor = forms.CharField(label='Toezichthouder_email')
     # phonenumber_supervisor = forms.CharField(label='Toezichthouder_telefoonnummer')
     # approach_choice = forms.CharField(label='Benadering_keuze')
-
-
     def clean(self):
         cleaned_data = super().clean()
         return cleaned_data
