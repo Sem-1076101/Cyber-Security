@@ -14,12 +14,8 @@ def signup(request):
     if request.method == 'POST':
         form = CreateExpertForm(request.POST)
         if form.is_valid():
-            gebruikersnaam = request.POST.get('gebruikersnaam')
             email = request.POST.get('email')
-
-            if Ervaringsdeskundige.objects.filter(gebruikersnaam=gebruikersnaam).exists():
-                messages.success(request, 'Gebruikersnaam is al in gebruik!')
-            elif Ervaringsdeskundige.objects.filter(email=email).exists():
+            if Ervaringsdeskundige.objects.filter(email=email).exists():
                 messages.success(request, 'E-mail is al in gebruik!')
             else:
                 voornaam = request.POST.get('firstName')

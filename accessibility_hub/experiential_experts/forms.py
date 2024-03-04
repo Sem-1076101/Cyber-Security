@@ -28,5 +28,5 @@ class CreateExpertForm(forms.Form):
         return cleaned_data
 
 class LoginFormExpert(forms.Form):
-    gebruikersnaam = forms.CharField(label='Gebruikersnaam', max_length=100)
+    email = forms.CharField(label='Email', max_length=100)
     wachtwoord = forms.CharField(label='wachtwoord', widget = forms.PasswordInput)
