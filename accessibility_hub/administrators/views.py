@@ -1,3 +1,4 @@
+from .forms import CreateEmployeeForm, LoginForm
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
@@ -7,14 +8,64 @@ from django.http import JsonResponse
 from .models import Medewerker, Ervaringsdeskundige, Beperking
 from companies.models import Organisatie, Onderzoek
 
+# Authenticatie imports voor de login
+from django.contrib import messages
+from django.contrib.auth.models import auth
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.hashers import check_password
 
 def login(request):
-    return render(request, 'login.html', {})
+    form = LoginForm()
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            gebruikersnaam = request.POST.get('gebruikersnaam')
+            wachtwoord = request.POST.get('wachtwoord')
+            print(gebruikersnaam)
+            print(wachtwoord)    
+            medewerker = Medewerker.objects.filter(gebruikersnaam=gebruikersnaam).first()
+            if medewerker and check_password(wachtwoord, medewerker.wachtwoord):
+                request.session['medewerker_id'] = medewerker.medewerker_id
+                request.session['voornaam'] = medewerker.voornaam
+                request.session['achternaam'] = medewerker.achternaam
+                request.session['gebruikersnaam'] = medewerker.gebruikersnaam
+                request.session['emailadres'] = medewerker.emailadres
+                request.session['admin'] = medewerker.admin
+                return redirect('../portal')    
+            else:
+                messages.success(request, ('Inloggen mislukt. Ongeldige gebruikersnaam of wachtwoord. (Let op hoofdletters!)'))
+        else:
+            print('Formulier is niet geldig')
+    else:
+        print('Geen POST-verzoek ontvangen.')
 
+    context = {'loginform': form}
+
+    return render(request, 'login.html', context=context)
 
 def signup(request):
-    return render(request, 'signup.html', {})
+    if request.method == 'POST':
+        form = CreateEmployeeForm(request.POST)
+        gebruikersnaam = request.POST.get('gebruikersnaam')
+        emailadres = request.POST.get('email')
+        if Medewerker.objects.filter(gebruikersnaam=gebruikersnaam).exists(): 
+            messages.success(request, ('Gebruikersnaam is al ingebruik!'))
+        elif Medewerker.objects.filter(emailadres=emailadres).exists():
+            messages.success(request, ('Email is al ingebruik!'))
+        elif form.is_valid():
+                form.save()
+                return redirect('../login') 
+        else:
+            messages.success(request, ('Er is iets fout gegaan, probeer het opnieuw'))
 
+    else:
+        form = CreateEmployeeForm()
+    return render(request, 'signup.html', {'form': form})  
+
+def logout_view(request):
+    logout(request)
+    request.session.flush()
+    return redirect('../medewerkers/login') 
 
 def portal(request):
     onderzoeken = Onderzoek.objects.all()

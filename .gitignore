@@ -1,5 +1,9 @@
 /venv/
 .idea/
 /myvenv/
-__pycache__/
+accessibility_hub/*/__pycache__
 *.pyc
+*/__pycache__/
+accessibility_hub/accessibility_hub/__pycache__/__init__.cpython-311.pyc
+accessibility_hub/accessibility_hub/__pycache__/__init__.cpython-311.pyc
+accessibility_hub/accessibility_hub/__pycache__/settings.cpython-311.pyc

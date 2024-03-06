@@ -3,32 +3,21 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+{% load crispy_forms_tags %}
 
 <div class="container">
-
-
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-12">
-            <h1>Voeg een nieuwe gebruiker toe</h1>
+            <h1 class="text-center mb-4">Voeg een nieuwe medewerker toe</h1>
         </div>
-        <div>
-            <form action="registratie_verwerk" method="post">
-                
-                <label for="voornaam">Voornaam</label>
-                <input type="text" name="voornaam">
-
-                <label for="achternaam">Achternaam</label>
-                <input type="text" name="achternaam" required>
-
-                <label for="wachtwoord">wachtwoord</label>
-                <input type="password" name="wachtwoord">
-
-                <button type="submit">Inloggen</button>
+        <div class="col-8">
+            <form action="" method="post" class="form-horizontal">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="form-group p-1">
+                    <button type="submit" class="btn btn-primary mb-5 mt-2">Account aanmaken</button>
+                </div>
             </form>
-        </div>
-        <div>
-            <h2>Al een account?</h2>
-            <a href="inloggen">Inloggen</a>
         </div>
     </div>
 </div>
