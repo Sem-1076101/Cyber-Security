@@ -32,8 +32,7 @@ def login(request):
                 request.session['emailadres'] = medewerker.emailadres
                 return redirect('../portal')    
             else:
-                print('error')
-                messages.success(request, ('Inloggen mislukt. Ongeldige gebruikersnaam of wachtwoord.'))
+                messages.success(request, ('Inloggen mislukt. Ongeldige gebruikersnaam of wachtwoord. (Let op hoofdletters!)'))
         else:
             print('Formulier is niet geldig')
     else:

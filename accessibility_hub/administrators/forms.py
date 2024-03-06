@@ -6,6 +6,7 @@ from django.forms.widgets import PasswordInput, TextInput
 
 class CreateEmployeeForm(forms.ModelForm):
     wachtwoord = forms.CharField(label='Wachtwoord', widget = forms.PasswordInput)
+    
     class Meta:
         model = Medewerker
         fields = ('voornaam', 'achternaam', 'gebruikersnaam', 'wachtwoord', 'emailadres', 'postcode', 'huisnummer', 'geslacht', 'geboortedatum', 'admin')
