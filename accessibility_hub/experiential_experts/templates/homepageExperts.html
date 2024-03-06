@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <h1 class="text-center mb-4">Welkom {{ request.session.voornaam }} {{ request.session.achternaam }}</h1>
+        </div>
+        <div class="col-2 justify-content-center">
+           
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
