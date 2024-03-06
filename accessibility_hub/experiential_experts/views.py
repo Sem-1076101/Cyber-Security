@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from administrators.models import Onderzoek, Medewerker, Organisatie, Ervaringsdeskundige, Beperking
+from administrators.models import Medewerker, Ervaringsdeskundige, Beperking
 # from .forms import CreateExpertForm, LoginForm
 
 # Authenticatie imports voor de login
