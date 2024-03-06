@@ -10,7 +10,6 @@
 {% elif request.session.admin == 0%}
 <script>window.location.href = '../medewewerker/{{ request.session.medewerker_id }}';</script>  
 {% else %}
-    <a href="../logout">uitloggen</a>
     <div class="container">
         <div class="row">
             <div class="col-3">
