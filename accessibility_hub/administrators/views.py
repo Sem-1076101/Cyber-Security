@@ -9,28 +9,35 @@ from .models import Medewerker, Ervaringsdeskundige, Beperking
 from companies.models import Organisatie, Onderzoek
 
 # Authenticatie imports voor de login
+from django.contrib import messages
 from django.contrib.auth.models import auth
-from django.contrib.auth import authenticate, login, logout 
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.hashers import check_password
 
 def login(request):
     form = LoginForm()
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
-            username = request.POST.get('gebruikersnaam')
-            password = request.POST.get('wachtwoord')
-
-            userCheck = authenticate(request, username= username, password= password)
-            if userCheck is not None:
-                auth.login(request, userCheck)
-                return redirect('../portal')
+            gebruikersnaam = request.POST.get('gebruikersnaam')
+            wachtwoord = request.POST.get('wachtwoord')
+            print(gebruikersnaam)
+            print(wachtwoord)    
+            medewerker = Medewerker.objects.filter(gebruikersnaam=gebruikersnaam).first()
+            if medewerker and check_password(wachtwoord, medewerker.wachtwoord):
+                request.session['medewerker_id'] = medewerker.medewerker_id
+                request.session['voornaam'] = medewerker.voornaam
+                request.session['achternaam'] = medewerker.achternaam
+                request.session['gebruikersnaam'] = medewerker.gebruikersnaam
+                request.session['emailadres'] = medewerker.emailadres
+                return redirect('../portal')    
             else:
-                print('Inloggen mislukt. Ongeldige gebruikersnaam of wachtwoord.')
+                print('error')
+                messages.success(request, ('Inloggen mislukt. Ongeldige gebruikersnaam of wachtwoord.'))
         else:
             print('Formulier is niet geldig')
     else:
         print('Geen POST-verzoek ontvangen.')
-            
 
     context = {'loginform': form}
 
@@ -39,14 +46,25 @@ def login(request):
 def signup(request):
     if request.method == 'POST':
         form = CreateEmployeeForm(request.POST)
-        
-        if form.is_valid():
-            form.save()
-            return redirect('../login')
+        gebruikersnaam = request.POST.get('gebruikersnaam')
+        emailadres = request.POST.get('email')
+        if Medewerker.objects.filter(gebruikersnaam=gebruikersnaam).exists(): 
+            messages.success(request, ('Gebruikersnaam is al ingebruik!'))
+        elif Medewerker.objects.filter(emailadres=emailadres).exists():
+            messages.success(request, ('Email is al ingebruik!'))
+        elif form.is_valid():
+                form.save()
+                return redirect('../login') 
+        else:
+            messages.success(request, ('Er is iets fout gegaan, probeer het opnieuw'))
+
     else:
         form = CreateEmployeeForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'signup.html', {'form': form})  
 
+def logout_view(request):
+    logout(request)
+    return redirect('login') 
 
 def portal(request):
     onderzoeken = Onderzoek.objects.all()

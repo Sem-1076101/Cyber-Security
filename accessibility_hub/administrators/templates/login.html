@@ -3,6 +3,7 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
+{% load crispy_forms_tags %}
 
 <div class="container">
     <div class="row justify-content-center">
@@ -12,30 +13,11 @@
         <div class="col-2 justify-content-center">
             <form action="" method="post" class="form-horizontal">
                 {% csrf_token %}
-                {{loginform.as_p}}
-                <p class="form-group p-1">
+                {{loginform|crispy}}
+                <div class="form-group p-1">
                     <button type="submit" name="submit-button" class="btn btn-primary mb-5 mt-2">Inloggen</button>
-                </p>
+                </div>
             </form>
-        </div>
-        <div>
-            <form action="login_verwerk" method="post">
-                
-                <label for="voornaam">Voornaam</label>
-                <input type="text" name="voornaam" required>
-
-                <label for="achternaam">Achternaam</label>
-                <input type="text" name="achternaam" required>
-
-                <label for="wachtwoord">wachtwoord</label>
-                <input type="password" name="wachtwoord">
-
-                <button type="submit">Inloggen</button>
-            </form>
-        </div>
-        <div>
-            <h2>Nog geen account?</h2>
-            <a href="registeren">Registreren</a>
         </div>
     </div>
 </div>
