@@ -4,6 +4,13 @@
 
 {% block content %}
 
+
+{% if request.session.session_key is empty %}
+    <script>window.location.href = '../login';</script> 
+{% elif request.session.admin == 0%}
+<script>window.location.href = '../medewewerker/{{ request.session.medewerker_id }}';</script>  
+{% else %}
+    <a href="../logout">uitloggen</a>
     <div class="container">
         <div class="row">
             <div class="col-3">
@@ -34,7 +41,8 @@
                 </div>
             </div>
             <div class="col-9">
-                <h2>Welkom {Naam}</h2>
+                <h2>Welkom {{request.session.voornaam}} {{request.session.achternaam}}</h2>
+                <p></p>
                 <hr>
 
                 <div class="row">
@@ -249,5 +257,8 @@
             </div>
         </div>
     </div>
+
+
+{% endif %}
 
 {% endblock content %}

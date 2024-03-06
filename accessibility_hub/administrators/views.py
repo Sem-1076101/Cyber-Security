@@ -30,6 +30,7 @@ def login(request):
                 request.session['achternaam'] = medewerker.achternaam
                 request.session['gebruikersnaam'] = medewerker.gebruikersnaam
                 request.session['emailadres'] = medewerker.emailadres
+                request.session['admin'] = medewerker.admin
                 return redirect('../portal')    
             else:
                 messages.success(request, ('Inloggen mislukt. Ongeldige gebruikersnaam of wachtwoord. (Let op hoofdletters!)'))
@@ -63,7 +64,8 @@ def signup(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('login') 
+    request.session.flush()
+    return redirect('../medewerkers/login') 
 
 def portal(request):
     onderzoeken = Onderzoek.objects.all()
