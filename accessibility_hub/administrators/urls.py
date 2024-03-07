@@ -8,6 +8,7 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('logout', views.logout_view, name='logout'),
     path('portal/', views.portal, name='medewerkersportal'),
+    path('ervaringsdeskundige/<int:deskundige_id>/', views.ervaringsdeskundige, name='ervaringsdeskundige'),
     path('medewerker/<int:medewerker_id>/', views.medewerker, name='medewerker'),
     path('verwijder_medewerker/<int:medewerker_id>/', views.verwijder_medewerker, name='verwijder_medewerker'),
     path('organisatie/<int:id>/', views.organisatie, name='organisatie'),

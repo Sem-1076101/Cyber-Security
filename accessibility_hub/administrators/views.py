@@ -68,16 +68,21 @@ def logout_view(request):
     return redirect('../medewerkers/login') 
 
 def portal(request):
+    goedgekeurd = 1
+    in_behandeling = 0
     onderzoeken = Onderzoek.objects.all()
     medewerkers = Medewerker.objects.all()
     organisaties = Organisatie.objects.all()
-    ervaringsdeskundigen = Ervaringsdeskundige.objects.all()
-    ervaringsdeskundige_status = Ervaringsdeskundige.objects.filter(account_status=0)
+    ervaringsdeskundigen = Ervaringsdeskundige.objects.filter(account_status=goedgekeurd)
+    ervaringsdeskundige_status = Ervaringsdeskundige.objects.filter(account_status=in_behandeling)
     beperkingen = Beperking.objects.all()
     return render(request, 'portal.html',
                   {'onderzoeken': onderzoeken, 'medewerkers': medewerkers, 'organisaties': organisaties,
                    'ervaringsdeskundigen': ervaringsdeskundigen, 'ervaringsdeskundige_status': ervaringsdeskundige_status, 'beperkingen': beperkingen})
 
+def ervaringsdeskundige(request, deskundige_id):
+    ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)
+    return render(request, 'experts.html', {'ervaringsdeskundige': ervaringsdeskundige})
 
 def medewerker(request, medewerker_id):
     medewerker = Medewerker.objects.get(medewerker_id=medewerker_id)
