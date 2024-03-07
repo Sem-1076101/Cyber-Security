@@ -15,6 +15,7 @@ def signup(request):
         form = CreateExpertForm(request.POST)
         if form.is_valid():
             email = request.POST.get('email')
+            print(email)
             if Ervaringsdeskundige.objects.filter(email=email).exists():
                 messages.success(request, 'E-mail is al in gebruik!')
             else:

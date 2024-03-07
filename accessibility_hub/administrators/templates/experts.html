@@ -30,7 +30,24 @@
                             <p><b>Huisnummer:</b> {{ ervaringsdeskundige.huisnummer }}</p>
                             <p><b>Geslacht:</b> {{ ervaringsdeskundige.geslacht }}</p>
                             <p><b>Aangemaakt op:</b> {{ ervaringsdeskundige.created_at|date:"d-m-Y H:i" }}</p>
+                            <p><b>Account status:</b>{% if ervaringsdeskundige.account_status == 0 %} In behandeling {% else %} Goedgekeurd{% endif %}</p>
+
+                            <div>
+                                <form action="" method=POST>
+                                    <input type="hidden" name="id" value="{{ervaringsdeskundige.deskundige_id}}">
+                                    <button type="submit" class="btn btn-success">Goedkeuren</button>
+                                </form>
+                                <button type="submit" class="btn btn-danger">Afkeuren</button>
+                            </div>
                         </div>
+                        {% if ervaringsdeskundige.email_toezichthouder %}
+                        <div class="col-6">
+                            <h2>Toezichthouder/voogd gegevens</h2>
+                            <p><b>Naam toezichthouder:</b> {{ervaringsdeskundige.naam_toezichthouder}}</p>
+                            <p><b>Email toezichthouder:</b> {{ervaringsdeskundige.email_toezichthouder}}</p>
+                            <p><b>Telefoonnummer toezichthouder:</b> {{ervaringsdeskundige.telefoonnummer_toezichthouder}}</p>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

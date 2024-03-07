@@ -84,6 +84,12 @@ def ervaringsdeskundige(request, deskundige_id):
     ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)
     return render(request, 'experts.html', {'ervaringsdeskundige': ervaringsdeskundige})
 
+def goedkeuren_ervaringsdeskundige(request, pk):
+    ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=pk)
+    ervaringsdeskundige.account_status = '0'
+    ervaringsdeskundige.save()
+    return redirect(request, 'ervaringsdeskundige/' + pk)
+
 def medewerker(request, medewerker_id):
     medewerker = Medewerker.objects.get(medewerker_id=medewerker_id)
     return render(request, 'employee.html', {'medewerker': medewerker})
