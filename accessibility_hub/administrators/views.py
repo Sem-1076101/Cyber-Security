@@ -72,10 +72,11 @@ def portal(request):
     medewerkers = Medewerker.objects.all()
     organisaties = Organisatie.objects.all()
     ervaringsdeskundigen = Ervaringsdeskundige.objects.all()
+    ervaringsdeskundige_status = Ervaringsdeskundige.objects.filter(account_status=0)
     beperkingen = Beperking.objects.all()
     return render(request, 'portal.html',
                   {'onderzoeken': onderzoeken, 'medewerkers': medewerkers, 'organisaties': organisaties,
-                   'ervaringsdeskundigen': ervaringsdeskundigen, 'beperkingen': beperkingen})
+                   'ervaringsdeskundigen': ervaringsdeskundigen, 'ervaringsdeskundige_status': ervaringsdeskundige_status, 'beperkingen': beperkingen})
 
 
 def medewerker(request, medewerker_id):
