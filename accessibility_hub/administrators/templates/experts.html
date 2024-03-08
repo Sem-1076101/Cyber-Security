@@ -32,12 +32,20 @@
                             <p><b>Aangemaakt op:</b> {{ ervaringsdeskundige.created_at|date:"d-m-Y H:i" }}</p>
                             <p><b>Account status:</b>{% if ervaringsdeskundige.account_status == 0 %} In behandeling {% else %} Goedgekeurd{% endif %}</p>
 
-                            <div>
-                                <form action="" method=POST>
+                            <div class="col-3">
+                                <form action="{% url 'goedkeuren_ervaringsdeskundige' %}" method="POST" class="form-control">
+                                    {% csrf_token %}
                                     <input type="hidden" name="id" value="{{ervaringsdeskundige.deskundige_id}}">
                                     <button type="submit" class="btn btn-success">Goedkeuren</button>
                                 </form>
-                                <button type="submit" class="btn btn-danger">Afkeuren</button>
+                                <button type="button" id="afkeur_btn" class="btn btn-danger">Afkeuren</button>
+                                <form action="{% url 'afkeuren_ervaringsdeskundige' %}" method="POST" id="afkeur_form" class="form-control">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="deskundige_id" value="{{ ervaringsdeskundige.deskundige_id }}">
+                                    <label for="bericht_afkeuren" class="form-label">Bericht voor het afkeuren:</label>
+                                    <input type="text" name="afkeur_bericht" class="form-input">
+                                    <button type="submit" class="btn btn-danger">Afkeuren</button>
+                                </form>
                             </div>
                         </div>
                         {% if ervaringsdeskundige.email_toezichthouder %}
@@ -55,4 +63,5 @@
     </div>
 </div>
 
+<script src="../../static//js/status_expert.js"></script>
 {% endblock content %}

@@ -9,6 +9,4 @@ $(document).ready(function() {
             $("#supervisor_div").fadeOut();
         }
     });
-   
-    // console.log("jQuery is ready!");
 });

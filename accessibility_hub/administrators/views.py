@@ -86,7 +86,14 @@ def ervaringsdeskundige(request, deskundige_id):
 
 def goedkeuren_ervaringsdeskundige(request, pk):
     ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=pk)
-    ervaringsdeskundige.account_status = '0'
+    ervaringsdeskundige.account_status = '1'
+    ervaringsdeskundige.save()
+    return redirect(request, 'ervaringsdeskundige/' + pk)
+
+def afkeuren_ervaringsdeskundige(request, pk):
+    ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=pk)
+    ervaringsdeskundige.account_status = '2'
+    ervaringsdeskundige.afkeur_bericht = ''
     ervaringsdeskundige.save()
     return redirect(request, 'ervaringsdeskundige/' + pk)
 
