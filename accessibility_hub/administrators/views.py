@@ -84,18 +84,22 @@ def ervaringsdeskundige(request, deskundige_id):
     ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)
     return render(request, 'experts.html', {'ervaringsdeskundige': ervaringsdeskundige})
 
-def goedkeuren_ervaringsdeskundige(request, pk):
-    ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=pk)
-    ervaringsdeskundige.account_status = '1'
-    ervaringsdeskundige.save()
-    return redirect(request, 'ervaringsdeskundige/' + pk)
+def goedkeuren_deskundige(request, deskundige_id):
+    if request.method == 'POST':
+        ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)
+        ervaringsdeskundige.account_status = '1'
+        ervaringsdeskundige.save()
+        messages.success(request, ('Account status is succesvol aangepast.'))
+        return redirect('../ervaringsdeskundige/' + str(deskundige_id))
 
-def afkeuren_ervaringsdeskundige(request, pk):
-    ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=pk)
-    ervaringsdeskundige.account_status = '2'
-    ervaringsdeskundige.afkeur_bericht = ''
-    ervaringsdeskundige.save()
-    return redirect(request, 'ervaringsdeskundige/' + pk)
+def afkeuren_deskundige(request, pk):
+    if request.method == 'POST':
+        bericht_status = request.POST.get('bericht_status')
+        ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=pk)
+        ervaringsdeskundige.account_status = '2'
+        # ervaringsdeskundige.status_bericht = bericht_status
+        ervaringsdeskundige.save()
+        return redirect(request, 'ervaringsdeskundige/' + pk)
 
 def medewerker(request, medewerker_id):
     medewerker = Medewerker.objects.get(medewerker_id=medewerker_id)
