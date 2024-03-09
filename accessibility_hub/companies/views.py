@@ -80,7 +80,7 @@ class Question(APIView):
         if serializer.is_valid():
             serializer.save()
 
-            vraag = Vraag.objects.get(titel=serializer.data['titel'])
+            vraag = Vraag.objects.get(vraagtitel=serializer.data['vraagtitel'])
 
             vraag.save()
 
