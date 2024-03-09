@@ -99,8 +99,8 @@ class VraagSerializer(serializers.ModelSerializer):
         except Onderzoek.DoesNotExist:
             raise serializers.ValidationError("Er bestaat geen onderzoek met deze titel.")
 
-        if Vraag.objects.filter(vraagtitel=vraagtitel).exists():
-            raise serializers.ValidationError("Deze vraagtitel bestaat al.")
+        if Vraag.objects.filter(vraagtitel=vraagtitel, onderzoek=onderzoek).exists():
+            raise serializers.ValidationError("Deze vraagtitel bestaat al binnen dit onderzoek.")
 
         token = validated_data.pop('token', None)
         organisatie = validated_data.pop('organisatie', None)
