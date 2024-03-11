@@ -6,7 +6,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.http import JsonResponse
 from .models import Medewerker, Ervaringsdeskundige, Beperking
-from companies.models import Organisatie, Onderzoek
+from companies.models import Organisatie, Onderzoek, Vraag
 
 # Authenticatie imports voor de login
 from django.contrib import messages
@@ -175,7 +175,8 @@ def check_updates_organisaties(request):
 
 def onderzoek(request, onderzoek_id):
     onderzoek = Onderzoek.objects.get(onderzoek_id=onderzoek_id)
-    return render(request, 'research.html', {'onderzoek': onderzoek})
+    vragen = Vraag.objects.filter(onderzoek_id=onderzoek_id)
+    return render(request, 'research.html', {'onderzoek': onderzoek, 'vragen': vragen})
 
 
 def check_updates_onderzoek(request):

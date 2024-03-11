@@ -39,6 +39,14 @@
                                     <p><b>Einddatum:</b> {{ onderzoek.einddatum|date:"d-m-Y" }}</p>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h2>Vragen</h2>
+                                    {% for vraag in vragen %}
+                                        <p><b>Vraag:</b> {{ vraag.vraagtitel }}</p>
+                                    {% endfor %}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     {% if onderzoek.status == 'Nieuw' %}

@@ -1,8 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
-from .serializers import OrganisatieSerializer, OnderzoekSerializer
-from .models import Organisatie, Onderzoek
+from .serializers import OrganisatieSerializer, OnderzoekSerializer, VraagSerializer
+from .models import Organisatie, Onderzoek, Vraag
 import jwt
 import datetime
 
@@ -13,10 +13,8 @@ class Register(APIView):
         if serializer.is_valid():
             serializer.save()
 
-            # Haal de gegevens van de opgeslagen gebruiker op
             organisatie = Organisatie.objects.get(email=serializer.data['email'])
 
-            # Genereer de JWT-token
             payload = {
                 'id': organisatie.id,
                 'exp': datetime.datetime.now(datetime.UTC) + datetime.timedelta(minutes=60),
@@ -71,6 +69,20 @@ class Research(APIView):
             onderzoek = Onderzoek.objects.get(titel=serializer.data['titel'])
 
             onderzoek.save()
+
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
+
+class Question(APIView):
+    def post(self, request):
+        serializer = VraagSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+
+            vraag = Vraag.objects.get(vraagtitel=serializer.data['vraagtitel'])
+
+            vraag.save()
 
             return Response(serializer.data)
         return Response(serializer.errors, status=400)

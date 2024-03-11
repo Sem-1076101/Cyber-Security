@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Organisatie, Onderzoek
+from .models import Organisatie, Onderzoek, Vraag
 
 
 class OrganisatieSerializer(serializers.ModelSerializer):
@@ -65,4 +65,46 @@ class OnderzoekSerializer(serializers.ModelSerializer):
         instance = Onderzoek.objects.create(**validated_data)
 
         print("Organisatie ID:", organisatie.id)
+        return instance
+
+
+class VraagSerializer(serializers.ModelSerializer):
+    token = serializers.CharField(write_only=True)
+    onderzoek_titel = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = Vraag
+        fields = ['vraag_id', 'vraagtitel', 'beschrijving', 'categorie', 'onderzoek_titel', 'token']
+
+    def validate(self, data):
+        token = data.get('token')
+        if token is None:
+            raise serializers.ValidationError("Geen API-token verstrekt.")
+
+        try:
+            organisatie = Organisatie.objects.get(token=token)
+        except Organisatie.DoesNotExist:
+            raise serializers.ValidationError("Ongeldige API-token.")
+
+        data['organisatie'] = organisatie
+
+        return data
+
+    def create(self, validated_data):
+        onderzoek_titel = validated_data.pop('onderzoek_titel', None)
+        vraagtitel = validated_data.get('vraagtitel')
+
+        try:
+            onderzoek = Onderzoek.objects.get(titel=onderzoek_titel)
+        except Onderzoek.DoesNotExist:
+            raise serializers.ValidationError("Er bestaat geen onderzoek met deze titel.")
+
+        if Vraag.objects.filter(vraagtitel=vraagtitel, onderzoek=onderzoek).exists():
+            raise serializers.ValidationError("Deze vraagtitel bestaat al binnen dit onderzoek.")
+
+        token = validated_data.pop('token', None)
+        organisatie = validated_data.pop('organisatie', None)
+
+        instance = Vraag.objects.create(onderzoek=onderzoek, **validated_data)
+
         return instance
