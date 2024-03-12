@@ -57,12 +57,13 @@ def signup(request):
 
                     naam_toezichthouder=naam_toezichthouder,
                     email_toezichthouder=email_toezichthouder,
+                    telefoonnummer_toezichthouder=telefoonnummer_toezichthouder,
                     benadering_keuze=benadering_keuze
                 )
                 if aanmaken_ervaringsdeskundige:
                     return redirect('../login') 
                 else:
-                    messages.success(request, ('Er is iets fout gegaan.'))
+                    messages.success(request, ('Er is iets fout gegaan, probeer het opnieuw.'))
         else:
             messages.success(request, ('Er is iets fout gegaan, probeer het opnieuw'))
     else:

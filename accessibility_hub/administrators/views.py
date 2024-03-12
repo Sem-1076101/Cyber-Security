@@ -8,6 +8,7 @@ from django.http import JsonResponse
 from .models import Medewerker, Ervaringsdeskundige, Beperking
 from companies.models import Organisatie, Onderzoek
 
+
 # Authenticatie imports voor de login
 from django.contrib import messages
 from django.contrib.auth.models import auth
@@ -92,14 +93,14 @@ def goedkeuren_deskundige(request, deskundige_id):
         messages.success(request, ('Account status is succesvol aangepast.'))
         return redirect('../ervaringsdeskundige/' + str(deskundige_id))
 
-def afkeuren_deskundige(request, pk):
+def afkeuren_deskundige(request, deskundige_id):
     if request.method == 'POST':
-        bericht_status = request.POST.get('bericht_status')
-        ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=pk)
+        ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)
+        # bericht_status = request.POST.get('bericht_status')
+        # ervaringsdeskundige.bericht_status = bericht_status
         ervaringsdeskundige.account_status = '2'
-        # ervaringsdeskundige.status_bericht = bericht_status
         ervaringsdeskundige.save()
-        return redirect(request, 'ervaringsdeskundige/' + pk)
+        return redirect(request, 'ervaringsdeskundige/' + str(deskundige_id))
 
 def medewerker(request, medewerker_id):
     medewerker = Medewerker.objects.get(medewerker_id=medewerker_id)

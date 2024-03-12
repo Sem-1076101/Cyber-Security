@@ -1,12 +1,10 @@
 $(document).ready(function() {
     $("#afkeur_form").hide();
+    $("#terug_btn_afkeur").hide();
+
     
     $("#afkeur_btn").on("click", function() {
-        $("#afkeur_form").fadeIn();
-    })
-
-    $("#terug_btn_afkeur").on("click", function() {
-        $("#afkeur_form").fadeOut(10);
+        $("#afkeur_form").toggle(400);
     })
     
 });

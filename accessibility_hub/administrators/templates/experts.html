@@ -44,11 +44,10 @@
                                 <button type="submit" class="btn btn-success">Goedkeuren</button>
                             </form>
                             <button type="button" id="afkeur_btn" class="btn btn-danger mt-2 mb-2">Afkeuren</button>
-                            <form action="{% url 'medewerkers:afkeuren_deskundige' %}" method="POST" id="afkeur_form"
-                                class="form-control">
+                            <button type="buttton" id="terug_btn_afkeur">Sluit</button>
+                            <form action="{% url 'medewerkers:afkeuren_deskundige' %}" method="POST" id="afkeur_form">
                                 {% csrf_token %}
-                                <input type="hidden" name="deskundige_id"
-                                    value="{{ ervaringsdeskundige.deskundige_id }}">
+                                <input type="hidden" name="deskundige_id" value="{{ ervaringsdeskundige.deskundige_id }}">
                                 <label for="bericht_afkeuren" class="form-label">Bericht voor het afkeuren:</label>
                                 <input type="text" name="afkeur_bericht" class="form-input">
                                 <button type="submit" class="btn btn-danger">Afkeuren</button>
@@ -64,7 +63,8 @@
                         </div>
                         {% else %}
                         <div class="col-6">
-                            <p><b>{{ ervaringsdeskundige.voornaam }} {{ ervaringsdeskundige.achternaam }} heeft geen toezichthouder/voogd.</b></p>
+                            <p><b>{{ ervaringsdeskundige.voornaam }} {{ ervaringsdeskundige.achternaam }} heeft geen
+                                    toezichthouder/voogd.</b></p>
                         </div>
                         {% endif %}
                     </div>
@@ -73,6 +73,5 @@
         </div>
     </div>
 </div>
-<script src="../../static/js/status_expert.js"></script>
 
 {% endblock content %}
