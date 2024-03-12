@@ -140,7 +140,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- onderzoeken -->
+                                    {% for onderzoek in onderzoeken %}
+                                    <tr class='clickable-row'
+                                        data-href="/medewerkers/onderzoek/{{ onderzoek.onderzoek_id }}">
+                                        <td>{{ onderzoek.titel }}</td>
+                                        <td>{{ onderzoek.organisatie.bedrijfsnaam }}</td>
+                                        <td>{{ onderzoek.startdatum|date:"d-m-Y" }}</td>
+                                        <td>{{ onderzoek.einddatum|date:"d-m-Y" }}</td>
+                                        <td>{{ onderzoek.status }}</td>
+                                    </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>
@@ -233,7 +242,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Organisatie  -->
+                                    {% for organisatie in organisaties %}
+                                    <tr class='clickable-row' data-href="/medewerkers/organisatie/{{ organisatie.id }}">
+                                        <td>{{ organisatie.bedrijfsnaam }}</td>
+                                        <td>{{ organisatie.email }}</td>
+                                        <td>{{ organisatie.first_name }}</td>
+                                        <td>{{ organisatie.last_name }}</td>
+                                        <td>{{ organisatie.status }}</td>
+                                        <td>{{ organisatie.date_joined }}</td>
+                                    </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>

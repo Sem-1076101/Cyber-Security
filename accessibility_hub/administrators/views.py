@@ -89,6 +89,7 @@ def goedkeuren_deskundige(request, deskundige_id):
     if request.method == 'POST':
         ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)
         ervaringsdeskundige.account_status = '1'
+        ervaringsdeskundige.bericht_status = None
         ervaringsdeskundige.save()
         messages.success(request, ('Account status is succesvol aangepast.'))
         return redirect('../ervaringsdeskundige/' + str(deskundige_id))
@@ -96,11 +97,12 @@ def goedkeuren_deskundige(request, deskundige_id):
 def afkeuren_deskundige(request, deskundige_id):
     if request.method == 'POST':
         ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)
-        # bericht_status = request.POST.get('bericht_status')
-        # ervaringsdeskundige.bericht_status = bericht_status
+        bericht_status = request.POST.get('bericht_status')
+        ervaringsdeskundige.bericht_status = bericht_status
+        print(bericht_status)
         ervaringsdeskundige.account_status = '2'
         ervaringsdeskundige.save()
-        return redirect(request, 'ervaringsdeskundige/' + str(deskundige_id))
+        return redirect('../ervaringsdeskundige/' + str(deskundige_id))
 
 def medewerker(request, medewerker_id):
     medewerker = Medewerker.objects.get(medewerker_id=medewerker_id)
