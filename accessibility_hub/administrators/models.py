@@ -41,6 +41,7 @@ class Ervaringsdeskundige(models.Model):
     hulpmiddelen = models.TextField(blank=True, null=True, default='null')
     bijzonderheden = models.TextField(blank=True, null=True, default='null')
     account_status = models.IntegerField(default=0)
+    bericht_status = models.CharField(max_length=255, blank=True, null=True)
     naam_toezichthouder = models.CharField(max_length=255, blank=True, null=True, default='null')
     email_toezichthouder = models.CharField(max_length=255, blank=True, null=True, default='null')
     telefoonnummer_toezichthouder = models.CharField(max_length=255, blank=True, null=True, default='null')
@@ -60,21 +61,6 @@ class Ervaringsdeskundige(models.Model):
 
     class Meta:
         db_table = 'ervaringsdeskundigen'
-
-
-class GoedkeuringErvaringsdeskundige(models.Model):
-    goedkeurings_id = models.AutoField(primary_key=True)
-    status = models.IntegerField(default=0)
-    datum_van_goed_keuring = models.DateField()
-    deskundige = models.ForeignKey(
-        'Ervaringsdeskundige', on_delete=models.SET_NULL, blank=True, null=True
-    )
-    medewerker = models.ForeignKey(
-        'Medewerker', on_delete=models.SET_NULL, blank=True, null=True
-    )
-
-    class Meta:
-        db_table = 'goedkeuring_ervaringsdeskundige'
 
 
 class Beperking(models.Model):
