@@ -11,17 +11,4 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.CreateModel(
-            name='GoedkeuringErvaringsdeskundige',
-            fields=[
-                ('goedkeurings_id', models.AutoField(primary_key=True, serialize=False)),
-                ('status', models.IntegerField(default=0)),
-                ('datum_van_goed_keuring', models.DateField()),
-                ('deskundige', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='administrators.ervaringsdeskundige')),
-                ('medewerker', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='administrators.medewerker')),
-            ],
-            options={
-                'db_table': 'goedkeuring_ervaringsdeskundige',
-            },
-        ),
     ]
