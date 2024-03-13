@@ -89,7 +89,7 @@ def goedkeuren_deskundige(request, deskundige_id):
     if request.method == 'POST':
         ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)
         ervaringsdeskundige.account_status = '1'
-        ervaringsdeskundige.bericht_status = None
+        ervaringsdeskundige.bericht_status = ''
         ervaringsdeskundige.save()
         messages.success(request, ('Account status is succesvol aangepast.'))
         return redirect('../ervaringsdeskundige/' + str(deskundige_id))

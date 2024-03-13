@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import check_password
 
 def signup(request):
+    beperkingen = Beperking.objects.all()
     if request.method == 'POST':
         form = CreateExpertForm(request.POST)
         if form.is_valid():
@@ -68,7 +69,7 @@ def signup(request):
             messages.success(request, ('Er is iets fout gegaan, probeer het opnieuw'))
     else:
         form = CreateExpertForm()
-    return render(request, 'signupExpert.html', {})          
+    return render(request, 'signupExpert.html', {'beperkingen': beperkingen})          
         
 
 
