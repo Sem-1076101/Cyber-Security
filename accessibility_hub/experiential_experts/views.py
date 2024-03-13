@@ -28,7 +28,7 @@ def signup(request):
                 geboortedatum = request.POST.get('birthday')
                 postcode = request.POST.get('zipCode')
                 huisnummer = request.POST.get('housenumber')
-                soort_beperking = request.POST.get('disability')
+                soort_beperking = request.POST.getlist('disability')
                 hulpmiddelen = request.POST.get('tools')
                 bijzonderheden = request.POST.get('particulars')
 
