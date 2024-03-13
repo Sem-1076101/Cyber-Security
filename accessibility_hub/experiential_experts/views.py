@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from administrators.models import Medewerker, Ervaringsdeskundige, Beperking
+from administrators.models import Medewerker, Onderzoek, Ervaringsdeskundige, Beperking
 from experiential_experts.forms import CreateExpertForm, LoginFormExpert
 from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
@@ -104,3 +104,22 @@ def login(request):
 
 def home(request):
     return render(request, 'homepageExperts.html', {})
+
+def onderzoek_overzicht(request):
+    onderzoeken = Onderzoek.objects.all()
+
+    doelgroep_filter = request.GET.get('doelgroep')
+    if doelgroep_filter:
+        onderzoeken = onderzoeken.filter(doelgroep_beperking=doelgroep_filter)
+
+    context = {
+        'onderzoeken': onderzoeken
+    }
+
+    return render(request, 'onderzoek_overzicht.html', {'onderzoeken': onderzoeken})
+
+def inschrijvingen(request):
+    return render(request, 'ervaringsdeskundige/inschrijvingen.html')
+
+def uitschrijvingen(request):
+    return render(request, 'uitschrijvingen.html')
