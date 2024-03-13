@@ -1,4 +1,5 @@
 from .forms import CreateEmployeeForm, LoginForm
+from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
@@ -69,13 +70,13 @@ def logout_view(request):
     return redirect('../medewerkers/login') 
 
 def portal(request):
-    goedgekeurd = 1 and 2
+    goedgekeurd = 1
     in_behandeling = 0
     afgekeurd = 2 
     onderzoeken = Onderzoek.objects.all()
     medewerkers = Medewerker.objects.all()
     organisaties = Organisatie.objects.all()
-    ervaringsdeskundigen = Ervaringsdeskundige.objects.filter(account_status=goedgekeurd)
+    ervaringsdeskundigen = Ervaringsdeskundige.objects.filter(Q(account_status=goedgekeurd) | Q(account_status=afgekeurd))
     ervaringsdeskundige_status = Ervaringsdeskundige.objects.filter(account_status=in_behandeling)
     beperkingen = Beperking.objects.all()
     return render(request, 'portal.html',
@@ -90,7 +91,7 @@ def goedkeuren_deskundige(request, deskundige_id):
     if request.method == 'POST':
         ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)
         ervaringsdeskundige.account_status = '1'
-        ervaringsdeskundige.bericht_status = ''
+        ervaringsdeskundige.bericht_status = None
         ervaringsdeskundige.save()
         messages.success(request, ('Account status is succesvol aangepast.'))
         return redirect('../ervaringsdeskundige/' + str(deskundige_id))

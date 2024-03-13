@@ -200,8 +200,9 @@
                                     </thead>
                                     <tbody>
                                     {% for ervaringsdeskundige in ervaringsdeskundigen %}
-                                        <tr>
-                                            <td>{{ ervaringsdeskundige.naam }}</td>
+                                        <tr class='clickable-row'
+                                            data-href="/medewerkers/ervaringsdeskundige/{{ ervaringsdeskundige.deskundige_id }}">
+                                            <td>{{ ervaringsdeskundige.voornaam }} {{ ervaringsdeskundige.achternaam }}</td>
                                             <td>{{ ervaringsdeskundige.geboortedatum }}</td>
                                             <td>{{ ervaringsdeskundige.email }}</td>
                                             <td>{{ ervaringsdeskundige.telefoonnummer }}</td>

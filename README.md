@@ -74,6 +74,7 @@ https://reintech.io/blog/building-a-custom-authentication-system-in-django <br/>
 https://stackoverflow.com/questions/57556793/login-check-the-username-and-password-from-database-in-django-website-using-post <br/>
 https://stackoverflow.com/questions/70644038/get-data-from-one-column-in-database-django <br/>
 https://www.sololearn.com/en/Discuss/2304405/in-python-if-the-user-doesnt-enters-a-input-and-simply-press-submit-button-if-this-is-situation-then-how-to-set-default-value <br/>
+https://www.w3schools.com/django/django_queryset_filter.php#:~:text=The%20filter()%20method%20takes,separating%20them%20by%20a%20comma. <br/>
 
 **Algemeen** <br/>
 
