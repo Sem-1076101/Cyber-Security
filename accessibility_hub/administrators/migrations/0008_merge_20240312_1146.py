@@ -6,8 +6,6 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('administrators', '0006_goedkeuring_ervaringsdeskundige_and_more'),
-        ('administrators', '0007_goedkeuringervaringsdeskundige'),
     ]
 
     operations = [
