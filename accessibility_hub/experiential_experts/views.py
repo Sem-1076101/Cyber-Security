@@ -81,14 +81,17 @@ def login(request):
             wachtwoord = request.POST.get('wachtwoord')
             print(email, wachtwoord)
             ervaringsdeskundige = Ervaringsdeskundige.objects.filter(email=email).first()
-            if ervaringsdeskundige and check_password(wachtwoord, ervaringsdeskundige.wachtwoord):
-                request.session['deskundige_id'] = ervaringsdeskundige.deskundige_id
-                request.session['voornaam'] = ervaringsdeskundige.voornaam
-                request.session['achternaam'] = ervaringsdeskundige.achternaam
-                request.session['email'] = ervaringsdeskundige.email
-                return redirect('../home')
+            if ervaringsdeskundige.account_status == 1:
+                if ervaringsdeskundige and check_password(wachtwoord, ervaringsdeskundige.wachtwoord):
+                    request.session['deskundige_id'] = ervaringsdeskundige.deskundige_id
+                    request.session['voornaam'] = ervaringsdeskundige.voornaam
+                    request.session['achternaam'] = ervaringsdeskundige.achternaam
+                    request.session['email'] = ervaringsdeskundige.email
+                    return redirect('../home')
+                else:
+                    messages.success(request, ('Inloggen mislukt. Ongeldige email of wachtwoord.'))
             else:
-                messages.success(request, ('Inloggen mislukt. Ongeldige email of wachtwoord.'))
+                messages.success(request, ('Inloggen mislukt. U moet nog wachten op goedkeuring van uw account!'))
         else:
             messages.success(request, ('Er is iets fout gegaan, probeer het opnieuw.'))
             print('Formulier is niet geldig')
