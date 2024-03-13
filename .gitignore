@@ -7,3 +7,12 @@ accessibility_hub/*/__pycache__
 accessibility_hub/accessibility_hub/__pycache__/__init__.cpython-311.pyc
 accessibility_hub/accessibility_hub/__pycache__/__init__.cpython-311.pyc
 accessibility_hub/accessibility_hub/__pycache__/settings.cpython-311.pyc
+*.DS_Store
+
+
+
+
+.DS_Store
+.DS_Store
+accessibility_hub/.DS_Store
+.DS_Store

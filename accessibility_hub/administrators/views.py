@@ -8,6 +8,7 @@ from django.http import JsonResponse
 from .models import Medewerker, Ervaringsdeskundige, Beperking
 from companies.models import Organisatie, Onderzoek, Vraag
 
+
 # Authenticatie imports voor de login
 from django.contrib import messages
 from django.contrib.auth.models import auth
@@ -68,15 +69,40 @@ def logout_view(request):
     return redirect('../medewerkers/login') 
 
 def portal(request):
+    goedgekeurd = 1
+    in_behandeling = 0
     onderzoeken = Onderzoek.objects.all()
     medewerkers = Medewerker.objects.all()
     organisaties = Organisatie.objects.all()
-    ervaringsdeskundigen = Ervaringsdeskundige.objects.all()
+    ervaringsdeskundigen = Ervaringsdeskundige.objects.filter(account_status=goedgekeurd)
+    ervaringsdeskundige_status = Ervaringsdeskundige.objects.filter(account_status=in_behandeling)
     beperkingen = Beperking.objects.all()
     return render(request, 'portal.html',
                   {'onderzoeken': onderzoeken, 'medewerkers': medewerkers, 'organisaties': organisaties,
-                   'ervaringsdeskundigen': ervaringsdeskundigen, 'beperkingen': beperkingen})
+                   'ervaringsdeskundigen': ervaringsdeskundigen, 'ervaringsdeskundige_status': ervaringsdeskundige_status, 'beperkingen': beperkingen})
 
+def ervaringsdeskundige(request, deskundige_id):
+    ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)
+    return render(request, 'experts.html', {'ervaringsdeskundige': ervaringsdeskundige})
+
+def goedkeuren_deskundige(request, deskundige_id):
+    if request.method == 'POST':
+        ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)
+        ervaringsdeskundige.account_status = '1'
+        ervaringsdeskundige.bericht_status = None
+        ervaringsdeskundige.save()
+        messages.success(request, ('Account status is succesvol aangepast.'))
+        return redirect('../ervaringsdeskundige/' + str(deskundige_id))
+
+def afkeuren_deskundige(request, deskundige_id):
+    if request.method == 'POST':
+        ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)
+        bericht_status = request.POST.get('bericht_status')
+        ervaringsdeskundige.bericht_status = bericht_status
+        print(bericht_status)
+        ervaringsdeskundige.account_status = '2'
+        ervaringsdeskundige.save()
+        return redirect('../ervaringsdeskundige/' + str(deskundige_id))
 
 def medewerker(request, medewerker_id):
     medewerker = Medewerker.objects.get(medewerker_id=medewerker_id)

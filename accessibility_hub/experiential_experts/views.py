@@ -15,6 +15,7 @@ def signup(request):
         form = CreateExpertForm(request.POST)
         if form.is_valid():
             email = request.POST.get('email')
+            print(email)
             if Ervaringsdeskundige.objects.filter(email=email).exists():
                 messages.success(request, 'E-mail is al in gebruik!')
             else:
@@ -56,12 +57,13 @@ def signup(request):
 
                     naam_toezichthouder=naam_toezichthouder,
                     email_toezichthouder=email_toezichthouder,
+                    telefoonnummer_toezichthouder=telefoonnummer_toezichthouder,
                     benadering_keuze=benadering_keuze
                 )
                 if aanmaken_ervaringsdeskundige:
                     return redirect('../login') 
                 else:
-                    messages.success(request, ('Er is iets fout gegaan.'))
+                    messages.success(request, ('Er is iets fout gegaan, probeer het opnieuw.'))
         else:
             messages.success(request, ('Er is iets fout gegaan, probeer het opnieuw'))
     else:
@@ -79,14 +81,17 @@ def login(request):
             wachtwoord = request.POST.get('wachtwoord')
             print(email, wachtwoord)
             ervaringsdeskundige = Ervaringsdeskundige.objects.filter(email=email).first()
-            if ervaringsdeskundige and check_password(wachtwoord, ervaringsdeskundige.wachtwoord):
-                request.session['deskundige_id'] = ervaringsdeskundige.deskundige_id
-                request.session['voornaam'] = ervaringsdeskundige.voornaam
-                request.session['achternaam'] = ervaringsdeskundige.achternaam
-                request.session['email'] = ervaringsdeskundige.email
-                return redirect('../home')
+            if ervaringsdeskundige.account_status == 1:
+                if ervaringsdeskundige and check_password(wachtwoord, ervaringsdeskundige.wachtwoord):
+                    request.session['deskundige_id'] = ervaringsdeskundige.deskundige_id
+                    request.session['voornaam'] = ervaringsdeskundige.voornaam
+                    request.session['achternaam'] = ervaringsdeskundige.achternaam
+                    request.session['email'] = ervaringsdeskundige.email
+                    return redirect('../home')
+                else:
+                    messages.success(request, ('Inloggen mislukt. Ongeldige email of wachtwoord.'))
             else:
-                messages.success(request, ('Inloggen mislukt. Ongeldige email of wachtwoord.'))
+                messages.success(request, ('Inloggen mislukt. U moet nog wachten op goedkeuring van uw account!'))
         else:
             messages.success(request, ('Er is iets fout gegaan, probeer het opnieuw.'))
             print('Formulier is niet geldig')

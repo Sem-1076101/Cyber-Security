@@ -41,7 +41,7 @@ class Ervaringsdeskundige(models.Model):
     hulpmiddelen = models.TextField(blank=True, null=True, default='null')
     bijzonderheden = models.TextField(blank=True, null=True, default='null')
     account_status = models.IntegerField(default=0)
-    bericht_status = models.CharField(max_length=255, blank=True, null=True)
+    bericht_status = models.CharField(max_length=255, blank=True, null=True, default='null')
     naam_toezichthouder = models.CharField(max_length=255, blank=True, null=True, default='null')
     email_toezichthouder = models.CharField(max_length=255, blank=True, null=True, default='null')
     telefoonnummer_toezichthouder = models.CharField(max_length=255, blank=True, null=True, default='null')
