@@ -41,3 +41,4 @@ https://reintech.io/blog/building-a-custom-authentication-system-in-django <br/>
 
 https://stackoverflow.com/questions/57556793/login-check-the-username-and-password-from-database-in-django-website-using-post <br/>
 https://stackoverflow.com/questions/70644038/get-data-from-one-column-in-database-django <br/>
+https://stackoverflow.com/questions/69226006/request-post-getlist-returns-a-list-of-strings-how-to-get-integers-instea <br/>
