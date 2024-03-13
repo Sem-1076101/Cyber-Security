@@ -69,8 +69,9 @@ def logout_view(request):
     return redirect('../medewerkers/login') 
 
 def portal(request):
-    goedgekeurd = 1
+    goedgekeurd = 1 and 2
     in_behandeling = 0
+    afgekeurd = 2 
     onderzoeken = Onderzoek.objects.all()
     medewerkers = Medewerker.objects.all()
     organisaties = Organisatie.objects.all()
