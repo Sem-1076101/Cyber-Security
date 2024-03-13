@@ -82,7 +82,7 @@ def login(request):
             wachtwoord = request.POST.get('wachtwoord')
             print(email, wachtwoord)
             ervaringsdeskundige = Ervaringsdeskundige.objects.filter(email=email).first()
-            if ervaringsdeskundige.account_status == 1:
+            if ervaringsdeskundige.account_status == 1 or ervaringsdeskundige.account_status == 2:
                 if ervaringsdeskundige and check_password(wachtwoord, ervaringsdeskundige.wachtwoord):
                     request.session['deskundige_id'] = ervaringsdeskundige.deskundige_id
                     request.session['voornaam'] = ervaringsdeskundige.voornaam
