@@ -7,5 +7,8 @@ app_name = 'ervaringsdeskundige'
 
 urlpatterns = [
     path('login/', views.login, name='login'),
-    path('signup/', views.signup, name='signup')
+    path('signup/', views.signup, name='signup'),
+    path('onderzoek-overzicht/', views.onderzoek_overzicht, name='onderzoek_overzicht'),
+    path('inschrijvingen/', views.inschrijvingen, name='inschrijvingen'),
+    path('uitschrijvingen/', views.uitschrijvingen, name='uitschrijvingen')
 ]

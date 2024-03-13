@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Onderzoeksoverzicht{% endblock title %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="border border-primary rounded p-2">
+                <a href="{% url 'ervaringsdeskundige:onderzoek_overzicht' %}" class="btn btn-primary mb-2 btn-block">Onderzoeksoverzicht</a>
+                <a href="{% url 'ervaringsdeskundige:inschrijvingen' %}" class="btn btn-primary btn-block">Inschrijvingen</a>
+            </div>
+        </div>
+        <div class="col-md-9">
+        <div class="col-12">
+            <h1>Onderzoeksoverzicht</h1>
+        </div>
+        <div class="col-12">
+            <form method="GET">
+                <label for="doelgroep">Selecteer doelgroep:</label>
+                <select name="doelgroep" id="doelgroep">
+                    <option value="">Alle doelgroepen</option>
+                    <option value="slechtzienden">Slechtzienden</option>
+                    <option value="niet-zienden">Niet-zienden</option>
+                    <option value="slechthorenden">Slechthorenden</option>
+                    <option value="niet-vocaal">Niet-vocaal</option>
+                </select>
+                <button type="submit">Filter</button>
+            </form>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Titel</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Beschikbaarheid</th>
+                        <th scope="col">Beschrijving</th>
+                        <th scope="col">Datum vanaf</th>
+                        <th scope="col">Datum tot</th>
+                        <th scope="col">Type onderzoek</th>
+                        <th scope="col">Locatie</th>
+                        <th scope="col">Beloning</th>
+                        <th scope="col">Doelgroep</th>
+                        <th scope="col">Organisatie</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for onderzoek in onderzoeken %}
+                    <tr>
+                        <td>{{ onderzoek.titel }}</td>
+                        <td>{{ onderzoek.status }}</td>
+                        <td>{{ onderzoek.beschikbaar }}</td>
+                        <td>{{ onderzoek.beschrijving }}</td>
+                        <td>{{ onderzoek.datum_vanaf }}</td>
+                        <td>{{ onderzoek.datum_tot }}</td>
+                        <td>{{ onderzoek.type_onderzoek }}</td>
+                        <td>{{ onderzoek.locatie }}</td>
+                        <td>{{ onderzoek.beloning }}</td>
+                        <td>{{ onderzoek.doelgroep_beperking }}</td>
+                        <td>{{ onderzoek.organisatie }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

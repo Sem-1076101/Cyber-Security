@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from administrators.models import Onderzoek, Medewerker, Ervaringsdeskundige, Beperking
+from administrators.models import Medewerker, Ervaringsdeskundige, Beperking
 from experiential_experts.forms import CreateExpertForm, LoginFormExpert
 from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
+from administrators.models import Onderzoek
 
 # Authenticatie imports voor de login
 from django.contrib import messages
