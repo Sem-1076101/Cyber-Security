@@ -75,195 +75,185 @@
                                             doen.</p>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="list-users" role="tabpanel"
-                                     aria-labelledby="list-users-list">
-                                    <div class="row">
-                                        <div class="col-8 ">
-                                            <h3>Accessibility Hub Medewerkers</h3>
-                                        </div>
-                                        <div class="col-4 d-flex justify-content-end align-items-center">
-                                            <a href="/medewerkers/medewerker/toevoegen" class="btn btn-primary">Medewerker
-                                                toevoegen</a>
-                                        </div>
+                            </div>
+                            <div class="tab-pane fade" id="list-users" role="tabpanel"
+                                 aria-labelledby="list-users-list">
+                                <div class="row">
+                                    <div class="col-8 ">
+                                        <h3>Accessibility Hub Medewerkers</h3>
                                     </div>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Medewerker ID</th>
-                                            <th scope="col">Naam</th>
-                                            <th scope="col">E-mailadres</th>
-                                            <th scope="col">Gebruikersnaam</th>
-                                            <th scope="col">Aangemaakt op</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="employee_table">
-                                        {% for medewerker in medewerkers %}
-                                            <tr class='clickable-row'
-                                                data-href="/medewerkers/medewerker/{{ medewerker.medewerker_id }}">
-                                                <td>{{ medewerker.medewerker_id }}</td>
-                                                <td>{{ medewerker.voornaam }} {{ medewerker.achternaam }}</td>
-                                                <td>{{ medewerker.emailadres }}</td>
-                                                <td>{{ medewerker.gebruikersnaam }}</td>
-                                                <td>{{ medewerker.created_at|date:"d-m-Y H:i" }}</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
+                                    <div class="col-4 d-flex justify-content-end align-items-center">
+                                        <a href="/medewerkers/medewerker/toevoegen" class="btn btn-primary">Medewerker
+                                            toevoegen</a>
+                                    </div>
                                 </div>
-                                <div class="tab-pane fade" id="list-recent-researches" role="tabpanel"
-                                     aria-labelledby="list-recent-researches-list">
-                                    <h3>Recent ingediende onderzoeken</h3>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Titel</th>
-                                            <th scope="col">Organisatie</th>
-                                            <th scope="col">Datum vanaf</th>
-                                            <th scope="col">Datum tot</th>
-                                            <th scope="col">Status</th>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Medewerker ID</th>
+                                        <th scope="col">Naam</th>
+                                        <th scope="col">E-mailadres</th>
+                                        <th scope="col">Gebruikersnaam</th>
+                                        <th scope="col">Aangemaakt op</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="employee_table">
+                                    {% for medewerker in medewerkers %}
+                                        <tr class='clickable-row'
+                                            data-href="/medewerkers/medewerker/{{ medewerker.medewerker_id }}">
+                                            <td>{{ medewerker.medewerker_id }}</td>
+                                            <td>{{ medewerker.voornaam }} {{ medewerker.achternaam }}</td>
+                                            <td>{{ medewerker.emailadres }}</td>
+                                            <td>{{ medewerker.gebruikersnaam }}</td>
+                                            <td>{{ medewerker.created_at|date:"d-m-Y H:i" }}</td>
                                         </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="tab-pane fade" id="list-researches" role="tabpanel"
-                                     aria-labelledby="list-researches-list">
-                                    <h3>Alle onderzoeken</h3>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Titel</th>
-                                            <th scope="col">Organisatie</th>
-                                            <th scope="col">Datum vanaf</th>
-                                            <th scope="col">Datum tot</th>
-                                            <th scope="col">Status</th>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="list-recent-researches" role="tabpanel"
+                                 aria-labelledby="list-recent-researches-list">
+                                <h3>Recent ingediende onderzoeken</h3>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Titel</th>
+                                        <th scope="col">Organisatie</th>
+                                        <th scope="col">Datum vanaf</th>
+                                        <th scope="col">Datum tot</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="list-researches" role="tabpanel"
+                                 aria-labelledby="list-researches-list">
+                                <h3>Alle onderzoeken</h3>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Titel</th>
+                                        <th scope="col">Organisatie</th>
+                                        <th scope="col">Datum vanaf</th>
+                                        <th scope="col">Datum tot</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for onderzoek in onderzoeken %}
+                                        <tr class='clickable-row'
+                                            data-href="/medewerkers/onderzoek/{{ onderzoek.onderzoek_id }}">
+                                            <td>{{ onderzoek.titel }}</td>
+                                            <td>{{ onderzoek.organisatie.bedrijfsnaam }}</td>
+                                            <td>{{ onderzoek.startdatum|date:"d-m-Y" }}</td>
+                                            <td>{{ onderzoek.einddatum|date:"d-m-Y" }}</td>
+                                            <td>{{ onderzoek.status }}</td>
                                         </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for onderzoek in onderzoeken %}
-                                            <tr class='clickable-row'
-                                                data-href="/medewerkers/onderzoek/{{ onderzoek.onderzoek_id }}">
-                                                <td>{{ onderzoek.titel }}</td>
-                                                <td>{{ onderzoek.organisatie.bedrijfsnaam }}</td>
-                                                <td>{{ onderzoek.startdatum|date:"d-m-Y" }}</td>
-                                                <td>{{ onderzoek.einddatum|date:"d-m-Y" }}</td>
-                                                <td>{{ onderzoek.status }}</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="tab-pane fade" id="list-recent-expert" role="tabpanel"
-                                     aria-labelledby="list-recent-experts-list">
-                                    <h3>Recent ingediende ervaringsdeskundigen</h3>
-                                    <table class="table table-hover">
-                                        <thead>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="list-recent-expert" role="tabpanel"
+                                 aria-labelledby="list-recent-experts-list">
+                                <h3>Recent ingediende ervaringsdeskundigen</h3>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Naam</th>
+                                        <th scope="col">Geboortedatum</th>
+                                        <th scope="col">E-mailadres</th>
+                                        <th scope="col">Telefoonnummer</th>
+                                        <th scope="col">Beperking</th>
+                                        <th scope="col">Aangemaakt op</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="list-expert" role="tabpanel"
+                                 aria-labelledby="list-experts-list">
+                                <h3>Alle ervaringsdeskundigen</h3>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Naam</th>
+                                        <th scope="col">Geboortedatum</th>
+                                        <th scope="col">E-mailadres</th>
+                                        <th scope="col">Telefoonnummer</th>
+                                        <th scope="col">Beperking</th>
+                                        <th scope="col">Aangemaakt op</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for ervaringsdeskundige in ervaringsdeskundigen %}
                                         <tr>
-                                            <th scope="col">Naam</th>
-                                            <th scope="col">Geboortedatum</th>
-                                            <th scope="col">E-mailadres</th>
-                                            <th scope="col">Telefoonnummer</th>
-                                            <th scope="col">Beperking</th>
-                                            <th scope="col">Aangemaakt op</th>
+                                            <td>{{ ervaringsdeskundige.naam }}</td>
+                                            <td>{{ ervaringsdeskundige.geboortedatum }}</td>
+                                            <td>{{ ervaringsdeskundige.email }}</td>
+                                            <td>{{ ervaringsdeskundige.telefoonnummer }}</td>
+                                            <td>{{ ervaringsdeskundige.soort_beperking }}</td>
+                                            <td>{{ ervaringsdeskundige.created_at }}</td>
                                         </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for deskundige_status in ervaringsdeskundige_status %}
-                                            <tr class='clickable-row'
-                                                data-href="/medewerkers/ervaringsdeskundige/{{ deskundige_status.deskundige_id }}">
-                                                <td>{{ deskundige_status.voornaam }} {{ deskundige_status.achternaam }}</td>
-                                                <td>{{ deskundige_status.geboortedatum }}</td>
-                                                <td>{{ deskundige_status.email }}</td>
-                                                <td>{{ deskundige_status.telefoonnummer }}</td>
-                                                <td>{{ deskundige_status.beperking }}</td>
-                                                <td>{{ deskundige_status.created_at }}</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="tab-pane fade" id="list-expert" role="tabpanel"
-                                     aria-labelledby="list-experts-list">
-                                    <h3>Alle ervaringsdeskundigen</h3>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Naam</th>
-                                            <th scope="col">Geboortedatum</th>
-                                            <th scope="col">E-mailadres</th>
-                                            <th scope="col">Telefoonnummer</th>
-                                            <th scope="col">Beperking</th>
-                                            <th scope="col">Aangemaakt op</th>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="list-recent-organisation" role="tabpanel"
+                                 aria-labelledby="list-recent-organisation-list">
+                                <h3>Recent ingediende organisaties</h3>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Bedrijfsnaam</th>
+                                        <th scope="col">E-mailadres</th>
+                                        <th scope="col">Voornaam</th>
+                                        <th scope="col">Achternaam</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Aangemaakt op</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="list-organisation" role="tabpanel"
+                                 aria-labelledby="list-organisation-list">
+                                <h3>Alle organisaties</h3>
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Bedrijfsnaam</th>
+                                        <th scope="col">E-mailadres</th>
+                                        <th scope="col">Voornaam</th>
+                                        <th scope="col">Achternaam</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Aangemaakt op</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for organisatie in organisaties %}
+                                        <tr class='clickable-row'
+                                            data-href="/medewerkers/organisatie/{{ organisatie.id }}">
+                                            <td>{{ organisatie.bedrijfsnaam }}</td>
+                                            <td>{{ organisatie.email }}</td>
+                                            <td>{{ organisatie.first_name }}</td>
+                                            <td>{{ organisatie.last_name }}</td>
+                                            <td>{{ organisatie.status }}</td>
+                                            <td>{{ organisatie.date_joined }}</td>
                                         </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for ervaringsdeskundige in ervaringsdeskundigen %}
-                                            <tr>
-                                                <td>{{ ervaringsdeskundige.voornaam }} {{ ervaringsdeskundige.achternaam }}</td>
-                                                <td>{{ ervaringsdeskundige.geboortedatum }}</td>
-                                                <td>{{ ervaringsdeskundige.email }}</td>
-                                                <td>{{ ervaringsdeskundige.telefoonnummer }}</td>
-                                                <td>{{ ervaringsdeskundige.soort_beperking }}</td>
-                                                <td>{{ ervaringsdeskundige.created_at }}</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="tab-pane fade" id="list-recent-organisation" role="tabpanel"
-                                     aria-labelledby="list-recent-organisation-list">
-                                    <h3>Recent ingediende organisaties</h3>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Bedrijfsnaam</th>
-                                            <th scope="col">E-mailadres</th>
-                                            <th scope="col">Voornaam</th>
-                                            <th scope="col">Achternaam</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Aangemaakt op</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="tab-pane fade" id="list-organisation" role="tabpanel"
-                                     aria-labelledby="list-organisation-list">
-                                    <h3>Alle organisaties</h3>
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th scope="col">Bedrijfsnaam</th>
-                                            <th scope="col">E-mailadres</th>
-                                            <th scope="col">Voornaam</th>
-                                            <th scope="col">Achternaam</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Aangemaakt op</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for organisatie in organisaties %}
-                                            <tr class='clickable-row'
-                                                data-href="/medewerkers/organisatie/{{ organisatie.id }}">
-                                                <td>{{ organisatie.bedrijfsnaam }}</td>
-                                                <td>{{ organisatie.email }}</td>
-                                                <td>{{ organisatie.first_name }}</td>
-                                                <td>{{ organisatie.last_name }}</td>
-                                                <td>{{ organisatie.status }}</td>
-                                                <td>{{ organisatie.date_joined }}</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 
     {% endif %}
