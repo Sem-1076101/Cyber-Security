@@ -70,3 +70,4 @@ class Beperking(models.Model):
 
     class Meta:
         db_table = 'beperkingen'
+

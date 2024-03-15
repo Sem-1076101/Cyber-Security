@@ -3,7 +3,8 @@ from administrators.models import Medewerker, Ervaringsdeskundige, Beperking
 from experiential_experts.forms import CreateExpertForm, LoginFormExpert
 from django.utils.translation import gettext as _
 from django.core.exceptions import ValidationError
-from administrators.models import Onderzoek
+from companies.models import Onderzoek
+from django.shortcuts import get_object_or_404
 
 # Authenticatie imports voor de login
 from django.contrib import messages
@@ -113,14 +114,26 @@ def onderzoek_overzicht(request):
     if doelgroep_filter:
         onderzoeken = onderzoeken.filter(doelgroep_beperking=doelgroep_filter)
 
-    context = {
-        'onderzoeken': onderzoeken
-    }
+    return render(request, 'onderzoek_overzicht.html', {'onderzoeken': onderzoeken})
+
+def inschrijven(request, onderzoek_id):
+    onderzoek = get_object_or_404(Onderzoek, onderzoek_id=onderzoek_id)
+    
+    ervaringsdeskundige = Ervaringsdeskundige.objects.filter(ervaringdeskundige_id=request.session['deskundige_id']).first()
+    
+    
+    ervaringsdeskundige.onderzoek = onderzoek
+    
+
+    onderzoeken = Onderzoek.objects.all()
+
+
+    doelgroep_filter = request.GET.get('doelgroep')
+    if doelgroep_filter:
+        onderzoeken = onderzoeken.filter(doelgroep_beperking=doelgroep_filter)
 
     return render(request, 'onderzoek_overzicht.html', {'onderzoeken': onderzoeken})
 
-def inschrijvingen(request):
-    return render(request, 'ervaringsdeskundige/inschrijvingen.html')
 
 def uitschrijvingen(request):
     return render(request, 'uitschrijvingen.html')

@@ -9,7 +9,6 @@
         <div class="col-md-3">
             <div class="border border-primary rounded p-2">
                 <a href="{% url 'ervaringsdeskundige:onderzoek_overzicht' %}" class="btn btn-primary mb-2 btn-block">Onderzoeksoverzicht</a>
-                <a href="{% url 'ervaringsdeskundige:inschrijvingen' %}" class="btn btn-primary btn-block">Inschrijvingen</a>
             </div>
         </div>
         <div class="col-md-9">
@@ -58,6 +57,7 @@
                         <td>{{ onderzoek.beloning }}</td>
                         <td>{{ onderzoek.doelgroep_beperking }}</td>
                         <td>{{ onderzoek.organisatie }}</td>
+                        <td><a href="{% url 'ervaringsdeskundige:inschrijven' onderzoek.onderzoek_id %}" class="btn btn-primary btn-block">Inschrijvingen</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

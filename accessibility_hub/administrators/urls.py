@@ -23,4 +23,3 @@ urlpatterns = [
     path('accepteer_onderzoek/<int:onderzoek_id>/', views.accepteer_onderzoek, name='accepteer_onderzoek'),
     path('updates_onderzoek/', views.check_updates_onderzoek, name='updates_onderzoek'),
 ]
- 
