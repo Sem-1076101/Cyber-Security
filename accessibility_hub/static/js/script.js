@@ -36,7 +36,7 @@ function checkForUpdatesOrganisation() {
             });
 
             document.querySelectorAll('.clickable-row').forEach(row => {
-                row.addEventListener('click', function() {
+                row.addEventListener('click', function () {
                     window.location.href = row.getAttribute('data-href');
                 });
             });
@@ -73,7 +73,7 @@ function checkForUpdatesResearch() {
             });
 
             document.querySelectorAll('.clickable-row').forEach(row => {
-                row.addEventListener('click', function() {
+                row.addEventListener('click', function () {
                     window.location.href = row.getAttribute('data-href');
                 });
             });
@@ -84,3 +84,23 @@ function checkForUpdatesResearch() {
 }
 
 setInterval(checkForUpdatesResearch, 2000);
+
+document.addEventListener('DOMContentLoaded', function () {
+    var searchInputs = document.querySelectorAll('.search_input');
+
+    searchInputs.forEach(function (searchInput) {
+        searchInput.addEventListener('keyup', function () {
+            var value = this.value.toLowerCase();
+            var tableRows = this.closest('.tab-pane').querySelectorAll('.table tbody tr');
+
+            tableRows.forEach(function (row) {
+                var rowText = row.textContent.toLowerCase();
+                if (rowText.indexOf(value) > -1) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    });
+});
