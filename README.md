@@ -33,6 +33,8 @@ In de Accessibility Hub krijgen medewerkers van Accessibility live een update ov
 
 De organisaties kunnen door een API zichzelf aanmelden, onderzoeken aanmaken en onderzoeksvragen inschieten voor een bepaald onderzoek. Dit moet allemaal worden goedgekeurd door medewerkers van Accessibility, als er goedkeuring of afkeuring is voor een organisatie of onderzoek dan krijgt de organisatie in kwestie hier een mail van.
 
+De uitleg van de API is [hier](API.md) te vinden.
+
 **Ervaringsdeskundige** <br/>
 
 Een ervaringsdeskundige kan zich registreren voor het platform, dit moet daarna worden goedgekeurd door medewerkers van Accessibility, als er een goedkeuring is dan kan de medewerkers inloggen op het platform en zich aanmelden voor bepaalde onderzoeken in zijn beperking. Dit wordt goedgekeurd of afgekeurd door een medewerker van Accessibility en daarna kan de ervaringsdeskundige het onderzoek invullen.
