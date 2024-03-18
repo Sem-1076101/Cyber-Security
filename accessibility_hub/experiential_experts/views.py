@@ -88,7 +88,10 @@ def login(request):
                     request.session['voornaam'] = ervaringsdeskundige.voornaam
                     request.session['achternaam'] = ervaringsdeskundige.achternaam
                     request.session['email'] = ervaringsdeskundige.email
-                    return redirect('../home')
+                    if ervaringsdeskundige.account_status == 2:
+                        return redirect('../overzicht_afkeuring/' + str(ervaringsdeskundige.deskundige_id))
+                    else: 
+                        return redirect('../home')
                 else:
                     messages.success(request, ('Inloggen mislukt. Ongeldige email of wachtwoord.'))
             else:
@@ -102,6 +105,11 @@ def login(request):
     context = {'loginform': form}
 
     return render(request, 'loginExpert.html', context=context)
+
+
+def overzicht_afkeuring(request, deskundige_id):
+    ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)
+    return render(request, 'overzicht_afkeuring.html', {'ervaringsdeskundige': ervaringsdeskundige})
 
 def home(request):
     return render(request, 'homepageExperts.html', {})
