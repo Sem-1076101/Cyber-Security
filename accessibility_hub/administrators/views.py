@@ -1,6 +1,6 @@
 from .forms import CreateEmployeeForm, LoginForm
 from django.db.models import Q
-from django.shortcuts import render, session
+from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.core.mail import send_mail
@@ -8,7 +8,6 @@ from django.conf import settings
 from django.http import JsonResponse
 from .models import Medewerker, Ervaringsdeskundige, Beperking
 from companies.models import Organisatie, Onderzoek, Vraag
-from django.contrib.sessions.models import Session
 
 
 # Authenticatie imports voor de login
@@ -68,7 +67,20 @@ def signup(request):
 def logout_view(request):
     logout(request)
     request.session.flush()
+    messages.success(request, ('U bent uitgelogd!'))
     return redirect('../medewerkers/login') 
+
+def get_deskundige_in_behandeling_ajax(request):
+    goedgekeurd = 1
+    in_behandeling = 0
+    afgekeurd = 2 
+    ervaringsdeskundige_status =  Ervaringsdeskundige.objects.filter(account_status=in_behandeling).values(
+        'deskundige_id', 'voornaam', 'achternaam', 'geboortedatum', 'email', 'telefoonnummer', 'soort_beperking', 'created_at', 'account_status'
+    )
+    data = {
+        'ervaringsdeskundigen': list(ervaringsdeskundige_status),
+    }
+    return JsonResponse(data)
 
 def portal(request):
     goedgekeurd = 1
@@ -78,11 +90,11 @@ def portal(request):
     medewerkers = Medewerker.objects.all()
     organisaties = Organisatie.objects.all()
     ervaringsdeskundigen = Ervaringsdeskundige.objects.filter(Q(account_status=goedgekeurd) | Q(account_status=afgekeurd))
-    ervaringsdeskundige_status = Ervaringsdeskundige.objects.filter(account_status=in_behandeling)
+    
     beperkingen = Beperking.objects.all()
     return render(request, 'portal.html',
                   {'onderzoeken': onderzoeken, 'medewerkers': medewerkers, 'organisaties': organisaties,
-                   'ervaringsdeskundigen': ervaringsdeskundigen, 'ervaringsdeskundige_status': ervaringsdeskundige_status, 'beperkingen': beperkingen})
+                   'ervaringsdeskundigen': ervaringsdeskundigen, 'beperkingen': beperkingen})
 
 def ervaringsdeskundige(request, deskundige_id):
     ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)
