@@ -42,3 +42,18 @@ https://reintech.io/blog/building-a-custom-authentication-system-in-django <br/>
 https://stackoverflow.com/questions/57556793/login-check-the-username-and-password-from-database-in-django-website-using-post <br/>
 https://stackoverflow.com/questions/70644038/get-data-from-one-column-in-database-django <br/>
 https://stackoverflow.com/questions/69226006/request-post-getlist-returns-a-list-of-strings-how-to-get-integers-instea <br/>
+
+
+
+ <!-- {% for ervaringsdeskundige in ervaringsdeskundige_status %}
+                                        <tr class='clickable-row'
+                                            data-href="/medewerkers/ervaringsdeskundige/{{ ervaringsdeskundige.deskundige_id }}">
+                                            <td>{{ ervaringsdeskundige.voornaam }} {{ ervaringsdeskundige.achternaam }}</td>
+                                            <td>{{ ervaringsdeskundige.geboortedatum }}</td>
+                                            <td>{{ ervaringsdeskundige.email }}</td>
+                                            <td>{{ ervaringsdeskundige.telefoonnummer }}</td>
+                                            <td>{{ ervaringsdeskundige.soort_beperking }}</td>
+                                            <td>{% if ervaringsdeskundige.account_status == 0 %}In behandeling{% elif ervaringsdeskundige.account_status == 1 %}Goedgekeurd{% else %}Afgekeurd{% endif %}</td>
+                                            <td>{{ ervaringsdeskundige.created_at }}</td>
+                                        </tr>
+                                    {% endfor %} -->

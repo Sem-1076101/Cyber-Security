@@ -106,6 +106,11 @@ def login(request):
 
     return render(request, 'loginExpert.html', context=context)
 
+def logout_view(request):
+    logout(request)
+    request.session.flush()
+    return redirect('../ervaringsdeskundigen/login')
+
 
 def overzicht_afkeuring(request, deskundige_id):
     ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)
