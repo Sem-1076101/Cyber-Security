@@ -84,6 +84,13 @@ betekende en waar we dit konden oplossen in onze code.
 
 De prompts van ChatGPT staan in dit [bestand](chatgpt.md).
 
+# Ervaringsdeskundige ophalen met AJAX, Sem
+Ik heb als aanpassing gedaan om toch nog in aanraking te komen met ajax ervoor gekozen om deskundige in real-time op te halen. Dit heb ik gedaan met hulp van de ajax workshop die ik gevolgd heb en met het kijken naar de code die Bryan had geschreven voor de API. Dit was echter best lastig om te maken. Ook heb ik een aantal video's en sites bekeken voor informatie. 
+
+https://www.youtube.com/watch?v=S2gkqC1fmbA&ab_channel=RedEyedCoderClub
+https://www.brennantymrak.com/articles/fetching-data-with-ajax-and-django
+https://testdriven.io/blog/django-ajax-xhr/
+
 **Login** <br/>
 
 Sem heeft veel tijd en werk in de login gestoken en veel opgezocht op het internet om dit werkend te krijgen, hij heeft al deze bronnen bewaard in dit [bestand](login.md). Uiteindelijk is het gelukt met hulp van Mark en verschillende bronnen. Sem heeft netjes gedocumenteerd wat hij heeft gebruikt en waarom dit niet werkte of deels werkte om het probleem op te lossen.

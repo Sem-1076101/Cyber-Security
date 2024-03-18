@@ -71,9 +71,7 @@ def logout_view(request):
     return redirect('../medewerkers/login') 
 
 def get_deskundige_in_behandeling_ajax(request):
-    goedgekeurd = 1
     in_behandeling = 0
-    afgekeurd = 2 
     ervaringsdeskundige_status =  Ervaringsdeskundige.objects.filter(account_status=in_behandeling).values(
         'deskundige_id', 'voornaam', 'achternaam', 'geboortedatum', 'email', 'telefoonnummer', 'soort_beperking', 'created_at', 'account_status'
     )
@@ -84,7 +82,6 @@ def get_deskundige_in_behandeling_ajax(request):
 
 def portal(request):
     goedgekeurd = 1
-    in_behandeling = 0
     afgekeurd = 2 
     onderzoeken = Onderzoek.objects.all()
     medewerkers = Medewerker.objects.all()
@@ -107,7 +104,7 @@ def goedkeuren_deskundige(request, deskundige_id):
         ervaringsdeskundige.bericht_status = None
         ervaringsdeskundige.save()
         messages.success(request, ('Account status is succesvol aangepast.'))
-        return redirect('../ervaringsdeskundige/' + str(deskundige_id))
+        return redirect('../../ervaringsdeskundige/' + str(deskundige_id))
 
 def afkeuren_deskundige(request, deskundige_id):
     if request.method == 'POST':
@@ -117,7 +114,8 @@ def afkeuren_deskundige(request, deskundige_id):
         print(bericht_status)
         ervaringsdeskundige.account_status = '2'
         ervaringsdeskundige.save()
-        return redirect('../ervaringsdeskundige/' + str(deskundige_id))
+        messages.success(request, ('Account status is succesvol aangepast.'))
+        return redirect('../../ervaringsdeskundige/' + str(deskundige_id))
 
 def medewerker(request, medewerker_id):
     medewerker = Medewerker.objects.get(medewerker_id=medewerker_id)
