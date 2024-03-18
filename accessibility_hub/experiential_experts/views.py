@@ -119,7 +119,7 @@ def onderzoek_overzicht(request):
 def inschrijven(request, onderzoek_id):
     onderzoek = get_object_or_404(Onderzoek, onderzoek_id=onderzoek_id)
     
-    ervaringsdeskundige = Ervaringsdeskundige.objects.filter(ervaringdeskundige_id=request.session['deskundige_id']).first()
+    ervaringsdeskundige = Ervaringsdeskundige.objects.filter(deskundige_id=request.session['deskundige_id']).first()
     
     
     ervaringsdeskundige.onderzoek = onderzoek
