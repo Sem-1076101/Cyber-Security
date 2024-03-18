@@ -166,6 +166,7 @@
                                         <th scope="col">E-mailadres</th>
                                         <th scope="col">Telefoonnummer</th>
                                         <th scope="col">Beperking</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Aangemaakt op</th>
                                     </tr>
                                     </thead>
@@ -178,6 +179,7 @@
                                             <td>{{ ervaringsdeskundige.email }}</td>
                                             <td>{{ ervaringsdeskundige.telefoonnummer }}</td>
                                             <td>{{ ervaringsdeskundige.soort_beperking }}</td>
+                                            <td>{% if ervaringsdeskundige.account_status == 0 %}In behandeling{% elif ervaringsdeskundige.account_status == 1 %}Goedgekeurd{% else %}Afgekeurd{% endif %}</td>
                                             <td>{{ ervaringsdeskundige.created_at }}</td>
                                         </tr>
                                     {% endfor %}
@@ -195,6 +197,7 @@
                                         <th scope="col">E-mailadres</th>
                                         <th scope="col">Telefoonnummer</th>
                                         <th scope="col">Beperking</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Aangemaakt op</th>
                                     </tr>
                                     </thead>
@@ -207,6 +210,7 @@
                                             <td>{{ ervaringsdeskundige.email }}</td>
                                             <td>{{ ervaringsdeskundige.telefoonnummer }}</td>
                                             <td>{{ ervaringsdeskundige.soort_beperking }}</td>
+                                            <td>{% if ervaringsdeskundige.account_status == 0 %}In behandeling{% elif ervaringsdeskundige.account_status == 1 %}Goedgekeurd{% else %}Afgekeurd{% endif %}</td>
                                             <td>{{ ervaringsdeskundige.created_at }}</td>
                                         </tr>
                                     {% endfor %}
