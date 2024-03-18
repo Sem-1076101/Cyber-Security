@@ -89,7 +89,7 @@ def login(request):
                     request.session['voornaam'] = ervaringsdeskundige.voornaam
                     request.session['achternaam'] = ervaringsdeskundige.achternaam
                     request.session['email'] = ervaringsdeskundige.email
-                    return redirect('../home')
+                    return redirect('../onderzoek-overzicht')
                 else:
                     messages.success(request, ('Inloggen mislukt. Ongeldige email of wachtwoord.'))
             else:

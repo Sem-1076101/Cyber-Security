@@ -1,4 +1,5 @@
 from .forms import CreateEmployeeForm, LoginForm
+from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
@@ -7,6 +8,7 @@ from django.conf import settings
 from django.http import JsonResponse
 from .models import Medewerker, Ervaringsdeskundige, Beperking
 from companies.models import Organisatie, Onderzoek, Vraag
+
 
 
 # Authenticatie imports voor de login
@@ -71,10 +73,11 @@ def logout_view(request):
 def portal(request):
     goedgekeurd = 1
     in_behandeling = 0
+    afgekeurd = 2 
     onderzoeken = Onderzoek.objects.all()
     medewerkers = Medewerker.objects.all()
     organisaties = Organisatie.objects.all()
-    ervaringsdeskundigen = Ervaringsdeskundige.objects.filter(account_status=goedgekeurd)
+    ervaringsdeskundigen = Ervaringsdeskundige.objects.filter(Q(account_status=goedgekeurd) | Q(account_status=afgekeurd))
     ervaringsdeskundige_status = Ervaringsdeskundige.objects.filter(account_status=in_behandeling)
     beperkingen = Beperking.objects.all()
     return render(request, 'portal.html',
