@@ -1,6 +1,6 @@
 from .forms import CreateEmployeeForm, LoginForm
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import render, session
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.core.mail import send_mail
@@ -8,6 +8,7 @@ from django.conf import settings
 from django.http import JsonResponse
 from .models import Medewerker, Ervaringsdeskundige, Beperking
 from companies.models import Organisatie, Onderzoek, Vraag
+from django.contrib.sessions.models import Session
 
 
 # Authenticatie imports voor de login
