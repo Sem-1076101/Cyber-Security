@@ -80,18 +80,24 @@ def get_deskundige_in_behandeling_ajax(request):
     }
     return JsonResponse(data)
 
-def portal(request):
+def get_alle_deskundige_ajax(request):
     goedgekeurd = 1
     afgekeurd = 2 
+    ervaringsdeskundigen = Ervaringsdeskundige.objects.filter(Q(account_status=goedgekeurd) | Q(account_status=afgekeurd)).values(
+        'deskundige_id', 'voornaam', 'achternaam', 'geboortedatum', 'email', 'telefoonnummer', 'soort_beperking', 'created_at', 'account_status'
+    )
+    data = {
+        'ervaringsdeskundigen': list(ervaringsdeskundigen),
+    }
+    return JsonResponse(data)
+
+def portal(request):
     onderzoeken = Onderzoek.objects.all()
     medewerkers = Medewerker.objects.all()
     organisaties = Organisatie.objects.all()
-    ervaringsdeskundigen = Ervaringsdeskundige.objects.filter(Q(account_status=goedgekeurd) | Q(account_status=afgekeurd))
-    
     beperkingen = Beperking.objects.all()
     return render(request, 'portal.html',
-                  {'onderzoeken': onderzoeken, 'medewerkers': medewerkers, 'organisaties': organisaties,
-                   'ervaringsdeskundigen': ervaringsdeskundigen, 'beperkingen': beperkingen})
+                  {'onderzoeken': onderzoeken, 'medewerkers': medewerkers, 'organisaties': organisaties, 'beperkingen': beperkingen})
 
 def ervaringsdeskundige(request, deskundige_id):
     ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)

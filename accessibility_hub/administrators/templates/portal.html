@@ -171,7 +171,7 @@
                                     </tr>
                                     </thead>
                                     <tbody id="recent-ervaringsdeskundigen-table">
-
+                                        <!-- Hier komen de gegevens van recent aangemelde ervaringsdeskundigen via ajax -->
                                     </tbody>
                                 </table>
                             </div>
@@ -190,19 +190,8 @@
                                         <th scope="col">Aangemaakt op</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    {% for ervaringsdeskundige in ervaringsdeskundigen %}
-                                        <tr class='clickable-row'
-                                            data-href="/medewerkers/ervaringsdeskundige/{{ ervaringsdeskundige.deskundige_id }}">
-                                            <td>{{ ervaringsdeskundige.voornaam }} {{ ervaringsdeskundige.achternaam }}</td>
-                                            <td>{{ ervaringsdeskundige.geboortedatum }}</td>
-                                            <td>{{ ervaringsdeskundige.email }}</td>
-                                            <td>{{ ervaringsdeskundige.telefoonnummer }}</td>
-                                            <td>{{ ervaringsdeskundige.soort_beperking }}</td>
-                                            <td>{% if ervaringsdeskundige.account_status == 0 %}In behandeling{% elif ervaringsdeskundige.account_status == 1 %}Goedgekeurd{% else %}Afgekeurd{% endif %}</td>
-                                            <td>{{ ervaringsdeskundige.created_at }}</td>
-                                        </tr>
-                                    {% endfor %}
+                                    <tbody  id="alle-ervaringsdeskundigen-table">
+                                        <!-- Hier komen de gegevens van alle goedgekeurde en afgekeurde ervaringsdeskundigen via ajax -->
                                     </tbody>
                                 </table>
                             </div>
