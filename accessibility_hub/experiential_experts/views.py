@@ -109,12 +109,27 @@ def login(request):
 def logout_view(request):
     logout(request)
     request.session.flush()
-    return redirect('../ervaringsdeskundigen/login')
+    return redirect('../login')
 
+def overzicht_ervaringsdeskundige(request):
+    ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=request.session['deskundige_id'])
+    return render(request, 'overzicht_ervaringsdeskundige.html', {'ervaringsdeskundige': ervaringsdeskundige})
 
 def overzicht_afkeuring(request, deskundige_id):
     ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)
     return render(request, 'overzicht_afkeuring.html', {'ervaringsdeskundige': ervaringsdeskundige})
+
+def aanpassen_ervaringsdeskundige(request):
+    if request.method == 'POST':
+        ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=request.session['deskundige_id'])
+        ervaringsdeskundige.account_status = '1'
+        ervaringsdeskundige.bericht_status = None
+        ervaringsdeskundige.save()
+        messages.success(request, ('Account is succesvol aangepast.'))
+        return redirect('../overzicht_ervaringsdeskundige')
+    else:
+        ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=request.session['deskundige_id'])
+        return render(request, 'aanpassen_ervaringsdeskundige.html', {'ervaringsdeskundige': ervaringsdeskundige})
 
 def home(request):
     return render(request, 'homepageExperts.html', {})

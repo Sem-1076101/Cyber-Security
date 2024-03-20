@@ -68,7 +68,7 @@ def logout_view(request):
     logout(request)
     request.session.flush()
     messages.success(request, ('U bent uitgelogd!'))
-    return redirect('../medewerkers/login') 
+    return redirect('../login') 
 
 def get_deskundige_in_behandeling_ajax(request):
     in_behandeling = 0
