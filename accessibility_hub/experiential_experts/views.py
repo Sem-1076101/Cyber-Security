@@ -108,30 +108,35 @@ def home(request):
     return render(request, 'homepageExperts.html', {})
 
 def onderzoek_overzicht(request):
-    onderzoeken = Onderzoek.objects.all()
-
-    doelgroep_filter = request.GET.get('doelgroep')
-    if doelgroep_filter:
-        onderzoeken = onderzoeken.filter(doelgroep_beperking=doelgroep_filter)
-
-    return render(request, 'onderzoek_overzicht.html', {'onderzoeken': onderzoeken})
+    if 'deskundige_id' in request.session:
+        deskundige_id = request.session['deskundige_id']
+        # Onderzoeken waarvoor de huidige deskundige is ingeschreven
+        ingeschreven_onderzoeken = Onderzoek.objects.filter(ervaringsdeskundige__deskundige_id=deskundige_id)
+        # Alle onderzoeken
+        alle_onderzoeken = Onderzoek.objects.all()
+        return render(request, 'onderzoek_overzicht.html', {'ingeschreven_onderzoeken': ingeschreven_onderzoeken, 'alle_onderzoeken': alle_onderzoeken, 'deskundige_id': deskundige_id})
+    else:
+        return redirect('login_page')
+    
 
 def inschrijven(request, onderzoek_id, deskundige_id):
-    onderzoek = get_object_or_404(Onderzoek, onderzoek_id=onderzoek_id)
-    deskundige_id = request.session.get('deskundige_id')
-
-    if deskundige_id:
-        ervaringsdeskundige = Ervaringsdeskundige.objects.filter(deskundige_id=request.session['deskundige_id']).first()
-        if ervaringsdeskundige:
-            ervaringsdeskundige.onderzoek = onderzoek
-            ervaringsdeskundige.save()
+   if 'deskundige_id' in request.session:
+        deskundige_id = request.session['deskundige_id']
+        onderzoek = get_object_or_404(Onderzoek, id=onderzoek_id)
+        # Controleren of de deskundige niet al is ingeschreven voor dit onderzoek
+        if not Ervaringsdeskundige.objects.filter(deskundige_id=deskundige_id, onderzoek=onderzoek).exists():
+            Ervaringsdeskundige.objects.create(deskundige_id=deskundige_id, onderzoek=onderzoek)
     
-    return redirect('signUpExpert.html')
-
+        return redirect('../ervaringsdeskundigen/onderzoek_overzicht')
 
 def uitschrijven(request, onderzoek_id):
-    onderzoek = get_object_or_404(Onderzoek, onderzoek_id=onderzoek_id)
-    onderzoek.deskundige_id = None
-    onderzoek.save()
+    if 'deskundige_id' in request.session:
+        deskundige_id = request.session['deskundige_id']
+    
+        onderzoek = get_object_or_404(Onderzoek, onderzoek_id=onderzoek_id)
+    
+        if onderzoek.deskundige_id == deskundige_id:
+            onderzoek.deskundige_id = None
+            onderzoek.save()
 
-    return redirect('onderzoek_overzicht')
+        return redirect('../ervaringsdeskundigen/onderzoek_overzicht')

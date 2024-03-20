@@ -58,6 +58,7 @@
                         <td>{{ onderzoek.doelgroep_beperking }}</td>
                         <td>{{ onderzoek.organisatie }}</td>
                         <td>{% if onderzoek.deskundige_id == request.session.deskundige_id %}
+                            <!-- Toon de knop om uit te schrijven -->
                             <a href="{% url 'ervaringsdeskundige:uitschrijven' onderzoek.onderzoek_id %}" class="btn btn-primary btn-block">Uitschrijven</a>
                             {% else %}
                             <a href="{% url 'ervaringsdeskundige:inschrijven' onderzoek.onderzoek_id %}" class="btn btn-primary btn-block">Inschrijven</a>
