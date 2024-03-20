@@ -3,11 +3,15 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-
+{% if request.session.session_key is empty %}
+<script>window.location.href = '../login';</script>
+{% elif request.session.deskundige_id != ervaringsdeskundige.deskundige_id %}
+    <script>alert("Je hebt geen toestemming om deze pagina te bekijken."); window.history.back();</script>
+{% endif %}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12">
-            <h1>Aanmelden</h1>
+            <h1>Gegevens aanpassen</h1>
         </div>
         <div class="col-8">
             <form action="" method="post" class="p-5 mb-2">
@@ -37,7 +41,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="birthday">Geboortedatum:</label>
-                    <input type="text" class="form-control" name="birthday" value="{{ervaringsdeskundige.geboortedatum}}"  placeholder="jjjj-mm-dd" required>
+                    <input type="text" class="form-control" name="birthday" value="{{ervaringsdeskundige.geboortedatum | date:'Y-m-d' }}"  placeholder="jjjj-mm-dd" required>
                 </div>
                 <div class="mb-3">
                     <label for="zipCode">Postcode:</label>
@@ -58,11 +62,11 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="tools">Gebruikte hulpmiddelen:</label>
-                    <textarea name="tools" class="form-control" value="{{ervaringsdeskundige.hulpmiddelen}}"  rows="3"></textarea>
+                    <textarea name="tools" class="form-control" rows="3">{{ervaringsdeskundige.hulpmiddelen}}</textarea>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="particulars">Bijzonderheden:</label>
-                    <textarea name="particulars" class="form-control" value="{{ervaringsdeskundige.bijzonderheden}}"  rows="3"></textarea>
+                    <textarea name="particulars" class="form-control" rows="3">{{ervaringsdeskundige.bijzonderheden}}</textarea>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="supervisor">Toezichthouder/voogd?:</label>
@@ -87,8 +91,13 @@
                 <div class="mb-3">
                     <label class="form-label" for="approach">Benadering keuze:</label>
                     <select class="form-select" name="approach_choice">
+                        {% if ervaringsdeskundige.approach_choice == 'Telefoon' %}
                         <option value="Telefoon">Telefonisch</option>
                         <option value="Email">Email</option>
+                        {% else %}
+                        <option value="Email">Email</option>
+                        <option value="Telefoon">Telefonisch</option>
+                        {% endif %}
                     </select>
                 </div>
                 <div class="mb-3">
