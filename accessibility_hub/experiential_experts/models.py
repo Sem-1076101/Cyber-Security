@@ -1,6 +1,7 @@
 from django.db import models
 
 class Onderzoek(models.Model):
+    deskundige_id = models.IntegerField(null=True, blank=True)
     titel = models.CharField(max_length=100)
     status = models.CharField(max_length=50)
     beschikbaar = models.BooleanField(default=False)
@@ -13,5 +14,7 @@ class Onderzoek(models.Model):
     doelgroep_beperking = models.CharField(max_length=100)
     organisatie = models.CharField(max_length=100)
     
+    
     def __str__(self):
         return self.titel
+

@@ -116,24 +116,22 @@ def onderzoek_overzicht(request):
 
     return render(request, 'onderzoek_overzicht.html', {'onderzoeken': onderzoeken})
 
-def inschrijven(request, onderzoek_id):
+def inschrijven(request, onderzoek_id, deskundige_id):
     onderzoek = get_object_or_404(Onderzoek, onderzoek_id=onderzoek_id)
+    deskundige_id = request.session.get('deskundige_id')
+
+    if deskundige_id:
+        ervaringsdeskundige = Ervaringsdeskundige.objects.filter(deskundige_id=request.session['deskundige_id']).first()
+        if ervaringsdeskundige:
+            ervaringsdeskundige.onderzoek = onderzoek
+            ervaringsdeskundige.save()
     
-    ervaringsdeskundige = Ervaringsdeskundige.objects.filter(deskundige_id=request.session['deskundige_id']).first()
-    
-    
-    ervaringsdeskundige.onderzoek = onderzoek
-    
-
-    onderzoeken = Onderzoek.objects.all()
+    return redirect('signUpExpert.html')
 
 
-    doelgroep_filter = request.GET.get('doelgroep')
-    if doelgroep_filter:
-        onderzoeken = onderzoeken.filter(doelgroep_beperking=doelgroep_filter)
+def uitschrijven(request, onderzoek_id):
+    onderzoek = get_object_or_404(Onderzoek, onderzoek_id=onderzoek_id)
+    onderzoek.deskundige_id = None
+    onderzoek.save()
 
-    return render(request, 'onderzoek_overzicht.html', {'onderzoeken': onderzoeken})
-
-
-def uitschrijvingen(request):
-    return render(request, 'uitschrijvingen.html')
+    return redirect('onderzoek_overzicht')
