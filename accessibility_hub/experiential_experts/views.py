@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.shortcuts import reverse
 from administrators.models import Medewerker, Ervaringsdeskundige, Beperking
 from experiential_experts.forms import CreateExpertForm, LoginFormExpert
 from django.utils.translation import gettext as _
@@ -83,17 +84,14 @@ def login(request):
             wachtwoord = request.POST.get('wachtwoord')
             print(email, wachtwoord)
             ervaringsdeskundige = Ervaringsdeskundige.objects.filter(email=email).first()
-            if ervaringsdeskundige.account_status == 1:
-                if ervaringsdeskundige and check_password(wachtwoord, ervaringsdeskundige.wachtwoord):
-                    request.session['deskundige_id'] = ervaringsdeskundige.deskundige_id
-                    request.session['voornaam'] = ervaringsdeskundige.voornaam
-                    request.session['achternaam'] = ervaringsdeskundige.achternaam
-                    request.session['email'] = ervaringsdeskundige.email
-                    return redirect('../onderzoek-overzicht')
-                else:
-                    messages.success(request, ('Inloggen mislukt. Ongeldige email of wachtwoord.'))
+            if ervaringsdeskundige and check_password(wachtwoord, ervaringsdeskundige.wachtwoord):
+                request.session['deskundige_id'] = ervaringsdeskundige.deskundige_id
+                request.session['voornaam'] = ervaringsdeskundige.voornaam
+                request.session['achternaam'] = ervaringsdeskundige.achternaam
+                request.session['email'] = ervaringsdeskundige.email
+                return redirect('../onderzoek-overzicht')
             else:
-                messages.success(request, ('Inloggen mislukt. U moet nog wachten op goedkeuring van uw account!'))
+                messages.success(request, ('Inloggen mislukt. Ongeldige email of wachtwoord.'))
         else:
             messages.success(request, ('Er is iets fout gegaan, probeer het opnieuw.'))
             print('Formulier is niet geldig')
@@ -110,33 +108,26 @@ def home(request):
 def onderzoek_overzicht(request):
     if 'deskundige_id' in request.session:
         deskundige_id = request.session['deskundige_id']
-        # Onderzoeken waarvoor de huidige deskundige is ingeschreven
+        
         ingeschreven_onderzoeken = Onderzoek.objects.filter(ervaringsdeskundige__deskundige_id=deskundige_id)
-        # Alle onderzoeken
-        alle_onderzoeken = Onderzoek.objects.all()
-        return render(request, 'onderzoek_overzicht.html', {'ingeschreven_onderzoeken': ingeschreven_onderzoeken, 'alle_onderzoeken': alle_onderzoeken, 'deskundige_id': deskundige_id})
+        
+        onderzoeken = Onderzoek.objects.all()
+        return render(request, 'onderzoek_overzicht.html', {'ingeschreven_onderzoeken': ingeschreven_onderzoeken, 'onderzoeken': onderzoeken, 'deskundige_id': deskundige_id})
     else:
-        return redirect('login_page')
+        return redirect('../login')
     
 
-def inschrijven(request, onderzoek_id, deskundige_id):
-   if 'deskundige_id' in request.session:
-        deskundige_id = request.session['deskundige_id']
-        onderzoek = get_object_or_404(Onderzoek, id=onderzoek_id)
-        # Controleren of de deskundige niet al is ingeschreven voor dit onderzoek
-        if not Ervaringsdeskundige.objects.filter(deskundige_id=deskundige_id, onderzoek=onderzoek).exists():
-            Ervaringsdeskundige.objects.create(deskundige_id=deskundige_id, onderzoek=onderzoek)
-    
-        return redirect('../ervaringsdeskundigen/onderzoek_overzicht')
+def inschrijven(request, onderzoek_id):
+    onderzoek = Onderzoek.objects.get(onderzoek_id=onderzoek_id)
+    onderzoek.deskundige_id = request.session['deskundige_id']
+    onderzoek.save()
 
-def uitschrijven(request, onderzoek_id):
-    if 'deskundige_id' in request.session:
-        deskundige_id = request.session['deskundige_id']
-    
-        onderzoek = get_object_or_404(Onderzoek, onderzoek_id=onderzoek_id)
-    
-        if onderzoek.deskundige_id == deskundige_id:
-            onderzoek.deskundige_id = None
-            onderzoek.save()
+    return redirect('../inschrijven' + str(onderzoek_id))
 
-        return redirect('../ervaringsdeskundigen/onderzoek_overzicht')
+
+def uitschrijven(onderzoek_id):
+    onderzoek = Onderzoek.objects.get(onderzoek_id=onderzoek_id)
+    onderzoek.deskundige_id = None
+    onderzoek.save()
+
+    return redirect('../uitschrijven' + str(onderzoek_id))

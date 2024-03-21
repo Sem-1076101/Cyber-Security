@@ -46,6 +46,7 @@
                 <tbody>
                     {% for onderzoek in onderzoeken %}
                     <tr>
+                        <td>{{ onderzoek.onderzoek_id }}</td>
                         <td>{{ onderzoek.titel }}</td>
                         <td>{{ onderzoek.status }}</td>
                         <td>{{ onderzoek.beschikbaar }}</td>
@@ -57,13 +58,12 @@
                         <td>{{ onderzoek.beloning }}</td>
                         <td>{{ onderzoek.doelgroep_beperking }}</td>
                         <td>{{ onderzoek.organisatie }}</td>
-                        <td>{% if onderzoek.deskundige_id == request.session.deskundige_id %}
-                            <!-- Toon de knop om uit te schrijven -->
-                            <a href="{% url 'ervaringsdeskundige:uitschrijven' onderzoek.onderzoek_id %}" class="btn btn-primary btn-block">Uitschrijven</a>
-                            {% else %}
-                            <a href="{% url 'ervaringsdeskundige:inschrijven' onderzoek.onderzoek_id %}" class="btn btn-primary btn-block">Inschrijven</a>
-                            {% endif %}
-                        </td>
+                        <td>
+                        {% if onderzoek.deskundige_id == request.session.deskundige_id %}
+                        <a href="{% url 'ervaringsdeskundige:uitschrijven' onderzoek.onderzoek_id %}" class="btn btn-primary btn-block">Uitschrijven</a>
+                        {% else %}
+                        <a href="{% url 'ervaringsdeskundige:inschrijven' onderzoek.onderzoek_id %}" class="btn btn-primary btn-block">Inschrijven</a></td>
+                        {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>
