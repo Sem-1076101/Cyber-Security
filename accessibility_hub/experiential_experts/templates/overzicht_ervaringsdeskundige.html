@@ -1,13 +1,17 @@
 {% extends "base.html" %}
 
-{% block title %}Medewerker {{ ervaringsdeskundige.voornaam }} {{ ervaringsdeskundige.achternaam }}{% endblock title %}
+{% block title %}Deskundige {{ ervaringsdeskundige.voornaam }} {{ ervaringsdeskundige.achternaam }}{% endblock title %}
 
 {% block content %}
 
+{% if request.session.session_key is empty %}
+<script>window.location.href = '../login';</script>
+{% elif request.session.deskundige_id != ervaringsdeskundige.deskundige_id %}
+    <script>alert("Je hebt geen toestemming om deze pagina te bekijken."); window.history.back();</script>
+{% endif %}
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <a class="btn btn-primary mb-2" href="/medewerkers/portal/" role="button">Terug naar portal</a>
             <div class="row">
                 <div class="col-8 ">
                     <h1>Gegevens van {{ ervaringsdeskundige.voornaam }} {{ ervaringsdeskundige.achternaam }}</h1>
@@ -34,28 +38,12 @@
                             <p><b>Account status:</b>{% if ervaringsdeskundige.account_status == 0 %} In behandeling
                                 {% elif ervaringsdeskundige.account_status == 1 %} Goedgekeurd {% else %} Afgekeurd {% endif %}</p>
                         </div>
-
+                        {% if ervaringsdeskundige.bericht_status is not empty %}
                         <div class="col-6">
-                            <form
-                                action="{% url 'medewerkers:goedkeuren_deskundige' deskundige_id=ervaringsdeskundige.deskundige_id %}"
-                                method="POST">
-                                {% csrf_token %}
-                                <input type="hidden" name="deskundige_id"
-                                    value="{{ ervaringsdeskundige.deskundige_id }}">
-                                <button type="submit" class="btn btn-success">Goedkeuren</button>
-                            </form>
-                            <button type="button" id="afkeur_btn" class="btn btn-danger mt-2 mb-2">Afkeuren</button>
-                            <form
-                                action="{% url 'medewerkers:afkeuren_deskundige' deskundige_id=ervaringsdeskundige.deskundige_id %}"
-                                method="POST" id="afkeur_form">
-                                {% csrf_token %}
-                                <input type="hidden" name="deskundige_id"
-                                    value="{{ ervaringsdeskundige.deskundige_id }}">
-                                <label for="bericht_afkeuren" class="form-label">Bericht voor het afkeuren:</label>
-                                <input type="text" name="bericht_status" class="form-input">
-                                <button type="submit" class="btn btn-danger">Afkeuren</button>
-                            </form>
+                            <h2>Bericht bij afkeuren deskundige</h2>
+                            <p>{{ ervaringsdeskundige.bericht_status }}</p>
                         </div>
+                        {% endif %}
                         {% if ervaringsdeskundige.email_toezichthouder %}
                         <div class="col-6">
                             <h2>Toezichthouder/voogd gegevens</h2>
@@ -69,12 +57,11 @@
                                     toezichthouder/voogd.</b></p>
                         </div>
                         {% endif %}
-                        {% if ervaringsdeskundige.bericht_status != 'null' and ervaringsdeskundige.bericht_status is not empty %}
+
                         <div class="col-6">
-                            <h2>Bericht bij afkeuren deskundige</h2>
-                            <p>{{ ervaringsdeskundige.bericht_status }}</p>
+                            <a class="btn btn-warning" href="../aanpassen_ervaringsdeskundige">Gegevens aanpassen</a>
                         </div>
-                        {% endif %}
+                        
                     </div>
                 </div>
             </div>

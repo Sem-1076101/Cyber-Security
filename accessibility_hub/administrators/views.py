@@ -1,4 +1,5 @@
 from .forms import CreateEmployeeForm, LoginForm
+from django.db.models import Q
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
@@ -66,20 +67,37 @@ def signup(request):
 def logout_view(request):
     logout(request)
     request.session.flush()
-    return redirect('../medewerkers/login') 
+    messages.success(request, ('U bent uitgelogd!'))
+    return redirect('../login') 
+
+def get_deskundige_in_behandeling_ajax(request):
+    in_behandeling = 0
+    ervaringsdeskundige_status =  Ervaringsdeskundige.objects.filter(account_status=in_behandeling).values(
+        'deskundige_id', 'voornaam', 'achternaam', 'geboortedatum', 'email', 'telefoonnummer', 'soort_beperking', 'created_at', 'account_status'
+    )
+    data = {
+        'ervaringsdeskundigen': list(ervaringsdeskundige_status),
+    }
+    return JsonResponse(data)
+
+def get_alle_deskundige_ajax(request):
+    goedgekeurd = 1
+    afgekeurd = 2 
+    ervaringsdeskundigen = Ervaringsdeskundige.objects.filter(Q(account_status=goedgekeurd) | Q(account_status=afgekeurd)).values(
+        'deskundige_id', 'voornaam', 'achternaam', 'geboortedatum', 'email', 'telefoonnummer', 'soort_beperking', 'created_at', 'account_status'
+    )
+    data = {
+        'ervaringsdeskundigen': list(ervaringsdeskundigen),
+    }
+    return JsonResponse(data)
 
 def portal(request):
-    goedgekeurd = 1
-    in_behandeling = 0
     onderzoeken = Onderzoek.objects.all()
     medewerkers = Medewerker.objects.all()
     organisaties = Organisatie.objects.all()
-    ervaringsdeskundigen = Ervaringsdeskundige.objects.filter(account_status=goedgekeurd)
-    ervaringsdeskundige_status = Ervaringsdeskundige.objects.filter(account_status=in_behandeling)
     beperkingen = Beperking.objects.all()
     return render(request, 'portal.html',
-                  {'onderzoeken': onderzoeken, 'medewerkers': medewerkers, 'organisaties': organisaties,
-                   'ervaringsdeskundigen': ervaringsdeskundigen, 'ervaringsdeskundige_status': ervaringsdeskundige_status, 'beperkingen': beperkingen})
+                  {'onderzoeken': onderzoeken, 'medewerkers': medewerkers, 'organisaties': organisaties, 'beperkingen': beperkingen})
 
 def ervaringsdeskundige(request, deskundige_id):
     ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)
@@ -92,7 +110,7 @@ def goedkeuren_deskundige(request, deskundige_id):
         ervaringsdeskundige.bericht_status = None
         ervaringsdeskundige.save()
         messages.success(request, ('Account status is succesvol aangepast.'))
-        return redirect('../ervaringsdeskundige/' + str(deskundige_id))
+        return redirect('../../ervaringsdeskundige/' + str(deskundige_id))
 
 def afkeuren_deskundige(request, deskundige_id):
     if request.method == 'POST':
@@ -102,7 +120,8 @@ def afkeuren_deskundige(request, deskundige_id):
         print(bericht_status)
         ervaringsdeskundige.account_status = '2'
         ervaringsdeskundige.save()
-        return redirect('../ervaringsdeskundige/' + str(deskundige_id))
+        messages.success(request, ('Account status is succesvol aangepast.'))
+        return redirect('../../ervaringsdeskundige/' + str(deskundige_id))
 
 def medewerker(request, medewerker_id):
     medewerker = Medewerker.objects.get(medewerker_id=medewerker_id)

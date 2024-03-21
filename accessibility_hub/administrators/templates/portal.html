@@ -204,10 +204,12 @@
                                             <th scope="col">E-mailadres</th>
                                             <th scope="col">Telefoonnummer</th>
                                             <th scope="col">Beperking</th>
+                                            <th scope="col">Status</th>
                                             <th scope="col">Aangemaakt op</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="recent-ervaringsdeskundigen-table">
+                                        <!-- Hier komen de gegevens van recent aangemelde ervaringsdeskundigen via ajax -->
                                         </tbody>
                                     </table>
                                 </div>
@@ -232,20 +234,12 @@
                                             <th scope="col">E-mailadres</th>
                                             <th scope="col">Telefoonnummer</th>
                                             <th scope="col">Beperking</th>
+                                            <th scope="col">Status</th>
                                             <th scope="col">Aangemaakt op</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
-                                        {% for ervaringsdeskundige in ervaringsdeskundigen %}
-                                            <tr>
-                                                <td>{{ ervaringsdeskundige.naam }}</td>
-                                                <td>{{ ervaringsdeskundige.geboortedatum }}</td>
-                                                <td>{{ ervaringsdeskundige.email }}</td>
-                                                <td>{{ ervaringsdeskundige.telefoonnummer }}</td>
-                                                <td>{{ ervaringsdeskundige.soort_beperking }}</td>
-                                                <td>{{ ervaringsdeskundige.created_at }}</td>
-                                            </tr>
-                                        {% endfor %}
+                                        <tbody id="alle-ervaringsdeskundigen-table">
+                                        <!-- Hier komen de gegevens van alle goedgekeurde en afgekeurde ervaringsdeskundigen via ajax -->
                                         </tbody>
                                     </table>
                                 </div>
@@ -321,6 +315,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
     {% endif %}

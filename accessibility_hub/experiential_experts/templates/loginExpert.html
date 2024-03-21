@@ -13,14 +13,6 @@
         <div class="col-2 justify-content-center">
             <form action="" method="post" class="form-horizontal">
                 {% csrf_token %}
-                <!-- <div class="mb-3">
-                    <label class="form-label" for="username">Gebruikersnaam:</label>
-                    <input type="text" name="username">
-                </div>
-                <div class="mb-3">
-                    <label class="form-label" for="password">Wachtwoord:</label>
-                    <input type="password" name="password">
-                </div> -->
                 {{loginform|crispy}}
                 <div class="form-group p-1">
                     <button type="submit" name="submit-button" class="btn btn-primary mb-5 mt-2">Inloggen</button>

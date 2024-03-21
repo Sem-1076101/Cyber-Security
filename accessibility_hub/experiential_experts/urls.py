@@ -7,5 +7,9 @@ app_name = 'ervaringsdeskundige'
 
 urlpatterns = [
     path('login/', views.login, name='login'),
-    path('signup/', views.signup, name='signup')
+    path('signup/', views.signup, name='signup'),
+    path('overzicht_afkeuring/<int:deskundige_id>', views.overzicht_afkeuring, name='overzicht_afkeuring'),
+    path('overzicht_ervaringsdeskundige/', views.overzicht_ervaringsdeskundige, name='overzicht_ervaringsdeskundige'),
+    path('aanpassen_ervaringsdeskundige/', views.aanpassen_ervaringsdeskundige, name='aanpassen_ervaringsdeskundige'),
+    path('logout', views.logout_view, name='logout')
 ]

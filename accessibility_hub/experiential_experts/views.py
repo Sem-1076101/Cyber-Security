@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import check_password
 
 def signup(request):
+    beperkingen = Beperking.objects.all()
     if request.method == 'POST':
         form = CreateExpertForm(request.POST)
         if form.is_valid():
@@ -27,7 +28,7 @@ def signup(request):
                 geboortedatum = request.POST.get('birthday')
                 postcode = request.POST.get('zipCode')
                 huisnummer = request.POST.get('housenumber')
-                soort_beperking = request.POST.get('disability')
+                soort_beperking = request.POST.getlist('disability')
                 hulpmiddelen = request.POST.get('tools')
                 bijzonderheden = request.POST.get('particulars')
 
@@ -68,7 +69,7 @@ def signup(request):
             messages.success(request, ('Er is iets fout gegaan, probeer het opnieuw'))
     else:
         form = CreateExpertForm()
-    return render(request, 'signupExpert.html', {})          
+    return render(request, 'signupExpert.html', {'beperkingen': beperkingen})          
         
 
 
@@ -81,13 +82,16 @@ def login(request):
             wachtwoord = request.POST.get('wachtwoord')
             print(email, wachtwoord)
             ervaringsdeskundige = Ervaringsdeskundige.objects.filter(email=email).first()
-            if ervaringsdeskundige.account_status == 1:
+            if ervaringsdeskundige.account_status == 1 or ervaringsdeskundige.account_status == 2:
                 if ervaringsdeskundige and check_password(wachtwoord, ervaringsdeskundige.wachtwoord):
                     request.session['deskundige_id'] = ervaringsdeskundige.deskundige_id
                     request.session['voornaam'] = ervaringsdeskundige.voornaam
                     request.session['achternaam'] = ervaringsdeskundige.achternaam
                     request.session['email'] = ervaringsdeskundige.email
-                    return redirect('../home')
+                    if ervaringsdeskundige.account_status == 2:
+                        return redirect('../overzicht_afkeuring/' + str(ervaringsdeskundige.deskundige_id))
+                    else: 
+                        return redirect('../home')
                 else:
                     messages.success(request, ('Inloggen mislukt. Ongeldige email of wachtwoord.'))
             else:
@@ -101,6 +105,59 @@ def login(request):
     context = {'loginform': form}
 
     return render(request, 'loginExpert.html', context=context)
+
+def logout_view(request):
+    logout(request)
+    request.session.flush()
+    return redirect('../ervaringsdeskundigen/login')
+
+def overzicht_ervaringsdeskundige(request):
+    ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=request.session['deskundige_id'])
+    return render(request, 'overzicht_ervaringsdeskundige.html', {'ervaringsdeskundige': ervaringsdeskundige})
+
+def overzicht_afkeuring(request, deskundige_id):
+    ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=deskundige_id)
+    return render(request, 'overzicht_afkeuring.html', {'ervaringsdeskundige': ervaringsdeskundige})
+
+def aanpassen_ervaringsdeskundige(request):
+    beperkingen = Beperking.objects.all()
+    if request.method == 'POST':
+        ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=request.session['deskundige_id'])
+        ervaringsdeskundige.voornaam = request.POST.get('firstName')
+        ervaringsdeskundige.achternaam = request.POST.get('lastName')
+        ervaringsdeskundige.wachtwoord = request.POST.get('password')
+        ervaringsdeskundige.geslacht = request.POST.get('gender')
+        ervaringsdeskundige.telefoonnummer = request.POST.get('phonenumber')
+        ervaringsdeskundige.geboortedatum = request.POST.get('birthday')
+        ervaringsdeskundige.postcode = request.POST.get('zipCode')
+        ervaringsdeskundige.huisnummer = request.POST.get('housenumber')
+        ervaringsdeskundige.soort_beperking = request.POST.getlist('disability')
+        ervaringsdeskundige.hulpmiddelen = request.POST.get('tools')
+        ervaringsdeskundige.bijzonderheden = request.POST.get('particulars')
+
+        
+        naam_toezichthouder = request.POST.get('supervisorName')
+        email_toezichthouder = request.POST.get('email_supervisor')
+        telefoonnummer_toezichthouder = request.POST.get('phonenumber_supervisor')
+        
+
+        if not naam_toezichthouder or not email_toezichthouder or not telefoonnummer_toezichthouder:
+            ervaringsdeskundige.naam_toezichthouder = None
+            ervaringsdeskundige.email_toezichthouder = None
+            ervaringsdeskundige.telefoonnummer_toezichthouder = None
+        else:
+            ervaringsdeskundige.naam_toezichthouder = request.POST.get('supervisorName')
+            ervaringsdeskundige.email_toezichthouder = request.POST.get('email_supervisor')
+            ervaringsdeskundige.telefoonnummer_toezichthouder = request.POST.get('phonenumber_supervisor')
+            ervaringsdeskundige.benadering_keuze = request.POST.get('approach_choice')
+
+
+        ervaringsdeskundige.save()
+        messages.success(request, ('Account is succesvol aangepast.'))
+        return redirect('../overzicht_ervaringsdeskundige')
+    else:
+        ervaringsdeskundige = Ervaringsdeskundige.objects.get(deskundige_id=request.session['deskundige_id'])
+        return render(request, 'aanpassen_ervaringsdeskundige.html', {'ervaringsdeskundige': ervaringsdeskundige, 'beperkingen': beperkingen})
 
 def home(request):
     return render(request, 'homepageExperts.html', {})
