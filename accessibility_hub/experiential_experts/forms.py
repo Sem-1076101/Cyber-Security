@@ -4,7 +4,6 @@ from django import forms
 from administrators.models import Ervaringsdeskundige
 from django.forms.widgets import PasswordInput, TextInput
 from django.core.exceptions import ValidationError
-from .models import Onderzoek
 
 class CreateExpertForm(forms.Form):
     def clean(self):
@@ -14,7 +13,3 @@ class CreateExpertForm(forms.Form):
 class LoginFormExpert(forms.Form):
     email = forms.CharField(label='Email', max_length=100)
     wachtwoord = forms.CharField(label='wachtwoord', widget = forms.PasswordInput)
-
-class OnderzoekForm(forms.ModelForm):
-        model = Onderzoek
-        fields = ('titel', 'status', 'beschikbaar', 'beschrijving', 'datum_vanaf', 'datum_tot', 'type_onderzoek', 'locatie', 'beloning', 'doelgroep_beperking', 'organisatie')
