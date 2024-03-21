@@ -20,8 +20,8 @@ Gebruikersnaam: ```bryan``` <br/>
 Wachtwoord: ```bryan``` <br/>
 
 <strong>Ervaringsdeskundige</strong> <br/>
-Gebruikersnaam: ```deskundige``` <br/>
-Wachtwoord: ```deskundige``` <br/>
+E-mailadres: ```semsem@gmail.com``` <br/>
+Wachtwoord: ```test``` <br/>
 
 # Functionaliteiten
 
