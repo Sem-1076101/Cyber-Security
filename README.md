@@ -1,5 +1,5 @@
 # Accessibility Hub
-In deze applicatie kunnen mensen met een beperking zich aanmelden voor een onderzoek die is aangemaakt door een organisatie. De organisatie meld zich aan voor de applicatie en moet worden goedgekeurd of afgekeurd door een medewerker van Accessibility. Als dit is gebeurd krijgt de organisatie een mail met daarin hun API key om toegang te krijgen tot het platform om onderzoeken aan te maken. Deze onderzoeken moeten ook worden goedgekeurd of afgekeurd door een medewerker van Accessibility. Als dat is gebeurd krijgen ze weer een mail. Ze kunnen ondertussen ook al onderzoeksvragen koppelen aan het onderzoek zodat de medewerker van Accessibility ziet wat er gevraagd gaat worden. Ervaringsdeskundige die zich hebben aangemeld voor het platform kunnen zich aanmelden voor een onderzoek die voor hun beperking is. Dit moet goedgekeurd worden door een medewerker van Accessibility en daarna kan de ervaringsdeskundige het onderzoek uitvoeren.
+In deze applicatie kunnen mensen met een beperking zich aanmelden voor een onderzoek die is aangemaakt door een organisatie. De organisatie meldt zich aan voor de applicatie en moet worden goedgekeurd of afgekeurd door een medewerker van Accessibility. Als dit is gebeurd krijgt de organisatie een mail met daarin hun API key om toegang te krijgen tot het platform om onderzoeken aan te maken. Deze onderzoeken moeten ook worden goedgekeurd of afgekeurd door een medewerker van Accessibility. Als dat is gebeurd krijgen ze weer een mail. Ze kunnen ondertussen ook al onderzoeksvragen koppelen aan het onderzoek zodat de medewerker van Accessibility ziet wat er gevraagd gaat worden. Ervaringsdeskundige die zich hebben aangemeld voor het platform kunnen zich aanmelden voor een onderzoek die voor hun beperking is. Dit moet goedgekeurd worden door een medewerker van Accessibility en daarna kan de ervaringsdeskundige het onderzoek uitvoeren.
 
 # Applicatie starten
 
@@ -7,7 +7,7 @@ Navigeer naar de main folder in het project. <br/>
 
 Maak een virtual environment aan met het volgende commando: ```python -m venv venv``` <br/>
 
-Activeer de virtual environment met het volgende commando: ```venv\Scripts\activate``` <br/>
+Activeer het virtual environment met het volgende commando: ```venv\Scripts\activate``` <br/>
 
 Installeer de benodigde packages met het volgende commando: ```pip install -r requirements.txt``` <br/>
 
@@ -38,6 +38,12 @@ De uitleg van de API is [hier](API.md) te vinden.
 **Ervaringsdeskundige** <br/>
 
 Een ervaringsdeskundige kan zich registreren voor het platform, dit moet daarna worden goedgekeurd door medewerkers van Accessibility, als er een goedkeuring is dan kan de medewerkers inloggen op het platform en zich aanmelden voor bepaalde onderzoeken in zijn beperking. Dit wordt goedgekeurd of afgekeurd door een medewerker van Accessibility en daarna kan de ervaringsdeskundige het onderzoek invullen.
+
+**Database** <br/>
+
+De ERD van de database staat hieronder. <br/>
+
+![Alt text](Diagram Accessibility Hub.gif)
 
 # Hulpmiddelen
 
