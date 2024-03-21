@@ -3,13 +3,19 @@ In deze applicatie kunnen mensen met een beperking zich aanmelden voor een onder
 
 # Applicatie starten
 
-Navigeer naar de main folder in het project. <br/>
+Clone de applicatie naar je computer met het volgende commando als je een SSH key hebt in je GitHub: ```git clone git@github.com:Rac-Software-Development/wp3-2024-rest-1e3-prodev.git``` <br/>
+
+Clone de applicatie naar je computer met het volgende commando als je geen SSH key hebt in je GitHub: ```git clone https://github.com/Rac-Software-Development/wp3-2024-rest-1e3-prodev.git``` <br/>
+
+Navigeer naar de main folder in het project met het volgende commando: ```cd .\wp3-2024-rest-1e3-prodev\``` <br/>
 
 Maak een virtual environment aan met het volgende commando: ```python -m venv venv``` <br/>
 
 Activeer het virtual environment met het volgende commando: ```venv\Scripts\activate``` <br/>
 
 Installeer de benodigde packages met het volgende commando: ```pip install -r requirements.txt``` <br/>
+
+Navigeer 1 folder lager in de applicatie met het volgende commando: ```cd .\accessibility_hub\``` <br/>
 
 Start de applicatie met het volgende commando: ```python manage.py runserver``` <br/>
 
