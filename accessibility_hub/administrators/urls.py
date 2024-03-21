@@ -9,7 +9,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('get_deskundige_in_behandeling_ajax/', views.get_deskundige_in_behandeling_ajax, name='get_deskundige_in_behandeling_ajax'),
     path('get_alle_deskundige_ajax/', views.get_alle_deskundige_ajax, name='get_alle_deskundige_ajax'),
-    path('portal/', views.portal, name='medewerkersportal'),
+    path('portal/', views.portal, name='portal'),
     path('goedkeuren_deskundige/<int:deskundige_id>/', views.goedkeuren_deskundige, name='goedkeuren_deskundige'),
     path('afkeuren_deskundige/<int:deskundige_id>/', views.afkeuren_deskundige, name='afkeuren_deskundige'),
     path('ervaringsdeskundige/<int:deskundige_id>/', views.ervaringsdeskundige, name='ervaringsdeskundige'),
@@ -25,4 +25,3 @@ urlpatterns = [
     path('accepteer_onderzoek/<int:onderzoek_id>/', views.accepteer_onderzoek, name='accepteer_onderzoek'),
     path('updates_onderzoek/', views.check_updates_onderzoek, name='updates_onderzoek'),
 ]
- 
