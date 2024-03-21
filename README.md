@@ -39,11 +39,21 @@ De uitleg van de API is [hier](API.md) te vinden.
 
 Een ervaringsdeskundige kan zich registreren voor het platform, dit moet daarna worden goedgekeurd door medewerkers van Accessibility, als er een goedkeuring is dan kan de medewerkers inloggen op het platform en zich aanmelden voor bepaalde onderzoeken in zijn beperking. Dit wordt goedgekeurd of afgekeurd door een medewerker van Accessibility en daarna kan de ervaringsdeskundige het onderzoek invullen.
 
+# Documentatie
+
 **Database** <br/>
 
 De ERD van de database staat hieronder. <br/>
 
 ![Alt text](Diagram Accessibility Hub.gif)
+
+**Azure DevOps** <br/>
+
+Het Excel bestand met de sprintplanning en de user stories staat [hier](1E3-ProDev-Azure-DevOps.xlsx).
+
+**Standups** <br/>
+
+Ons standup document staat [hier](standups.md).
 
 # Hulpmiddelen
 
@@ -92,12 +102,12 @@ betekende en waar we dit konden oplossen in onze code.
 
 De prompts van ChatGPT staan in dit [bestand](chatgpt.md).
 
-# Ervaringsdeskundige ophalen met AJAX, Sem
-Ik heb als aanpassing gedaan om toch nog in aanraking te komen met ajax ervoor gekozen om deskundige in real-time op te halen. Dit heb ik gedaan met hulp van de ajax workshop die ik gevolgd heb en met het kijken naar de code die Bryan had geschreven voor de API. Dit was echter best lastig om te maken. Ook heb ik een aantal video's en sites bekeken voor informatie. 
+**Ervaringsdeskundige ophalen met AJAX**
+Sem heeft een aantal aanpassingen gedaan om toch nog in aanraking te komen met ajax, hij heeft ervoor gekozen om deskundige in real-time op te halen. Dit heeft hij gedaan met behulp van de ajax workshop die hij heeft gevolgd en met het kijken naar de code die Bryan had geschreven voor de API. Dit was echter best lastig om te maken. Ook heeft hij een aantal video's en sites bekeken voor informatie. 
 
-https://www.youtube.com/watch?v=S2gkqC1fmbA&ab_channel=RedEyedCoderClub
-https://www.brennantymrak.com/articles/fetching-data-with-ajax-and-django
-https://testdriven.io/blog/django-ajax-xhr/
+https://www.youtube.com/watch?v=S2gkqC1fmbA&ab_channel=RedEyedCoderClub <br/>
+https://www.brennantymrak.com/articles/fetching-data-with-ajax-and-django <br/>
+https://testdriven.io/blog/django-ajax-xhr/ <br/>
 
 **Login** <br/>
 
