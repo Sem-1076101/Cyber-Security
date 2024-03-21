@@ -112,3 +112,7 @@ https://testdriven.io/blog/django-ajax-xhr/ <br/>
 **Login** <br/>
 
 Sem heeft veel tijd en werk in de login gestoken en veel opgezocht op het internet om dit werkend te krijgen, hij heeft al deze bronnen bewaard in dit [bestand](login.md). Uiteindelijk is het gelukt met hulp van Mark en verschillende bronnen. Sem heeft netjes gedocumenteerd wat hij heeft gebruikt en waarom dit niet werkte of deels werkte om het probleem op te lossen.
+
+**Hamze** <br/>
+
+Sem heeft Hamze veel geholpen tijdens dit project, Hamze vond sommige lastig en Sem heeft hem hierbij ondersteund.
