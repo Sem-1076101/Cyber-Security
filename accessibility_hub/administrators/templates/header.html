@@ -6,11 +6,12 @@
         </a>
 
         <ul class="nav nav-pills">
-            <li class="nav-item"><a href="{% url 'index' %}" class="nav-link active" aria-current="page">Home</a></li>
-            <li class="nav-item"><a href="{% url 'administrators:portal' %}" class="nav-link" aria-current="page">Medewerkers portal</a></li>
-            <li class="nav-item"><a href="{% url 'ervaringsdeskundige:onderzoek_overzicht' %}" class="nav-link" aria-current="page">Ervaringsdeskundigen portal</a></li>
             {% if request.session.session_key %}
                 <li class="nav-item"><a href="{% url 'administrators:logout' %}" class="nav-link">Uitloggen</a></li>
+            {% else %}
+                <li class="nav-item"><a href="{% url 'index' %}" class="nav-link {% if request.path == '/' %}active{% endif %}" aria-current="page">Home</a></li>
+                <li class="nav-item"><a href="{% url 'administrators:portal' %}" class="nav-link">Medewerkers portal</a></li>
+                <li class="nav-item"><a href="{% url 'ervaringsdeskundige:onderzoek_overzicht' %}" class="nav-link">Ervaringsdeskundigen portal</a></li>
             {% endif %}
         </ul>
     </header>
