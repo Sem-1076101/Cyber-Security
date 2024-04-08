@@ -56,7 +56,7 @@ def signup(request):
             messages.success(request, ('Email is al ingebruik!'))
         elif form.is_valid():
                 form.save()
-                return redirect('../login') 
+                return redirect('../portal')
         else:
             messages.success(request, ('Er is iets fout gegaan, probeer het opnieuw'))
 
@@ -131,7 +131,7 @@ def medewerker(request, medewerker_id):
 def verwijder_medewerker(request, medewerker_id):
     medewerker = get_object_or_404(Medewerker, medewerker_id=medewerker_id)
     medewerker.delete()
-    return redirect('administrators:medewerkersportal')
+    return redirect('administrators:portal')
 
 
 def organisatie(request, id):
