@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from administrators.models import Ervaringsdeskundige
 
 # Create your models here.
 
@@ -34,6 +35,7 @@ class Onderzoek(models.Model):
     doelgroep_leeftijd_tot = models.IntegerField()
     doelgroep_beperking = models.CharField(max_length=255)
     organisatie = models.ForeignKey(Organisatie, on_delete=models.CASCADE, related_name='onderzoeken')
+    deskundige = models.ForeignKey(Ervaringsdeskundige, on_delete=models.CASCADE, related_name='ervaringsdeskundigen')
 
     class Meta:
         db_table = 'onderzoeken'
