@@ -179,7 +179,7 @@ def inschrijven(request, onderzoek_id):
     onderzoek.deskundige_id = request.session['deskundige_id']
     onderzoek.save()
 
-    return redirect('../inschrijven/' + str(onderzoek_id))
+    return redirect('../onderzoek_overzicht/')
 
 
 def uitschrijven(onderzoek_id):
@@ -187,4 +187,4 @@ def uitschrijven(onderzoek_id):
     onderzoek.deskundige_id = None
     onderzoek.save()
 
-    return redirect('../uitschrijven/' + str(onderzoek_id))
+    return redirect('../onderzoek_overzicht/')
