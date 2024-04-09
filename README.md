@@ -27,7 +27,7 @@ Wachtwoord: ```bryan``` <br/>
 
 <strong>Ervaringsdeskundige</strong> <br/>
 E-mailadres: ```semsem@gmail.com``` <br/>
-Wachtwoord: ```test``` <br/>
+Wachtwoord: ```Test``` <br/>
 
 # Functionaliteiten
 
