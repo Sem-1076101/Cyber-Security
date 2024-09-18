@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+
 from .forms import CreateEmployeeForm, LoginForm
 from django.db.models import Q
 from django.shortcuts import render
@@ -123,10 +125,14 @@ def afkeuren_deskundige(request, deskundige_id):
         messages.success(request, ('Account status is succesvol aangepast.'))
         return redirect('../../ervaringsdeskundige/' + str(deskundige_id))
 
-def medewerker(request, medewerker_id):
-    medewerker = Medewerker.objects.get(medewerker_id=medewerker_id)
-    return render(request, 'employee.html', {'medewerker': medewerker})
+# def medewerker(request, medewerker_id):
+#     medewerker = Medewerker.objects.get(medewerker_id=medewerker_id)
+#     return render(request, 'employee.html', {'medewerker': medewerker})
 
+@login_required
+def medewerker(request, medewerker_id):
+    medewerker = get_object_or_404(Medewerker, medewerker_id=medewerker_id)
+    return render(request, 'employee.html', {'medewerker': medewerker})
 
 def verwijder_medewerker(request, medewerker_id):
     medewerker = get_object_or_404(Medewerker, medewerker_id=medewerker_id)
