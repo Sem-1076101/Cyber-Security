@@ -25,7 +25,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-4=8ni*m!u^1dhffuzqn!!j$())ebeob-+@waoj*g)$+&u-s=*p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+# settings.py
+DEBUG = False
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'yourdomain.com']  # Voeg je domeinen toe
+
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'timdenduin@gmail.com'
 EMAIL_HOST_PASSWORD = 'vtpzdhsxeuuvulfe'
@@ -33,7 +37,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -50,7 +54,7 @@ INSTALLED_APPS = [
     'experiential_experts',
     'default',
     'rest_framework',
-    'crispy_forms', 
+    'crispy_forms',
     'crispy_bootstrap4',
 ]
 

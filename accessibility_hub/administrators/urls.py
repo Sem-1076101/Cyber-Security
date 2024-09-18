@@ -24,4 +24,7 @@ urlpatterns = [
     path('verwijder_onderzoek/<int:onderzoek_id>/', views.verwijder_onderzoek, name='verwijder_onderzoek'),
     path('accepteer_onderzoek/<int:onderzoek_id>/', views.accepteer_onderzoek, name='accepteer_onderzoek'),
     path('updates_onderzoek/', views.check_updates_onderzoek, name='updates_onderzoek'),
+
 ]
+
+

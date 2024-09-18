@@ -9,6 +9,14 @@ from django.contrib.auth import logout
 from django.contrib.auth.hashers import check_password
 
 
+# redirect voor als je op een 404 pagina terecht komt
+def custom_404_view(request, exception):
+    return redirect('/') # doorsturen naar de homepage
+
+
+
+
+
 def signup(request):
     beperkingen = Beperking.objects.all()
     if request.method == 'POST':
